@@ -1,19 +1,38 @@
 package com.ctc.isweather.activity;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ctc.isweather.R;
+import com.ctc.isweather.obj.Weather;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("MainActivity","onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //测试
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    //Your code goes here
+                    Weather mWeather = new Weather("北京");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
 
     }
 
@@ -38,4 +57,6 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
