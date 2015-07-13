@@ -3,6 +3,7 @@
     <words>
       <w>cityid</w>
       <w>ptime</w>
+      <w>tipt</w>
     </words>
   </dictionary>
 </component>
