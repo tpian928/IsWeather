@@ -1,4 +1,4 @@
-package database.isweather.ctc.com;
+package com.ctc.isweather.db;
 
 import java.io.InputStream;
 
