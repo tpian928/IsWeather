@@ -39,4 +39,22 @@ public class Color {
         return  color;
     }
 
+    /**
+     * 得到背景色，深色的背景色
+     * @return 16位颜色
+     */
+    public static String getBkgColor()
+    {
+        return "#182330";
+    }
+
+    /**
+     * 得到前景色，作为当日天气模块的背景色，也是折线颜色
+     * @return
+     */
+    public static String getForegroundColor()
+    {
+        return "#00e1ff";
+    }
+
 }

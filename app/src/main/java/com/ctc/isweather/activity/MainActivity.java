@@ -26,6 +26,7 @@ public class MainActivity extends ActionBarActivity{
                 try {
                     //Your code goes here
                     Weather mWeather = new Weather("北京");
+                    mWeather.getTempInWeek();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
