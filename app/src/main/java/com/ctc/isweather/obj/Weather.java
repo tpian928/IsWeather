@@ -7,8 +7,6 @@ import com.ctc.isweather.http.HttpRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 /**
  * Created by TPIAN on 15/7/13.
  */
@@ -21,7 +19,7 @@ public class Weather {
     private String pm25;
     private String sd;//湿度
     private String mess;
-    private String cityid="101010100";
+    private String cityid;
     private String maintemp; //主要温度
 
 
@@ -48,9 +46,9 @@ public class Weather {
         String result = "";
 
         try{
-            String url = "http://api.map.baidu.com/telematics/v3/weather?location="+cityname+"&output=json&ak=256333037387158f732a3601de80cfb3";
-            log("url "+url);
-            result = HttpRequest.sendGet(url, "");
+            String url = "http://api.map.baidu.com/telematics/v3/weather";
+            Log.d("Weather","url "+url);
+            result = HttpRequest.sendGet(url, "location="+cityname+"&output=json&ak=256333037387158f732a3601de80cfb3");
 
             //Log.d("Weather","json result is "+result);
 
@@ -161,35 +159,6 @@ public class Weather {
         }
 
 
-    }
-
-    /**
-     * 得到一周温度的数组
-     * @return 一周温度的数组
-     */
-    public ArrayList<String> getTempInWeek(){
-        ArrayList<String> tempArr = new ArrayList<String>();
-
-        //从数据库中得到城市id
-        //this.cityid = getCityIdFromDB(cityname);-----need
-
-        try{
-            String url = "http://wap.youhubst.com/weather/getweather.php?ID="+this.cityid;
-
-            String result1 = HttpRequest.sendGet(url, "");
-
-            JSONObject obj = new JSONObject(result1);
-            log("objzz "+obj.getString("weatherinfo"));
-
-            //不合规ID导致的错误---todo
-
-
-        }
-        catch (Exception e) {
-            System.err.println(e);
-        }
-
-        return  tempArr;
     }
 
     /**
