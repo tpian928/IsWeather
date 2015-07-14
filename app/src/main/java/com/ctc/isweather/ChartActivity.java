@@ -9,7 +9,6 @@ import com.github.mikephil.charting.charts.LineChart;
 
 public class ChartActivity extends ActionBarActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +18,9 @@ public class ChartActivity extends ActionBarActivity {
         int count = 7;
         // Get the value
         double[] data = {26.5, 23.6, 28, 30, 32, 29, 27.5};
-        LineChart c = (LineChart) findViewById(R.id.chart);
-        dchart.showChart(c, dchart.getLineData(data,Color.BLACK,"Temps",count),
+        dchart.showChart((LineChart) findViewById(R.id.chart),
+                dchart.getLineData(data,Color.BLACK,"Temps",count),
                 "Temps Changes", Color.WHITE, Color.WHITE, Color.WHITE);
     }
+
 }

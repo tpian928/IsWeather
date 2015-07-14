@@ -19,6 +19,8 @@
         <activity
             android:name=".ChartActivity"
             android:label="@string/app_name"></activity>
+        <activity android:name=".ToastActivity"
+            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>

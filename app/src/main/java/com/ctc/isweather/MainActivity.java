@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
         click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ChartActivity.class);
+                Intent intent = new Intent(MainActivity.this,ToastActivity.class);
                 startActivity(intent);
             }
         });
@@ -49,4 +49,5 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
