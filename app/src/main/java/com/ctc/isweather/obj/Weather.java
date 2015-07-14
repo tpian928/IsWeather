@@ -7,6 +7,8 @@ import com.ctc.isweather.http.HttpRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by TPIAN on 15/7/13.
  */
@@ -20,7 +22,7 @@ public class Weather {
     private String sd;//湿度
     private String mess;
     private String cityid;
-    private String maintemp;
+    private String maintemp; //主要温度
 
 
 
@@ -143,7 +145,7 @@ public class Weather {
 
                 this.maintemp=this.getTodayWeather().getTemp();
 
-                //log("maintemp "+maintemp);
+                log("maintemp "+maintemp);
 
             }
 
@@ -159,6 +161,37 @@ public class Weather {
         }
 
 
+    }
+
+    /**
+     * 得到一周温度的数组
+     * @return 一周温度的数组
+     */
+    public ArrayList<String> getTempInWeek(){
+        ArrayList<String> tempArr = new ArrayList<String>();
+
+        //从数据库中得到城市id
+        this.cityid="101010100";
+        //this.cityid = getCityIdFromDB(cityname);-----need
+
+        try{
+            String url = "http://wap.youhubst.com/weather/getweather.php?ID="+this.cityid;
+            log(url);
+            String result1 = HttpRequest.sendGet(url, "");
+
+            JSONObject obj = new JSONObject(result1);
+
+            log("objzz "+obj.getString("weatherinfo"));
+
+            //不合规ID导致的错误---todo
+
+
+        }
+        catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return  tempArr;
     }
 
     /**
