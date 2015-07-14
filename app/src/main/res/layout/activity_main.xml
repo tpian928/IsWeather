@@ -87,11 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnSkip"
-            android:text="Click"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </LinearLayout>
