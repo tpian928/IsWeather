@@ -15,7 +15,14 @@ public class Weather {
     /**
      * 基本的数据 sd是湿度 基本信息显示temp,mess用来输出一些错误信息
      */
-    private String cityname,pm25,sd,mess;
+    private String cityname;
+    private String pm25;
+    private String sd;//湿度
+    private String mess;
+    private String cityid;
+    private String maintemp;
+
+
 
     /**
      * 指数
@@ -134,6 +141,20 @@ public class Weather {
                 this.setAferWeather(day3);
 
                 //log(this.getAferWeather().getTempRage());
+
+//                //通过城市ID获取其他
+//                this.cityid = "101010100";
+//                //this.cityid=getCityIdByName(cityname)
+//                String url2 = "http://www.weather.com.cn/adat/sk/"+cityid+".html";
+//                String result2 = HttpRequest.sendGet(url2,"");
+//                //log("result2 is "+result2);
+//
+//                JSONObject obj2 = new JSONObject(result2);
+//                JSONObject info = obj2.getJSONObject("weatherinfo");
+//
+//                this.maintemp=info.getString("temp");
+//                this.sd=info.getString("SD");
+//                log("sd is "+this.getTodayWeather().getDate());
             }
 
             else{
@@ -249,7 +270,24 @@ public class Weather {
         this.mess = mess;
     }
 
+    public String getCityid() {
+        return cityid;
+    }
+
+    public void setCityid(String cityid) {
+        this.cityid = cityid;
+    }
+
+    public String getMaintemp() {
+        return maintemp;
+    }
+
+    public void setMaintemp(String maintemp) {
+        this.maintemp = maintemp;
+    }
+
     private void log(String str){
         Log.d("Weatherlog",str);
     }
+
 }
