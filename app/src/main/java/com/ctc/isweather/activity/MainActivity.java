@@ -1,22 +1,31 @@
 package com.ctc.isweather.activity;
 
+<<<<<<< HEAD:app/src/main/java/com/ctc/isweather/activity/MainActivity.java
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
+=======
+import android.content.Intent;
+>>>>>>> origin/chris:app/src/main/java/com/ctc/isweather/MainActivity.java
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.ctc.isweather.R;
 import com.ctc.isweather.obj.Weather;
 
 public class MainActivity extends ActionBarActivity{
 
+    private Button click;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("MainActivity","onCreate");
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD:app/src/main/java/com/ctc/isweather/activity/MainActivity.java
         setContentView(R.layout.activity_main);
 
         //测试
@@ -34,6 +43,18 @@ public class MainActivity extends ActionBarActivity{
 
         thread.start();
 
+=======
+        Log.d("MainActivity", "test");
+        setContentView(R.layout.activity_main);
+        click = (Button) findViewById(R.id.btnSkip);
+        click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ToastActivity.class);
+                startActivity(intent);
+            }
+        });
+>>>>>>> origin/chris:app/src/main/java/com/ctc/isweather/MainActivity.java
     }
 
     @Override
@@ -58,5 +79,8 @@ public class MainActivity extends ActionBarActivity{
         return super.onOptionsItemSelected(item);
     }
 
+<<<<<<< HEAD:app/src/main/java/com/ctc/isweather/activity/MainActivity.java
 
+=======
+>>>>>>> origin/chris:app/src/main/java/com/ctc/isweather/MainActivity.java
 }

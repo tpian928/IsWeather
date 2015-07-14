@@ -143,7 +143,7 @@ public class Weather {
 
                 this.maintemp=this.getTodayWeather().getTemp();
 
-                //log("maintemp "+maintemp);
+                log("maintemp "+maintemp);
 
             }
 
