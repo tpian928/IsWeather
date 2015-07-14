@@ -121,6 +121,7 @@ public class Weather {
                 day1.setDate(todayObj.getString("date"));
                 day1.setTemp(todayObj.getString("temperature"));
                 day1.setTempRage(todayObj.getString("temperature"));
+                day1.setTemp(todayObj.getString("date").split("：")[1].replaceAll("[^0-9?!\\.]", ""));
                 day1.setWeather(todayObj.getString("weather"));
                 day1.setWind(todayObj.getString("wind"));
 
@@ -140,21 +141,10 @@ public class Weather {
                 this.setTomorrowWeather(day2);
                 this.setAferWeather(day3);
 
-                //log(this.getAferWeather().getTempRage());
+                this.maintemp=this.getTodayWeather().getTemp();
 
-//                //通过城市ID获取其他
-//                this.cityid = "101010100";
-//                //this.cityid=getCityIdByName(cityname)
-//                String url2 = "http://www.weather.com.cn/adat/sk/"+cityid+".html";
-//                String result2 = HttpRequest.sendGet(url2,"");
-//                //log("result2 is "+result2);
-//
-//                JSONObject obj2 = new JSONObject(result2);
-//                JSONObject info = obj2.getJSONObject("weatherinfo");
-//
-//                this.maintemp=info.getString("temp");
-//                this.sd=info.getString("SD");
-//                log("sd is "+this.getTodayWeather().getDate());
+                //log("maintemp "+maintemp);
+
             }
 
             else{
