@@ -20,7 +20,7 @@ public class Weather {
     private String sd;//湿度
     private String mess;
     private String cityid;
-    private String maintemp;
+    private String maintemp; //主要温度
 
 
 
