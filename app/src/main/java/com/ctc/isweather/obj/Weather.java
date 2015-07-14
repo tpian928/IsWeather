@@ -15,7 +15,14 @@ public class Weather {
     /**
      * 基本的数据 sd是湿度 基本信息显示temp,mess用来输出一些错误信息
      */
-    private String cityname,pm25,sd,mess;
+    private String cityname;
+    private String pm25;
+    private String sd;//湿度
+    private String mess;
+    private String cityid;
+    private String maintemp;
+
+
 
     /**
      * 指数
@@ -114,6 +121,7 @@ public class Weather {
                 day1.setDate(todayObj.getString("date"));
                 day1.setTemp(todayObj.getString("temperature"));
                 day1.setTempRage(todayObj.getString("temperature"));
+                day1.setTemp(todayObj.getString("date").split("：")[1].replaceAll("[^0-9?!\\.]", ""));
                 day1.setWeather(todayObj.getString("weather"));
                 day1.setWind(todayObj.getString("wind"));
 
@@ -133,7 +141,10 @@ public class Weather {
                 this.setTomorrowWeather(day2);
                 this.setAferWeather(day3);
 
-                //log(this.getAferWeather().getTempRage());
+                this.maintemp=this.getTodayWeather().getTemp();
+
+                //log("maintemp "+maintemp);
+
             }
 
             else{
@@ -249,7 +260,24 @@ public class Weather {
         this.mess = mess;
     }
 
+    public String getCityid() {
+        return cityid;
+    }
+
+    public void setCityid(String cityid) {
+        this.cityid = cityid;
+    }
+
+    public String getMaintemp() {
+        return maintemp;
+    }
+
+    public void setMaintemp(String maintemp) {
+        this.maintemp = maintemp;
+    }
+
     private void log(String str){
         Log.d("Weatherlog",str);
     }
+
 }
