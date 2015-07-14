@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.ctc.isweather.R;
 import com.ctc.isweather.obj.Weather;
+import com.ctc.isweather.tools.Color;
 
 public class MainActivity extends ActionBarActivity{
 
@@ -25,7 +26,9 @@ public class MainActivity extends ActionBarActivity{
             public void run() {
                 try {
                     //Your code goes here
-                    Weather mWeather = new Weather("北京");
+//                    Weather mWeather = new Weather("北京");
+//                    String color = Color.getColorByTemp(55);
+//                    Log.d("color",color);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
