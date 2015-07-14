@@ -1,6 +1,6 @@
-package com.ctc.tools;
+package com.ctc.isweather.tools;
 
-import com.ctc.interfaces.Charts;
+import com.ctc.isweather.interfaces.Charts;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.YAxis;

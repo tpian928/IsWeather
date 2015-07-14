@@ -1,4 +1,4 @@
-package com.ctc.interfaces;
+package com.ctc.isweather.interfaces;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
