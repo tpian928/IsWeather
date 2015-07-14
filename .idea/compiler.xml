@@ -15,20 +15,7 @@
     </wildcardResourcePatterns>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="false">
-        <outputRelativeToContentRoot value="true" />
-<<<<<<< HEAD
-        <processorPath useClasspath="false">
-          <entry name="$PROJECT_DIR$/../../androidannotations-bundle-3.3.2/androidannotations-3.3.2.jar" />
-        </processorPath>
-      </profile>
-      <profile default="false" name="Annotations" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$PROJECT_DIR$/../../androidannotations-bundle-3.3.2/androidannotations-3.3.2.jar" />
-        </processorPath>
-=======
         <processorPath useClasspath="true" />
->>>>>>> Clotho
       </profile>
     </annotationProcessing>
   </component>
