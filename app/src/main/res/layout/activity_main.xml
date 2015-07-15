@@ -106,7 +106,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/little_rain"
-            android:layout_weight="2"/>
+            android:padding="10dp"
+            android:layout_weight="2" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -127,6 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/thunder_rain"
+            android:padding="10dp"
             android:layout_weight="2"/>
 
         <LinearLayout
