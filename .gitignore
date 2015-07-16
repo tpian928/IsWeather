@@ -4,4 +4,6 @@ local.properties
 .DS_Store
 build
 captures
-*.iml*
+app/*.iml*
+
+*.iml
