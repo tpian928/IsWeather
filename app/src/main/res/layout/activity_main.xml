@@ -112,7 +112,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/little_rain"
+            android:src="@drawable/sprinkle"
             android:padding="10dp"
             android:layout_weight="2" />
 
