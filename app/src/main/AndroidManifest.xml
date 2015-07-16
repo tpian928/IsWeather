@@ -19,6 +19,8 @@
             </intent-filter>
         </activity>
 
+        <service android:enabled="true" android:name=".service.NotificationSvc" android:process="system"></service>
+
     </application>
 
 </manifest>

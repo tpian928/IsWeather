@@ -2,6 +2,15 @@
 local.properties
 .idea/*
 .DS_Store
+<<<<<<< HEAD
 build
 captures
 *.iml*
+=======
+/build
+/captures
+.idea/misc.xml
+app/src/main/java/com/ctc/isweather/activity/MainActivity.java
+app/src/main/java/com/ctc/isweather/activity/MainActivity.java
+.idea/misc.xml
+>>>>>>> origin/master
