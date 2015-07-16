@@ -26,14 +26,10 @@ public class MainActivity extends ActionBarActivity{
             public void run() {
                 try {
                     //Your code goes here
-<<<<<<< HEAD
+
 //                    Weather mWeather = new Weather("北京");
 //                    String color = Color.getColorByTemp(55);
 //                    Log.d("color",color);
-=======
-                    Weather mWeather = new Weather("北京");
-                    mWeather.getTempInWeek();
->>>>>>> origin/master
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
