@@ -41,6 +41,7 @@ public class Weather {
      * @param cityname
      */
     public Weather(String cityname) {
+        Log.d("MainActivity","Weather");
         this.cityname = cityname;
 
         //联网获取json
@@ -154,6 +155,11 @@ public class Weather {
                 this.setMess("wrong");
             }
 
+
+            String url2 = "http://wap.youhubst.com/weather/getweather.php?ID=101010100";
+            log("this");
+            result = HttpRequest.sendGet(url2, "");
+            log("new result is "+result);
 
         }
         catch (Exception e) {
