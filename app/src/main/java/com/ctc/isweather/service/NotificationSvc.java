@@ -12,37 +12,37 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * ¶¨Ê±£¨Ã¿Ğ¡Ê±£©ÂÖÑ¯¼à²âÌìÆø£¬Èç¹ûÎ´À´2ÌìÄÚÓĞ¼«¶ËÌìÆø£¬ÔòÍÆËÍÍ¨Öª
- * ³ÌĞòÍË³öÊ±£¬ºóÌ¨·şÎñ²»¹Ø±Õ
+ * å®šæ—¶ï¼ˆæ¯å°æ—¶ï¼‰è½®è¯¢ç›‘æµ‹å¤©æ°”ï¼Œå¦‚æœæœªæ¥2å¤©å†…æœ‰æç«¯å¤©æ°”ï¼Œåˆ™æ¨é€é€šçŸ¥
+ * ç¨‹åºé€€å‡ºæ—¶ï¼Œåå°æœåŠ¡ä¸å…³é—­
  * Created by saty on 2015/7/14.
  */
 public class NotificationSvc extends Service {
-    private long interval = 60*60*1000;//Ã¿Ğ¡Ê±¶¨Ê±»ñÈ¡
+    private long interval = 60*60*1000;//æ¯å°æ—¶å®šæ—¶è·å–
     private static Timer timer = null;
 
-    //ÍÆËÍÍ¨Öª
+    //æ¨é€é€šçŸ¥
     public void PushNotification(Intent intent)
     {
         NotificationManager nm = (NotificationManager)NotificationSvc.this.getSystemService(NOTIFICATION_SERVICE);
         Notification.Builder builder = new Notification.Builder(NotificationSvc.this);
-        Intent notificationIntent = new Intent(NotificationSvc.this, MainActivity.class);//µã»÷Í¨ÖªÌø×ªÖÁÖ÷½çÃæ
+        Intent notificationIntent = new Intent(NotificationSvc.this, MainActivity.class);//ç‚¹å‡»é€šçŸ¥è·³è½¬è‡³ä¸»ç•Œé¢
         PendingIntent contentIntent = PendingIntent.getActivity(NotificationSvc.this,0,notificationIntent,0);
 
-        //ÉèÖÃÍ¨Öª
+        //è®¾ç½®é€šçŸ¥
         builder.setContentIntent(contentIntent);
-        builder.setSmallIcon(R.mipmap.ic_launcher);//Í¨ÖªÀ¸Í¼±ê
-        builder.setTicker(intent.getStringExtra("tickerText")); //²âÊÔÍ¨ÖªÀ¸±êÌâ
-        builder.setContentText(intent.getStringExtra("contentText")); //ÏÂÀ­Í¨ÖªÄÚÈİ
-        builder.setContentTitle(intent.getStringExtra("contentTitle"));//ÏÂÀ­Í¨ÖªÀ¸±êÌâ
+        builder.setSmallIcon(R.mipmap.ic_launcher);//é€šçŸ¥æ å›¾æ ‡
+        builder.setTicker(intent.getStringExtra("tickerText")); //æµ‹è¯•é€šçŸ¥æ æ ‡é¢˜
+        builder.setContentText(intent.getStringExtra("contentText")); //ä¸‹æ‹‰é€šçŸ¥å†…å®¹
+        builder.setContentTitle(intent.getStringExtra("contentTitle"));//ä¸‹æ‹‰é€šçŸ¥æ æ ‡é¢˜
         builder.setAutoCancel(true);
         builder.setDefaults(Notification.DEFAULT_ALL);
 
-        //Æô¶¯Í¨Öª
+        //å¯åŠ¨é€šçŸ¥
         Notification notification = builder.build();
         nm.notify((int)System.currentTimeMillis(),notification);
     }
 
-    //Çå³ıÍ¨Öª
+    //æ¸…é™¤é€šçŸ¥
     public void clearNotification()
     {
     }
@@ -55,12 +55,12 @@ public class NotificationSvc extends Service {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //´ÓÍøÂç»ñÈ¡ÌìÆøĞÅÏ¢
-                //Î´À´2ÌìÄÚÓĞ¶ñÁÓÇé¿ö£¬Æô¶¯ÍÆ¶¯
+                //ä»ç½‘ç»œè·å–å¤©æ°”ä¿¡æ¯
+                //æœªæ¥2å¤©å†…æœ‰æ¶åŠ£æƒ…å†µï¼Œå¯åŠ¨æ¨åŠ¨
 
                 /*intent.putExtra("tickerText","");
-                intent.putExtra("contentText","");//ÌáĞÑÓÃ»§×öºÃÔ¤·À´ëÊ©
-                intent.putExtra("contentTitle","");//À×µç£¬´ó·ç£¬±©Óê£¬¸Éºµ£¬º®³±*/
+                intent.putExtra("contentText","");//æé†’ç”¨æˆ·åšå¥½é¢„é˜²æªæ–½
+                intent.putExtra("contentTitle","");//é›·ç”µï¼Œå¤§é£ï¼Œæš´é›¨ï¼Œå¹²æ—±ï¼Œå¯’æ½®*/
                 //PushNotification(intent);
             }
         }, 0,interval);
