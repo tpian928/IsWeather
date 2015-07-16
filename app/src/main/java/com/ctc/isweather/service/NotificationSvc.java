@@ -38,7 +38,7 @@ public class NotificationSvc extends Service {
         builder.setDefaults(Notification.DEFAULT_ALL);
 
         //启动通知
-        Notification notification = builder.build();
+        Notification notification = builder.build();//叫姐姐
         nm.notify((int)System.currentTimeMillis(),notification);
     }
 

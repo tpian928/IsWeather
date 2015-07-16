@@ -4,6 +4,7 @@ local.properties
 .DS_Store
 build
 captures
+<<<<<<< HEAD
 *.iml*
 
 *.iml
@@ -11,3 +12,8 @@ captures
 *.iml
 
 app/app.iml
+=======
+app/*.iml*
+
+*.iml
+>>>>>>> origin/master
