@@ -1,4 +1,4 @@
-package com.ctc.isweather.service;
+package com.ctc.isweather.control.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -7,7 +7,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import com.ctc.isweather.R;
-import com.ctc.isweather.activity.MainActivity;
+import com.ctc.isweather.view.activity.MainActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 

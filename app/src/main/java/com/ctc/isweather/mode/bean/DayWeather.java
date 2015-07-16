@@ -1,4 +1,4 @@
-package com.ctc.isweather.obj;
+package com.ctc.isweather.mode.bean;
 
 /**
  * Created by TPIAN on 15/7/13.
