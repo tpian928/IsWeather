@@ -50,7 +50,7 @@ public class NotificationSvc extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if(null == timer){
-            timer = new Timer();
+            timer = new Timer();//你好
         }
         timer.schedule(new TimerTask() {
             @Override
