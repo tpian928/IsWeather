@@ -4,6 +4,13 @@ package com.ctc.isweather.tools;
  * Created by Saty on 15/7/14.
  */
 public class Color {
+    public static String backgroundClr = "#1c2534";//背景色
+    public static String DayForeColor = "#00e1ff";//白天前景色（天气概况模块背景色），折线颜色
+    public static String DayGridColor = "#067786";//白天未来天气模块主色调（右侧颜色）
+    public static String DayGridColorLight = "0aa5ba";//白天未来天气模块主色调（左侧颜色）
+    public static String NightForeColor = "#3f51b5";//白天前景色（天气概况模块背景色），折线颜色
+    public static String NightGridColor = "#5677fc";//白天未来天气模块主色调（右侧颜色）
+    public static String NightGridColorLight = "8fa5fc";//白天未来天气模块主色调（左侧颜色）
 
     /**
      * 通过给出的天气度数得到对应的色卡元素
@@ -37,24 +44,6 @@ public class Color {
             color = "#ff5722";
         }
         return  color;
-    }
-
-    /**
-     * 得到背景色，深色的背景色
-     * @return 16位颜色
-     */
-    public static String getBkgColor()
-    {
-        return "#182330";
-    }
-
-    /**
-     * 得到前景色，作为当日天气模块的背景色，也是折线颜色
-     * @return
-     */
-    public static String getForegroundColor()
-    {
-        return "#00e1ff";
     }
 
 }
