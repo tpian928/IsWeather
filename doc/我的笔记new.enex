@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export3.dtd">
+<en-export export-date="20150716T061612Z" application="Evernote" version="Evernote Mac 6.0.14 (451777)">
+<note><title>结构</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note>
+<div><br/></div>
+<ul>
+<li>mode
+<ul>
+<li>bean 元素实体类
+<ul>
+<li>City</li>
+<li>ConCity</li>
+<li>Weather</li>
+<li>DayWeather</li>
+<li>WIndex</li>
+<li>BadWeather</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>view
+<ul>
+<li>activity
+<ul>
+<li>MainActivity</li>
+<li>CityManageActivity</li>
+<li>CityAddActivity</li>
+<li>FutureWeatherActivity</li>
+<li>TodayWeatherActivity</li>
+<li>ShareActivity</li>
+</ul>
+</li>
+<li>view
+<ul>
+<li><br/></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>control
+<ul>
+<li>service
+<ul>
+<li>NotificationSvc</li>
+<li><br/></li>
+</ul>
+</li>
+<li>Network 
+<ul>
+<li>getWeather  -static </li>
+<li>isConnected true; false  -static</li>
+<li>getBadWeather</li>
+</ul>
+</li>
+<li>DBTools</li>
+</ul>
+</li>
+<li>interfaces
+<ul>
+<li>Charts</li>
+</ul>
+</li>
+</ul>
+<div><br/></div>
+<div><br/></div>
+</en-note>
+]]></content><created>20150716T032106Z</created><updated>20150716T061540Z</updated><note-attributes><latitude>39.94979270125657</latitude><longitude>116.3338309371395</longitude><altitude>58.40606689453125</altitude><author>tpian928@icloud.com</author><source>desktop.mac</source><reminder-order>0</reminder-order></note-attributes></note>
+</en-export>
