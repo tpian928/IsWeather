@@ -3,6 +3,7 @@ local.properties
 .idea/*
 .DS_Store
 <<<<<<< HEAD
+<<<<<<< HEAD
 build
 captures
 *.iml*
@@ -14,3 +15,8 @@ app/src/main/java/com/ctc/isweather/activity/MainActivity.java
 app/src/main/java/com/ctc/isweather/activity/MainActivity.java
 .idea/misc.xml
 >>>>>>> origin/master
+=======
+build
+captures
+*.iml*
+>>>>>>> tpian
