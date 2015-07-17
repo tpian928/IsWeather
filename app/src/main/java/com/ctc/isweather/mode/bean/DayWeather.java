@@ -6,11 +6,11 @@ package com.ctc.isweather.mode.bean;
 public class DayWeather {
 
     /**
-     * date 日期
-     * temp 温度
+     * date
+     * temp
      * weather
-     * wind 风向
-     * tempRage 温度范围
+     * wind
+     * tempRage
      */
     private String date,temp,weather,wind,tempRage;
 

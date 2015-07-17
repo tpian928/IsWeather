@@ -165,6 +165,6 @@ public class SPTools {
      */
     public static String getSpName(String variable,Activity activity){
         SharedPreferences sp = activity.getSharedPreferences("weatherInfo",0);
-        return sp.getString(variable,"null");
+        return sp.getString(variable,null);
     }
 }
