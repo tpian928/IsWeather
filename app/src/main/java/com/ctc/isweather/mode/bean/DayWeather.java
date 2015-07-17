@@ -5,25 +5,7 @@ package com.ctc.isweather.mode.bean;
  */
 public class DayWeather {
 
-    /**
-     * date 日期
-     * temp 温度
-     * weather
-     * wind 风向
-     * tempRage 温度范围
-     */
     private String date,temp,weather,wind,tempRage;
-
-    public DayWeather(){}
-
-    public DayWeather(String date,String temp,String weather,String wind,String tempRage){
-        setDate(date);
-        setTemp(temp);
-        setWeather(weather);
-        setWind(wind);
-        setTempRage(tempRage);
-    }
-
 
     public String getDate() {
         return date;

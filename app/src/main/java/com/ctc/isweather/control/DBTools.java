@@ -1,14 +1,13 @@
-package com.ctc.isweather.control;
+package com.ctc.isweather.database;
 
-import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.ctc.isweather.R;
-
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -18,16 +17,28 @@ import java.util.ArrayList;
  */
 public class DBTools {
 
-    public static final String DBNAME = "weathersys.db";
+    public static final String DBPATH = "/sdcard";
+    public static final String DBNAME = "weatherSys.db";
+
+    /**
+     * insert single data into table conCity
+     * 
+     * @param db database 
+     * @param id city id 
+     */
+    public static void insertIntoConcity(SQLiteDatabase db, int id) {
+        String sqlInsert = "insert into conCity values(" + id + ")";
+        db.execSQL(sqlInsert);
+    }
 
 
     /**
      * import existed database to /sdcard
-     * this.getApplicationContext().getResource().openResource(R.raw.);
+	 * this.getApplicationContext().getResource().openResource(R.raw.);
      */
-    public static void importDB(Activity activity) {
-        // store database in the sd card
-        String dbpath = "/data/data/" + activity.getPackageName() + "/databases";
+    public static void importDB(InputStream input) {
+		// store database in the sd card
+        String dbpath = "/sdcard";
         File dir = new File(dbpath);
         if (!dir.exists()) {
             dir.mkdir();
@@ -39,7 +50,6 @@ public class DBTools {
                 file.createNewFile();
 
                 // read
-                InputStream input = activity.getApplicationContext().getResources().openRawResource(R.raw.weathersys);
                 byte[] buffer = new byte[input.available()];
                 input.read(buffer);
                 input.close();
@@ -62,13 +72,14 @@ public class DBTools {
 
 
     /**
-     * Database in /sdcard/weathersys.db
+     * Database in /sdcard/weatherSys.db
      *
      * @return Writable database
      */
-    public static SQLiteDatabase openDatabase(String name) {
-        return SQLiteDatabase.openDatabase("/data/data/" + name + "/databases/" + DBNAME, null, SQLiteDatabase.OPEN_READWRITE);
+    public static SQLiteDatabase openDatabase() {
+        return SQLiteDatabase.openDatabase(DBPATH + "/" + DBNAME, null, SQLiteDatabase.OPEN_READWRITE);
     }
+
 
     /**
      * Check whether the record has been existed in Table City.
@@ -92,18 +103,10 @@ public class DBTools {
      * @return true, exists; false doesnt exist;
      */
     public static boolean existInConCity(SQLiteDatabase db, String name) {
-        // get the list of city
-        ArrayList<String> list = QueryInConcity(db);
-        if (list.size() == 0) {
-            return false;
-        }
-
-        for (String city : list) {
-            if (city.compareTo(name) == 0) {
-                return true;
-            }
-        }
-        return false;
+        String sql = "select id from city,conCity where city.id = conCity.id and conCity.name=?";
+        String[] s = {name};
+        Cursor cursor = db.rawQuery(sql, s);
+        return cursor.moveToFirst();
     }
 
     /**
@@ -116,9 +119,8 @@ public class DBTools {
     public static boolean insertInConcity(SQLiteDatabase db, String name) {
 
         if (!existInConCity(db, name)) {
-            String insert = "insert into concity values(" + getIdFromCity(db, name) + ")";
+            String insert = "insert into conCity values(" + getIdFromCity(db, name) + ")";
             db.execSQL(insert);
-            Log.i("chris", "The city is inserted!");
             return true;
         } else {
             Log.i("chris", "The city has been concerned!");
@@ -135,9 +137,8 @@ public class DBTools {
      */
     public static boolean deleteInConcity(SQLiteDatabase db, String name) {
         if (existInConCity(db, name)) {
-            String delete = "delete from concity where id=" + getIdFromCity(db, name);
+            String delete = "delete from conCity where id=" + getIdFromCity(db, name);
             db.execSQL(delete);
-            Log.i("chris","The city is deleted!");
             return true;
         } else {
             Log.i("chris", "The city has been deleted.");
@@ -147,24 +148,6 @@ public class DBTools {
 
 
     /**
-     * get all the cities from the table conCity
-     *
-     * @param db database
-     * @return the list of cities.
-     */
-    public static ArrayList<String> QueryInConcity(SQLiteDatabase db) {
-        String sql = "select name from city, concity where city.id = concity.id";
-        Cursor cursor = db.rawQuery(sql, null);
-        ArrayList<String> cities = new ArrayList<String>();
-        while(cursor.moveToNext()) {
-            cities.add(cursor.getString(0));
-            Log.i("chris","query: " + cursor.getString(0));
-        }
-
-        return cities;
-    }
-
-    /**
      * Get the id by cityname from table city
      *
      * @param db   database
@@ -172,14 +155,10 @@ public class DBTools {
      * @return the id of the city
      */
     public static int getIdFromCity(SQLiteDatabase db, String name) {
-        String sqlSelect = "select id from city where name='" + name+ "'";
-        Cursor cityCursor = db.rawQuery(sqlSelect, null);
-        int id = -1;
-        System.out.println("count:"+cityCursor.getCount());
-        while(cityCursor.moveToNext()){
-            id =  cityCursor.getInt(0);
-        }
-        return id;
+        String sqlSelect = "select id from city where name=?";
+        String[] s = {name};
+        Cursor cityCursor = db.rawQuery(sqlSelect, s);
+        return cityCursor.getInt(0);
     }
 
 }
