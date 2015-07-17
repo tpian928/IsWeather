@@ -17,3 +17,5 @@ app/*.iml*
 
 *.iml
 >>>>>>> origin/master
+app/app.iml
+app/src/main/java/com/ctc/isweather/view/activity/MainActivity.java

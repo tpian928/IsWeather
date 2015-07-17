@@ -5,16 +5,22 @@ package com.ctc.isweather.mode.bean;
  */
 public class WIndex {
 
-<<<<<<< HEAD
-=======
     /**
-     * title
-     * zs
-     * tipt
-     * des
+     * title :  指数名字
+     * zs    :  指数的数值
+     * tipt  :  建议
+     * des   :  描述
      */
->>>>>>> origin/master
     String title,zs,tipt,des;
+
+    public WIndex(){}
+
+    public WIndex(String title,String zs,String tipt,String des){
+        setTitle(title);
+        setZs(zs);
+        setTipt(tipt);
+        setDes(des);
+    }
 
     public String getTitle() {
         return title;
