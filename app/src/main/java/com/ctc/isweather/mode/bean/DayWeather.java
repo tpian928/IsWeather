@@ -5,6 +5,16 @@ package com.ctc.isweather.mode.bean;
  */
 public class DayWeather {
 
+<<<<<<< HEAD
+=======
+    /**
+     * date
+     * temp
+     * weather
+     * wind
+     * tempRage
+     */
+>>>>>>> origin/master
     private String date,temp,weather,wind,tempRage;
 
     public String getDate() {

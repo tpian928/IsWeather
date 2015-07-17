@@ -5,6 +5,15 @@ package com.ctc.isweather.mode.bean;
  */
 public class WIndex {
 
+<<<<<<< HEAD
+=======
+    /**
+     * title
+     * zs
+     * tipt
+     * des
+     */
+>>>>>>> origin/master
     String title,zs,tipt,des;
 
     public String getTitle() {

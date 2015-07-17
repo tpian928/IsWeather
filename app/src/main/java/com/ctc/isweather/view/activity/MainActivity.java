@@ -7,7 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ctc.isweather.R;
+<<<<<<< HEAD
 import com.ctc.isweather.mode.bean.Weather;
+=======
+import com.ctc.isweather.control.service.ConnectRequest;
+
+import java.io.InputStream;
+>>>>>>> origin/master
 
 public class MainActivity extends ActionBarActivity{
 
@@ -30,7 +36,14 @@ public class MainActivity extends ActionBarActivity{
             }
         });
 
+<<<<<<< HEAD
         thread.start();
+=======
+        thread.start();*/
+
+
+
+>>>>>>> origin/master
 
     }
 
