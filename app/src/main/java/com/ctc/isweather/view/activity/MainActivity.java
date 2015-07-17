@@ -6,12 +6,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.ctc.isweather.R;
-import com.ctc.isweather.control.DBTools;
-import com.ctc.isweather.http.ConnectRequest;
+import com.ctc.isweather.control.service.ConnectRequest;
 
 import java.io.InputStream;
 
@@ -42,52 +39,7 @@ public class MainActivity extends ActionBarActivity{
         });
 
         thread.start();*/
-        packageName = getPackageName();
-        in = this.getApplicationContext().getResources().openRawResource(R.raw.weathersys);
-        DBTools.importDB(in,packageName);
-        db = DBTools.openDatabase(packageName);
 
-
-        Button testbtn = (Button) findViewById(R.id.testBtn);
-        testbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBTools.importDB(in, packageName);
-            }
-        });
-
-        Button insertbtn = (Button) findViewById(R.id.insertBtn);
-        insertbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBTools.insertInConcity(db, "深圳");
-
-            }
-        });
-
-        Button deleteBtn = (Button) findViewById(R.id.deleteBtn);
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBTools.deleteInConcity(db, "深圳");
-            }
-        });
-
-        Button queryBtn = (Button) findViewById(R.id.queryBtn);
-        queryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBTools.QueryInConcity(db);
-            }
-        });
-
-        Button connectBtn = (Button) findViewById(R.id.connectBtn);
-        connectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ConnectRequest.isNetworkAvailable(MainActivity.this);
-            }
-        });
 
 
 
