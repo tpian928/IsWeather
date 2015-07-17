@@ -17,41 +17,57 @@ public class Weather {
     /**
      * 基本的数据 sd是湿度 基本信息显示temp,mess用来输出一些错误信息
      */
+    private String cityid;
     private String cityname;
     private String pm25;
     private String sd;//湿度
-    private String mess;
-    private String cityid;
     private String maintemp; //主要温度
+    private String mess;
 
-
+    private Wsimple wsimple;
 
     /**
      * 指数
      */
-    private WIndex dressingIndex,carwashIndex,travelIndex,coldIndex,sportsIndex;
+    private WIndex dressingIndex, carwashIndex, travelIndex, coldIndex, sportsIndex;
 
     /**
-     *今天明天，后天的具体天气
+     * 今天明天，后天的具体天气
      */
-    private DayWeather todayWeather,tomorrowWeather,aferWeather;
+    private DayWeather todayWeather, tomorrowWeather, aferWeather;
+
+    public Weather(Wsimple wsimple,
+                   WIndex dressingIndex, WIndex carwashIndex, WIndex travelIndex, WIndex coldIndex, WIndex sportsIndex,
+                   DayWeather todayWeather, DayWeather tomorrowWeather, DayWeather aferWeather) {
+        setWsimple(wsimple);
+        setDressingIndex(dressingIndex);
+        setCarwashIndex(carwashIndex);
+        setTravelIndex(travelIndex);
+        setColdIndex(coldIndex);
+        setSportsIndex(sportsIndex);
+
+        setTodayWeather(todayWeather);
+        setTomorrowWeather(tomorrowWeather);
+        setAferWeather(aferWeather);
+    }
 
     /**
      * 通过城市名称进行构造，构造的同时获得所有信息
+     *
      * @param cityname
      */
     public Weather(String cityname) {
-        Log.d("MainActivity","Weather");
+        Log.d("MainActivity", "Weather");
         this.cityname = cityname;
 
         //联网获取json
 
         String result = "";
 
-        try{
+        try {
             String url = "http://api.map.baidu.com/telematics/v3/weather";
-            Log.d("Weather","url "+url);
-            result = HttpRequest.sendGet(url, "location="+cityname+"&output=json&ak=256333037387158f732a3601de80cfb3");
+            Log.d("Weather", "url " + url);
+            result = HttpRequest.sendGet(url, "location=" + cityname + "&output=json&ak=256333037387158f732a3601de80cfb3");
 
             //Log.d("Weather","json result is "+result);
 
@@ -61,43 +77,43 @@ public class Weather {
 
 
             //等于0代表没有错误
-            if(error==0){
+            if (error == 0) {
                 JSONArray resultArr = obj.getJSONArray("results");
-                JSONObject resultObj = (JSONObject)resultArr.get(0);
+                JSONObject resultObj = (JSONObject) resultArr.get(0);
                 String pm25 = resultObj.getString("pm25");
                 this.setPm25(pm25);
 
                 JSONArray indexArr = resultObj.getJSONArray("index");
 
-                JSONObject diobj = (JSONObject)indexArr.get(0);
+                JSONObject diobj = (JSONObject) indexArr.get(0);
                 WIndex index1 = new WIndex();
                 index1.setDes(diobj.getString("des"));
                 index1.setTipt(diobj.getString("tipt"));
                 index1.setTitle(diobj.getString("title"));
                 index1.setZs(diobj.getString("zs"));
 
-                JSONObject ciobj = (JSONObject)indexArr.get(1);
+                JSONObject ciobj = (JSONObject) indexArr.get(1);
                 WIndex index2 = new WIndex();
                 index2.setDes(ciobj.getString("des"));
                 index2.setTipt(ciobj.getString("tipt"));
                 index2.setTitle(ciobj.getString("title"));
                 index2.setZs(ciobj.getString("zs"));
 
-                JSONObject tiobj = (JSONObject)indexArr.get(2);
+                JSONObject tiobj = (JSONObject) indexArr.get(2);
                 WIndex index3 = new WIndex();
                 index3.setDes(tiobj.getString("des"));
                 index3.setTipt(tiobj.getString("tipt"));
                 index3.setTitle(tiobj.getString("title"));
                 index3.setZs(tiobj.getString("zs"));
 
-                JSONObject coldiobj = (JSONObject)indexArr.get(3);
+                JSONObject coldiobj = (JSONObject) indexArr.get(3);
                 WIndex index4 = new WIndex();
                 index4.setDes(coldiobj.getString("des"));
                 index4.setTipt(coldiobj.getString("tipt"));
                 index4.setTitle(coldiobj.getString("title"));
                 index4.setZs(coldiobj.getString("zs"));
 
-                JSONObject siobj = (JSONObject)indexArr.get(4);
+                JSONObject siobj = (JSONObject) indexArr.get(4);
                 WIndex index5 = new WIndex();
                 index5.setDes(siobj.getString("des"));
                 index5.setTipt(siobj.getString("tipt"));
@@ -113,13 +129,13 @@ public class Weather {
 //                weather_data
                 JSONArray dayArr = resultObj.getJSONArray("weather_data");
 
-                JSONObject todayObj = (JSONObject)dayArr.get(0);
-                JSONObject tomorrowObj = (JSONObject)dayArr.get(1);
-                JSONObject afterObj = (JSONObject)dayArr.get(2);
+                JSONObject todayObj = (JSONObject) dayArr.get(0);
+                JSONObject tomorrowObj = (JSONObject) dayArr.get(1);
+                JSONObject afterObj = (JSONObject) dayArr.get(2);
 
-                DayWeather day1= new DayWeather();
-                DayWeather day2= new DayWeather();
-                DayWeather day3= new DayWeather();
+                DayWeather day1 = new DayWeather();
+                DayWeather day2 = new DayWeather();
+                DayWeather day3 = new DayWeather();
 
                 day1.setDate(todayObj.getString("date"));
                 day1.setTemp(todayObj.getString("temperature"));
@@ -144,13 +160,11 @@ public class Weather {
                 this.setTomorrowWeather(day2);
                 this.setAferWeather(day3);
 
-                this.maintemp=this.getTodayWeather().getTemp();
+                this.maintemp = this.getTodayWeather().getTemp();
 
-                log("maintemp "+maintemp);
+                log("maintemp " + maintemp);
 
-            }
-
-            else{
+            } else {
                 log("wrong");
                 this.setMess("wrong");
             }
@@ -159,10 +173,9 @@ public class Weather {
             String url2 = "http://wap.youhubst.com/weather/getweather.php?ID=101010100";
             log("this");
             result = HttpRequest.sendGet(url2, "");
-            log("new result is "+result);
+            log("new result is " + result);
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e);
         }
 
@@ -171,33 +184,29 @@ public class Weather {
 
     /**
      * 得到一周温度的数组
+     *
      * @return 一周温度的数组
      */
-    public ArrayList<String> getTempInWeek(){
+    public ArrayList<String> getTempInWeek() {
         ArrayList<String> tempArr = new ArrayList<String>();
 
         //从数据库中得到城市id
-        this.cityid="101010100";
+        this.cityid = "101010100";
         //this.cityid = getCityIdFromDB(cityname);-----need
 
-        try{
-            String url = "http://wap.youhubst.com/weather/getweather.php?ID="+this.cityid;
+        try {
+            String url = "http://wap.youhubst.com/weather/getweather.php?ID=" + this.cityid;
             log(url);
             String result1 = HttpRequest.sendGet(url, "");
 
             JSONObject obj = new JSONObject(result1);
 
-            log("objzz "+obj.getString("weatherinfo"));
-
-            //不合规ID导致的错误---todo
-
-
-        }
-        catch (Exception e) {
+            log("objzz " + obj.getString("weatherinfo"));
+        } catch (Exception e) {
             System.err.println(e);
         }
 
-        return  tempArr;
+        return tempArr;
     }
 
     /**
@@ -315,8 +324,16 @@ public class Weather {
         this.maintemp = maintemp;
     }
 
-    private void log(String str){
-        Log.d("Weatherlog",str);
+    private void log(String str) {
+        Log.d("Weatherlog", str);
     }
 
+
+    public Wsimple getWsimple() {
+        return wsimple;
+    }
+
+    public void setWsimple(Wsimple wsimple) {
+        this.wsimple = wsimple;
+    }
 }
