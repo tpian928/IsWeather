@@ -20,12 +20,11 @@ public class SPTools {
      * @param activity To get the acticity
      */
     public static void setSharePreferences(Weather weather, Activity activity) {
-        SharedPreferences sp = activity.getSharedPreferences("weatherInfo", 0);
-        SharedPreferences.Editor editor = sp.edit();
+        SharedPreferences.Editor editor = activity.getSharedPreferences("weatherInfo", 0).edit();
         // Today's weather
         editor.putString("cityname", weather.getCityname());
         editor.putString("cityid", weather.getCityid());
-        editor.putString("pm2.5", weather.getPm25());
+        editor.putString("pm2.5", weather.getPm25());/**/
         editor.putString("sd", weather.getSd());
         editor.putString("maintemp", weather.getMaintemp());
 
@@ -167,4 +166,15 @@ public class SPTools {
         SharedPreferences sp = activity.getSharedPreferences("weatherInfo",0);
         return sp.getString(variable,"null");
     }
+
+    /**
+     * clear the sharepreferences
+     * @param activity
+     */
+    public static void clearSp(Activity activity){
+        SharedPreferences.Editor editor = activity.getSharedPreferences("weatherInfo",0).edit();
+        editor.clear().commit();
+    }
+
+
 }
