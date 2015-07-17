@@ -66,8 +66,8 @@ public class DBTools {
      *
      * @return Writable database
      */
-    public static SQLiteDatabase openDatabase(String packagename) {
-        return SQLiteDatabase.openDatabase("/data/data/" + packagename + "/databases/" + DBNAME, null, SQLiteDatabase.OPEN_READWRITE);
+    public static SQLiteDatabase openDatabase(String name) {
+        return SQLiteDatabase.openDatabase("/data/data/" + name + "/databases/" + DBNAME, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
     /**
@@ -182,13 +182,4 @@ public class DBTools {
         return id;
     }
 
-    /**
-     * Get the cursor of concity id from table concity
-     * @param db
-     * @return
-     */
-    public static Cursor getCursorIdFromCity(SQLiteDatabase db){
-        String select = "select * from concity";
-        return db.rawQuery(select,null);
-    }
 }

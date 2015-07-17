@@ -5,6 +5,12 @@ package com.ctc.isweather.mode.bean;
  */
 public class WIndex {
 
+    /**
+     * title :  指数名字
+     * zs    :  指数的数值
+     * tipt  :  建议
+     * des   :  描述
+     */
     String title,zs,tipt,des;
 
     public WIndex(){}
