@@ -2,8 +2,6 @@ package com.ctc.isweather.control;
 
 import android.util.Log;
 
-import com.ctc.isweather.mode.bean.FetureWeather;
-
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -29,10 +27,12 @@ public class LocationCtrl {
             URLConnection tc = hukd.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(tc.getInputStream(), "UTF-8"));
             String line = in.readLine();
-
+            Log.d("test",line);
             JSONObject obj = new JSONObject(line);
 
+
             if (obj.getInt("status")==0){
+
                 JSONObject contentObj = obj.getJSONObject("content");
                 JSONObject address_detailObj = contentObj.getJSONObject("address_detail");
                 if (address_detailObj.getString("city")!=null){
@@ -41,6 +41,7 @@ public class LocationCtrl {
                 }
             }
             else{
+
                 cityName=null;
             }
 

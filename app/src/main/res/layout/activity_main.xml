@@ -49,7 +49,7 @@
         android:background="#3f51b5">
 
         <ImageView
-            android:id="@+id/city_imageView"
+            android:id="@+id/city_today_imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
