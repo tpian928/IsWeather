@@ -81,7 +81,7 @@ public class SPTools {
      * @param activity
      * @return
      */
-    public static Weather getShareprefence(Activity activity) {
+    public static void getShareprefence(Activity activity) {
         SharedPreferences sp = activity.getSharedPreferences("weatherInfo", 0);
 
         // construction of Wsimple
@@ -153,7 +153,7 @@ public class SPTools {
         );
 
          //construction of the weather
-        return new Weather(wsimple,dressingIndex,cardwashIndex,travelIndex,coldIndex,sportIndex,today,tomorrow,after);
+        //  return new Weather(wsimple,dressingIndex,cardwashIndex,travelIndex,coldIndex,sportIndex,today,tomorrow,after);
     }
 
 
