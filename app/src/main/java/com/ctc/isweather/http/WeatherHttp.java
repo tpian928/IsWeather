@@ -3,19 +3,12 @@ package com.ctc.isweather.http;
 import android.util.Log;
 
 import com.ctc.isweather.mode.bean.DayWeather;
-import com.ctc.isweather.mode.bean.FetureWeather;
 import com.ctc.isweather.mode.bean.WIndex;
 import com.ctc.isweather.mode.bean.Weather;
 import com.ctc.isweather.mode.bean.Wsimple;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
 
 /**
  * Created by TPIAN on 15/7/16.
@@ -143,85 +136,8 @@ public class WeatherHttp {
         return mWeather;
     }
 
-    /**
-     * getFutureWeather get futureWeather(class) with cityid
-     * @param cityId cityid
-     * @return futureWeather(class)
-     * @Warnning: You should check the size of return Arraylist,beacuse it may be empty and this method cannot be used in main thread
-     */
-    public static ArrayList<FetureWeather> getFutureWeather(int cityId){
-        ArrayList<FetureWeather> fetureWeathers = new ArrayList<FetureWeather>();
-        try {
-
-            URL hukd = new URL("http://wap.youhubst.com/weather/getweather.php?ID="+cityId);
-            URLConnection tc = hukd.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(tc.getInputStream(), "UTF-8"));
-            String line = in.readLine();
-
-            JSONObject obj2 = new JSONObject(line);
-            JSONObject infoObj = obj2.getJSONObject("weatherinfo");
-
-
-            String temp1 = infoObj.getString("temp1");
-            String weather1 = infoObj.getString("weather1");
-            String wind1 = infoObj.getString("wind1");
-            String tempmin1 = temp1.split("-")[0];
-            String tempmax1 = temp1.split("-")[1];
-            FetureWeather f1 = new FetureWeather(tempmin1,tempmax1,weather1,wind1);
-
-            String temp2 = infoObj.getString("temp2");
-            String weather2 = infoObj.getString("weather2");
-            String wind2 = infoObj.getString("wind2");
-            String tempmin2 = temp1.split("-")[0];
-            String tempmax2 = temp1.split("-")[1];
-            FetureWeather f2 = new FetureWeather(tempmin2,tempmax2,weather2,wind2);
-
-            String temp3 = infoObj.getString("temp3");
-            String weather3 = infoObj.getString("weather3");
-            String wind3 = infoObj.getString("wind3");
-            String tempmin3 = temp1.split("-")[0];
-            String tempmax3 = temp1.split("-")[1];
-            FetureWeather f3 = new FetureWeather(tempmin3,tempmax3,weather3,wind3);
-
-            String temp4 = infoObj.getString("temp4");
-            String weather4 = infoObj.getString("weather4");
-            String wind4 = infoObj.getString("wind1");
-            String tempmin4 = temp1.split("-")[0];
-            String tempmax4 = temp1.split("-")[1];
-            FetureWeather f4 = new FetureWeather(tempmin4,tempmax4,weather4,wind4);
-
-            String temp5 = infoObj.getString("temp1");
-            String weather5 = infoObj.getString("weather1");
-            String wind5 = infoObj.getString("wind4");
-            String tempmin5 = temp1.split("-")[0];
-            String tempmax5 = temp1.split("-")[1];
-            FetureWeather f5 = new FetureWeather(tempmin5,tempmax5,weather5,wind5);
-
-            String temp6 = infoObj.getString("temp5");
-            String weather6 = infoObj.getString("weather5");
-            String wind6 = infoObj.getString("wind5");
-            String tempmin6 = temp1.split("-")[0];
-            String tempmax6 = temp1.split("-")[1];
-            FetureWeather f6 = new FetureWeather(tempmin6,tempmax6,weather6,wind6);
-
-            fetureWeathers.add(f1);
-            fetureWeathers.add(f2);
-            fetureWeathers.add(f3);
-            fetureWeathers.add(f4);
-            fetureWeathers.add(f5);
-            fetureWeathers.add(f6);
-
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-        return fetureWeathers;
-    }
-    
     public void log(String str) {
         Log.d("Weatherlog", str);
     }
-
-
-
 
 }
