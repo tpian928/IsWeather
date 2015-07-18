@@ -100,7 +100,7 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1px"
+        android:layout_height="3px"
         android:background="@android:color/white"  />
 
     <LinearLayout
@@ -114,12 +114,14 @@
             android:layout_height="match_parent"
             android:src="@drawable/sprinkle"
             android:padding="10dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:background="#1f2c78"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="#5677fc">
 
         </LinearLayout>
 
@@ -141,23 +143,31 @@
             android:layout_height="match_parent"
             android:src="@drawable/thunder_rain"
             android:padding="10dp"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            android:background="#1f2c78"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="#5677fc">
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="3px"
+        android:background="@android:color/white"  />
 
     <LinearLayout
         android:id="@+id/index_LinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#1d2636">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -222,13 +232,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:src="@drawable/rain_index"/>
+                    android:src="@drawable/car_index"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
-
                 </LinearLayout>
 
             </LinearLayout>
