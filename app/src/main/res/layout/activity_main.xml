@@ -18,7 +18,7 @@
             android:layout_weight="1"
             android:padding="10dp"
             android:src="@drawable/choose"
-            android:id="@+id/memu_ImageView" />
+            android:id="@+id/city_manage_ImageView" />
 
         <TextView
             android:layout_width="wrap_content"

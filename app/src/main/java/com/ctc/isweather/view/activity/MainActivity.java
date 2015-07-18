@@ -12,9 +12,7 @@ import android.widget.TextView;
 import com.ctc.isweather.R;
 
 public class MainActivity extends Fragment{
-
-
-
+    private ImageView city_manage_ImageView;
     // each move, need to get the data from the internet
     static MainActivity newInstance(String cityname){
         MainActivity city = new MainActivity();
@@ -51,6 +49,15 @@ public class MainActivity extends Fragment{
             public void onClick(View v) {
                 // some differences between activities and fragments.
                 Intent intent = new Intent(getActivity(),TodayWeatherActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        city_manage_ImageView = (ImageView) view.findViewById(R.id.city_manage_ImageView);
+        city_manage_ImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),CityManageActivity.class);
                 startActivity(intent);
             }
         });

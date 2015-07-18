@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.WindowManager;
 
 import com.ctc.isweather.R;
+import com.ctc.isweather.adapter.FragmentAdapter;
 import com.ctc.isweather.control.DBTools;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class IndexActivity extends FragmentActivity{
         setContentView(R.layout.activity_index);
 
         WindowManager wm = this.getWindowManager();
+        DBTools.importDB(this);
         initViewPage();
 
     }
