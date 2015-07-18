@@ -1,4 +1,4 @@
-package com.ctc.isweather.http;
+package com.ctc.isweather.control.service;
 
 import android.app.Activity;
 import android.content.Context;

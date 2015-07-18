@@ -7,6 +7,15 @@ public class WIndex {
 
     String title,zs,tipt,des;
 
+    public WIndex(){}
+
+    public WIndex(String title,String zs,String tipt,String des){
+        setTitle(title);
+        setZs(zs);
+        setTipt(tipt);
+        setDes(des);
+    }
+
     public String getTitle() {
         return title;
     }

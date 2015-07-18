@@ -7,6 +7,17 @@ public class DayWeather {
 
     private String date,temp,weather,wind,tempRage;
 
+    public DayWeather(){}
+
+    public DayWeather(String date,String temp,String weather,String wind,String tempRage){
+        setDate(date);
+        setTemp(temp);
+        setWeather(weather);
+        setWind(wind);
+        setTempRage(tempRage);
+    }
+
+
     public String getDate() {
         return date;
     }

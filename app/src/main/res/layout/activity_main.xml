@@ -49,6 +49,7 @@
         android:background="#3f51b5">
 
         <ImageView
+            android:id="@+id/city_imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -65,7 +66,7 @@
 
 
             <TextView
-                android:id="@+id/week_TextView"
+                android:id="@+id/date_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -73,21 +74,21 @@
                 android:text="2015/7/15"/>
 
             <TextView
-                android:id="@+id/time_TextView"
+                android:id="@+id/weekday_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="星期三"/>
             <TextView
-                android:id="@+id/city_TextView"
+                android:id="@+id/weather_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="晴"/>
             <TextView
-                android:id="@+id/weather_TextView"
+                android:id="@+id/temp_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

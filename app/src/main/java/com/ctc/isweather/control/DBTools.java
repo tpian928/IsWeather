@@ -1,8 +1,11 @@
 package com.ctc.isweather.control;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import com.ctc.isweather.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,7 +18,6 @@ import java.util.ArrayList;
  */
 public class DBTools {
 
-    public static final String DBPATH = "/sdcard";
     public static final String DBNAME = "weathersys.db";
 
 
@@ -23,9 +25,9 @@ public class DBTools {
      * import existed database to /sdcard
      * this.getApplicationContext().getResource().openResource(R.raw.);
      */
-    public static void importDB(InputStream input, String packageName) {
+    public static void importDB(Activity activity) {
         // store database in the sd card
-        String dbpath = "/data/data/" + packageName + "/databases";
+        String dbpath = "/data/data/" + activity.getPackageName() + "/databases";
         File dir = new File(dbpath);
         if (!dir.exists()) {
             dir.mkdir();
@@ -37,6 +39,7 @@ public class DBTools {
                 file.createNewFile();
 
                 // read
+                InputStream input = activity.getApplicationContext().getResources().openRawResource(R.raw.weathersys);
                 byte[] buffer = new byte[input.available()];
                 input.read(buffer);
                 input.close();
