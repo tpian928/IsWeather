@@ -10,8 +10,14 @@ import android.widget.BaseAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.ctc.isweather.R;
+import com.ctc.isweather.control.DBTools;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,13 +30,14 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
     private Context mContext;//context, get convertView
     private int mScreentWidth;//screen width
     private boolean isOperating;
+
     /**
      * constructor
+     *
      * @param context
      * @param screenWidth
      */
-    public MyAdapter(Context context, int screenWidth)
-    {
+    public MyAdapter(Context context, int screenWidth) {
         //initialize all private variables
         mContext = context;
         mScreentWidth = screenWidth;
@@ -60,8 +67,7 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         //initialize convertView
-        if (convertView == null)
-        {
+        if (convertView == null) {
             //view
             convertView = LayoutInflater.from(mContext).inflate(R.layout.list_city, parent, false);
 
@@ -73,14 +79,14 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
 
             //action
             holder.city_action_view = convertView.findViewById(R.id.city_action);
-            holder.delete_action = (ImageView)convertView.findViewById(R.id.delete);
+            holder.delete_action = (ImageView) convertView.findViewById(R.id.delete);
 
             //remember position
             holder.delete_action.setTag(position);
 
-            holder.img = (ImageView)convertView.findViewById(R.id.img);
-            holder.city_weather = (TextView)convertView.findViewById(R.id.city_weather);
-            holder.date = (TextView)convertView.findViewById(R.id.date);
+            holder.img = (ImageView) convertView.findViewById(R.id.img);
+            holder.city_weather = (TextView) convertView.findViewById(R.id.city_weather);
+            holder.date = (TextView) convertView.findViewById(R.id.date);
 
             //set width of view_content
             holder.city_content_view = convertView.findViewById(R.id.city_content);
@@ -88,22 +94,18 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
             lp.width = mScreentWidth;
 
             convertView.setTag(holder);
-            Log.d("debug","if clause,init holder");
-        }
-        else//ViewHolder
+            Log.d("debug", "if clause,init holder");
+        } else//ViewHolder
         {
             holder = (ViewHolder) convertView.getTag();
-            Log.d("debug","else clause,init holder");
+            Log.d("debug", "else clause,init holder");
         }
 
         //touch listener
-        convertView.setOnTouchListener(new View.OnTouchListener()
-        {
+        convertView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                switch (event.getAction())
-                {
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_UP:
 
                         //ViewHolder
@@ -115,12 +117,9 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
                         //operating length
                         int actionW = viewHolder.city_action_view.getWidth();
 
-                        if (scrollX < actionW / 2)
-                        {
+                        if (scrollX < actionW / 2) {
                             viewHolder.itemHorizontalScrollView.smoothScrollTo(0, 0);
-                        }
-                        else
-                        {
+                        } else {
                             viewHolder.itemHorizontalScrollView.smoothScrollTo(actionW, 0);
                         }
                         return true;
@@ -130,8 +129,7 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
         });
 
         //
-        if (holder.itemHorizontalScrollView.getScrollX() != 0)
-        {
+        if (holder.itemHorizontalScrollView.getScrollX() != 0) {
             holder.itemHorizontalScrollView.scrollTo(0, 0);
         }
 
@@ -141,7 +139,7 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
         Log.d("testo", "" + i);
 //        holder.img.setImageResource(o);
 
-        holder.img.setImageResource((Integer)city_data.get(position).get("img"));
+        holder.img.setImageResource((Integer) city_data.get(position).get("img"));
         holder.city_weather.setText("" + city_data.get(position).get("city_weather"));
         holder.date.setText("" + city_data.get(position).get("date"));
 
@@ -158,19 +156,19 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
         });
 
 
-
         return convertView;
     }
 
     /**
      * delete record
+     *
      * @param v
      */
     @Override
     public void onClick(View v) {
         int position = (Integer) v.getTag();
         city_data.remove(position);
-        //update listview
+        DBTools.deleteInConcity((String)city_data.get(position).get("city_weather"));
         notifyDataSetChanged();
     }
 
@@ -178,8 +176,7 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
     /**
      * helper,hold the view
      */
-    class ViewHolder
-    {
+    class ViewHolder {
         //
         public HorizontalScrollView itemHorizontalScrollView;
 
@@ -198,22 +195,50 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
     private List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("date", "7/16 Thur");
-        //map.put("weather", "sunny 19");
-        map.put("city_weather","Beijing");
-        map.put("img", R.drawable.shower);
-        list.add(map);
+        ArrayList<String> citylist = DBTools.QueryInConcity();
+        for (String city : citylist) {
+            Log.i("chris", city);
+        }
 
-        Log.d("testo", "img is " + R.drawable.shower);
 
-        Map<String, Object> map1 = new HashMap<String, Object>();
-        map1.put("date", "7/17 wu");
-        //map.put("weather", "sunny 19");
-        map1.put("city_weather","chenzhou");
-        map1.put("img", R.drawable.shower);
-        list.add(map1);
+        String date = getDate();
+        date = date + " " + getWeekDay(date);
 
+        if (citylist.size() > 0) {
+            for (int i = 0; i < citylist.size(); i++) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("date", date);
+                map.put("city_weather", citylist.get(i));
+                // need some method to indicate which picture will be used.
+                map.put("img", R.drawable.shower);
+                list.add(map);
+            }
+        }
         return list;
+    }
+
+    /**
+     * Get the current date
+     * @return Date
+     */
+    public static String getDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        return formatter.format(curDate);
+    }
+
+    /**
+     * get the day of the week
+     * @param date Date
+     * @return week day
+     */
+    public String getWeekDay(String date) {
+        String[] dates = date.split("/");
+        Calendar calendar = Calendar.getInstance();//获得一个日历
+        calendar.set(Integer.valueOf(dates[0]), Integer.valueOf(dates[1]) - 1, Integer.valueOf(dates[2]));//设置当前时间,月份是从0月开始计算
+        int number = calendar.get(Calendar.DAY_OF_WEEK);//星期表示1-7，是从星期日开始，
+        String[] str = {"", "Sun", "Mon", "Thus", "Wens", "Thur", "Fri", "Sat"};
+        //System.out.println(str[number]);
+        return str[number];
     }
 }

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ctc.isweather.R;
 import com.ctc.isweather.adapter.FragmentAdapter;
@@ -20,24 +21,19 @@ import java.util.ArrayList;
  */
 public class IndexActivity extends FragmentActivity{
     private ViewPager vpager;
-    private ArrayList<Fragment> flist;
-    private ArrayList<String> concity;
-    public String citylbs;
     private MyHandler myHandler;
-
-
+    MyHandler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
 
-        initLBS();
+        init(); // call the thread
         DBTools.importDB(this);
-        initViewPage();
     }
 
-    public void initLBS(){
-        myHandler = new MyHandler();
+    public void init(){
+        handler = new MyHandler();
         // get the lbs location
         new Thread(new Runnable(){
             @Override
@@ -47,22 +43,22 @@ public class IndexActivity extends FragmentActivity{
                     String  lbs = LocationCtrl.getCityName();
                     Message msg = new Message();
                     msg.obj = lbs;
-                    myHandler.sendMessage(msg);
+                    handler.sendMessage(msg);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+        //initViewPage();
     }
 
-    public void initViewPage(){
+    public void initViewPage(String citylbs){
         Log.i("chris","LBS city: " + citylbs);
-
         // init the viewpager
         vpager = (ViewPager) findViewById(R.id.viewpager);
-        concity = DBTools.QueryInConcity(DBTools.openDatabase(getPackageName()));
+        ArrayList<String> concity = DBTools.QueryInConcity(DBTools.openDatabase(getPackageName()));
 
-        flist = new ArrayList<Fragment>();
+        ArrayList<Fragment> flist = new ArrayList<Fragment>();
         flist.add(MainActivity.newInstance(citylbs));
 
         if (concity.size() > 0) {
@@ -75,6 +71,9 @@ public class IndexActivity extends FragmentActivity{
         vpager.setCurrentItem(0);
     }
 
+    /**
+     * Class MyHandler.
+     */
     class MyHandler extends Handler{
         public MyHandler() {
         }
@@ -83,11 +82,19 @@ public class IndexActivity extends FragmentActivity{
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             // get the data from the branch thread.
-            Thread branch = Thread.currentThread();
-            Log.i("chris","Thread id : " + branch.getId());
+            //Thread branch = Thread.currentThread();
+           // Log.i("chris","Thread id : " + branch.getId());
             String message = String.valueOf(msg.obj);
-            Log.i("chris","Thread data :" + message);
-            citylbs = message;
+            Log.i("chris", "Thread data :" + message);
+            initViewPage(message);
         }
+    }
+
+    // flash
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this.getApplicationContext(),"need to delete the city",Toast.LENGTH_SHORT).show();
     }
 }

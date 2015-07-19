@@ -70,6 +70,10 @@ public class DBTools {
         return SQLiteDatabase.openDatabase("/data/data/" + name + "/databases/" + DBNAME, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
+    public static SQLiteDatabase openDatabase() {
+        return SQLiteDatabase.openDatabase("/data/data/com.ctc.isweather/databases/" + DBNAME, null, SQLiteDatabase.OPEN_READWRITE);
+    }
+
     /**
      * Check whether the record has been existed in Table City.
      *
@@ -146,6 +150,20 @@ public class DBTools {
     }
 
 
+    public static boolean deleteInConcity(String name) {
+        SQLiteDatabase db = openDatabase();
+        if (existInConCity(db, name)) {
+            String delete = "delete from concity where id=" + getIdFromCity(db, name);
+            db.execSQL(delete);
+            Log.i("chris","The city is deleted!");
+            return true;
+        } else {
+            Log.i("chris", "The city has been deleted.");
+            return false;
+        }
+    }
+
+
     /**
      * get all the cities from the table conCity
      *
@@ -153,6 +171,19 @@ public class DBTools {
      * @return the list of cities.
      */
     public static ArrayList<String> QueryInConcity(SQLiteDatabase db) {
+        String sql = "select name from city, concity where city.id = concity.id";
+        Cursor cursor = db.rawQuery(sql, null);
+        ArrayList<String> cities = new ArrayList<String>();
+        while(cursor.moveToNext()) {
+            cities.add(cursor.getString(0));
+            Log.i("chris","query: " + cursor.getString(0));
+        }
+
+        return cities;
+    }
+
+    public static ArrayList<String> QueryInConcity() {
+        SQLiteDatabase db = openDatabase();
         String sql = "select name from city, concity where city.id = concity.id";
         Cursor cursor = db.rawQuery(sql, null);
         ArrayList<String> cities = new ArrayList<String>();
@@ -182,4 +213,15 @@ public class DBTools {
         return id;
     }
 
+    public static int getIdFromCity(String name) {
+        SQLiteDatabase db = openDatabase();
+        String sqlSelect = "select id from city where name='" + name+ "'";
+        Cursor cityCursor = db.rawQuery(sqlSelect, null);
+        int id = -1;
+        System.out.println("count:"+cityCursor.getCount());
+        while(cityCursor.moveToNext()){
+            id =  cityCursor.getInt(0);
+        }
+        return id;
+    }
 }

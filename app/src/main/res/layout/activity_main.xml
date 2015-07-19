@@ -81,7 +81,7 @@
                 android:gravity="center"
                 android:text="星期三"/>
             <TextView
-                android:id="@+id/weather_TextView"
+                android:id="@+id/pm25_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -111,7 +111,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/tomorrowweather_LinearLayout"
+            android:id="@+id/tomorro_LinearLayout"
             android:layout_width="match_parent"
             android:layout_height="84dp"
             android:orientation="horizontal">
@@ -140,7 +140,7 @@
             android:background="@android:color/white"  />
 
         <LinearLayout
-            android:id="@+id/afterweather_LinearLayout"
+            android:id="@+id/after_LinearLayout"
             android:layout_width="match_parent"
             android:layout_height="84dp"
             android:orientation="horizontal">
@@ -198,7 +198,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/dressIndex_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Dressing"/>
 
                 </LinearLayout>
 
@@ -220,7 +226,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
-
+                    <TextView
+                        android:id="@+id/coldIndex_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="cold"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -248,6 +258,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/carwash_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="carwash"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -268,7 +283,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
-
+                    <TextView
+                        android:id="@+id/sportIndex_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="sport"/>
                 </LinearLayout>
 
             </LinearLayout>

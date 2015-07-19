@@ -3,18 +3,18 @@ package com.ctc.isweather.mode.bean;
 /**
  * Created by TPIAN on 15/7/18.
  */
-public class FetureWeather {
+public class FutureWeather {
 
     private String tempmin;
     private String tempmax;
     private String weather;
     private String wind;
 
-    public FetureWeather(){
+    public FutureWeather(){
 
     }
 
-    public FetureWeather(String tempmin, String tempmax, String weather, String wind) {
+    public FutureWeather(String tempmin, String tempmax, String weather, String wind) {
         this.tempmin = tempmin;
         this.tempmax = tempmax;
         this.weather = weather;

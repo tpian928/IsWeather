@@ -3,10 +3,9 @@ package com.ctc.isweather.http;
 import android.util.Log;
 
 import com.ctc.isweather.mode.bean.DayWeather;
-import com.ctc.isweather.mode.bean.FetureWeather;
+import com.ctc.isweather.mode.bean.FutureWeather;
 import com.ctc.isweather.mode.bean.WIndex;
 import com.ctc.isweather.mode.bean.Weather;
-import com.ctc.isweather.mode.bean.Wsimple;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -149,8 +148,8 @@ public class WeatherHttp {
      * @return futureWeather(class)
      * @Warnning: You should check the size of return Arraylist,beacuse it may be empty and this method cannot be used in main thread
      */
-    public static ArrayList<FetureWeather> getFutureWeather(int cityId){
-        ArrayList<FetureWeather> fetureWeathers = new ArrayList<FetureWeather>();
+    public static ArrayList<FutureWeather> getFutureWeather(int cityId){
+        ArrayList<FutureWeather> futureWeathers = new ArrayList<FutureWeather>();
         try {
 
             URL hukd = new URL("http://wap.youhubst.com/weather/getweather.php?ID="+cityId);
@@ -167,54 +166,54 @@ public class WeatherHttp {
             String wind1 = infoObj.getString("wind1");
             String tempmin1 = temp1.split("-")[0];
             String tempmax1 = temp1.split("-")[1];
-            FetureWeather f1 = new FetureWeather(tempmin1,tempmax1,weather1,wind1);
+            FutureWeather f1 = new FutureWeather(tempmin1,tempmax1,weather1,wind1);
 
             String temp2 = infoObj.getString("temp2");
             String weather2 = infoObj.getString("weather2");
             String wind2 = infoObj.getString("wind2");
             String tempmin2 = temp1.split("-")[0];
             String tempmax2 = temp1.split("-")[1];
-            FetureWeather f2 = new FetureWeather(tempmin2,tempmax2,weather2,wind2);
+            FutureWeather f2 = new FutureWeather(tempmin2,tempmax2,weather2,wind2);
 
             String temp3 = infoObj.getString("temp3");
             String weather3 = infoObj.getString("weather3");
             String wind3 = infoObj.getString("wind3");
             String tempmin3 = temp1.split("-")[0];
             String tempmax3 = temp1.split("-")[1];
-            FetureWeather f3 = new FetureWeather(tempmin3,tempmax3,weather3,wind3);
+            FutureWeather f3 = new FutureWeather(tempmin3,tempmax3,weather3,wind3);
 
             String temp4 = infoObj.getString("temp4");
             String weather4 = infoObj.getString("weather4");
             String wind4 = infoObj.getString("wind1");
             String tempmin4 = temp1.split("-")[0];
             String tempmax4 = temp1.split("-")[1];
-            FetureWeather f4 = new FetureWeather(tempmin4,tempmax4,weather4,wind4);
+            FutureWeather f4 = new FutureWeather(tempmin4,tempmax4,weather4,wind4);
 
             String temp5 = infoObj.getString("temp1");
             String weather5 = infoObj.getString("weather1");
             String wind5 = infoObj.getString("wind4");
             String tempmin5 = temp1.split("-")[0];
             String tempmax5 = temp1.split("-")[1];
-            FetureWeather f5 = new FetureWeather(tempmin5,tempmax5,weather5,wind5);
+            FutureWeather f5 = new FutureWeather(tempmin5,tempmax5,weather5,wind5);
 
             String temp6 = infoObj.getString("temp5");
             String weather6 = infoObj.getString("weather5");
             String wind6 = infoObj.getString("wind5");
             String tempmin6 = temp1.split("-")[0];
             String tempmax6 = temp1.split("-")[1];
-            FetureWeather f6 = new FetureWeather(tempmin6,tempmax6,weather6,wind6);
+            FutureWeather f6 = new FutureWeather(tempmin6,tempmax6,weather6,wind6);
 
-            fetureWeathers.add(f1);
-            fetureWeathers.add(f2);
-            fetureWeathers.add(f3);
-            fetureWeathers.add(f4);
-            fetureWeathers.add(f5);
-            fetureWeathers.add(f6);
+            futureWeathers.add(f1);
+            futureWeathers.add(f2);
+            futureWeathers.add(f3);
+            futureWeathers.add(f4);
+            futureWeathers.add(f5);
+            futureWeathers.add(f6);
 
         } catch (Exception e) {
             System.err.println(e);
         }
-        return fetureWeathers;
+        return futureWeathers;
     }
     
     public void log(String str) {
