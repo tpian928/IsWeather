@@ -164,6 +164,7 @@ public class WeatherHttp {
      * @Warnning: You should check the size of return Arraylist,beacuse it may be empty and this method cannot be used in main thread
      */
     public static ArrayList<FutureWeather> getFutureWeather(int cityId){
+        //Log.i("chris","weather : " + cityId);
         ArrayList<FutureWeather> futureWeathers = new ArrayList<FutureWeather>();
         try {
 
@@ -232,7 +233,7 @@ public class WeatherHttp {
     }
 
     /**
-     *得到今天和未来5天的天气请客，每3小时候一次
+     *每3小时候一次
      * @param cityName
      * @return get every 3 hour  weather
      */

@@ -21,7 +21,7 @@ public class FutureWeather {
         this.wind = wind;
     }
 
-    public String getTempmin() {
+    public String getMaxTemp() {
         return tempmin;
     }
 
@@ -29,7 +29,7 @@ public class FutureWeather {
         this.tempmin = tempmin;
     }
 
-    public String getTempmax() {
+    public String getMinTemp() {
         return tempmax;
     }
 

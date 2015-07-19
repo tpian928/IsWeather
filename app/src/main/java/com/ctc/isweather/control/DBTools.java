@@ -222,6 +222,7 @@ public class DBTools {
         while(cityCursor.moveToNext()){
             id =  cityCursor.getInt(0);
         }
+        Log.i("chris","city id: "+ id);
         return id;
     }
 }

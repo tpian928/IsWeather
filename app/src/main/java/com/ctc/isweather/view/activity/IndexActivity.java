@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ctc.isweather.R;
 import com.ctc.isweather.adapter.FragmentAdapter;
@@ -95,6 +94,6 @@ public class IndexActivity extends FragmentActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        Toast.makeText(this.getApplicationContext(),"need to delete the city",Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this.getApplicationContext(),"need to delete the city",Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,6 +1,5 @@
-package com.ctc.isweather.tools;
+package com.ctc.isweather.control;
 
-import com.ctc.isweather.interfaces.Charts;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.YAxis;
@@ -14,47 +13,36 @@ import java.util.ArrayList;
  * Created by chris on 2015/7/14.
  * Implementation of Charts
  */
-public class DrawCharts implements Charts{
+public class DrawCharts {
 
-    @Override
-    public LineDataSet getLineDataSet(double[] datas, int lineColor,String label) {
+    public static LineDataSet getLineDataSet(double[] datas,
+                                      int lineColor, int circleColor, int hlcolor,
+                                      String label) {
         ArrayList<Entry> yvals = new ArrayList<Entry>();
 
-        for(int i = 0; i < datas.length; i++) {
-            yvals.add(new Entry((float)datas[i],i));
+        for (int i = 0; i < datas.length; i++) {
+            yvals.add(new Entry((float) datas[i], i));
         }
 
-        LineDataSet lds = new LineDataSet(yvals,label);
+        LineDataSet lds = new LineDataSet(yvals, label);
         lds.setLineWidth(6f);
         lds.setCircleSize(8f);
         lds.setColor(lineColor);
-        lds.setCircleColor(lineColor);
-        lds.setHighLightColor(lineColor);
+        lds.setCircleColor(circleColor);
+        lds.setHighLightColor(hlcolor);
         return lds;
     }
 
-    @Override
-    public LineData getLineData(double[] datas, int lineColor,String label,int xaxis) {
+    public static LineData getLineData(int xaxis, ArrayList<LineDataSet> linedatas) {
         ArrayList<String> x = new ArrayList<String>();
-        for(int i = 0; i  < xaxis; i++)
+        for (int i = 0; i < xaxis; i++)
             x.add(i + "");
 
-        LineData lindata = new LineData(x,getLineDataSet(datas,lineColor,label));
+        LineData lindata = new LineData(x, linedatas);
         return lindata;
     }
 
-    @Override
-    public LineData getLineData(int xaxis,ArrayList<LineDataSet> linedatas) {
-        ArrayList<String> x = new ArrayList<String>();
-        for(int i = 0; i  < xaxis; i++)
-            x.add(i + "");
-
-        LineData lindata = new LineData(x,linedatas);
-        return lindata;
-    }
-
-    @Override
-    public void showChart(LineChart lineChart, LineData lineData,String desc,int gridColor,int bkgColor,int textColor) {
+    public static void showChart(LineChart lineChart, LineData lineData, String desc, int gridColor, int bkgColor, int textColor) {
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setStartAtZero(false);
         YAxis rightAxis = lineChart.getAxisRight();

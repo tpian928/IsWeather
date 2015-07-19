@@ -101,6 +101,9 @@ public class MainActivity extends Fragment{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),FutureWeatherActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("cityname",cityname);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -145,7 +148,7 @@ public class MainActivity extends Fragment{
             super.handleMessage(msg);
             Weather weather = (Weather)msg.obj;
             // The city id is null
-            Log.i("chris", "send pm25: " + weather.getPm25());
+           // Log.i("chris", "send pm25: " + weather.getPm25());
 
             // set the information below
             pm25.setText("PM2.5  :  " + weather.getPm25());
