@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.ctc.isweather.mode.bean.DayWeather;
 import com.ctc.isweather.mode.bean.FutureWeather;
+import com.ctc.isweather.mode.bean.HourWeather;
 import com.ctc.isweather.mode.bean.WIndex;
 import com.ctc.isweather.mode.bean.Weather;
 
@@ -21,9 +22,23 @@ import java.util.ArrayList;
  */
 public class WeatherHttp {
 
+    //fucker in china weather
+    private static final char last2byte = (char) Integer.parseInt("00000011", 2);
+    private static final char last4byte = (char) Integer.parseInt("00001111", 2);
+    private static final char last6byte = (char) Integer.parseInt("00111111", 2);
+    private static final char lead6byte = (char) Integer.parseInt("11111100", 2);
+    private static final char lead4byte = (char) Integer.parseInt("11110000", 2);
+    private static final char lead2byte = (char) Integer.parseInt("11000000", 2);
+    private static final char[] encodeTable = new char[] { 'A', 'B', 'C', 'D',
+            'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
+            'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
+            'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+            'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3',
+            '4', '5', '6', '7', '8', '9', '+', '/'
+    };
+
     public static Weather getWeather(String cityName){
         Weather mWeather = new Weather();
-
 
         mWeather.setCityname(cityName);
 
@@ -215,12 +230,122 @@ public class WeatherHttp {
         }
         return futureWeathers;
     }
-    
+
+    /**
+     *得到今天和未来5天的天气请客，每3小时候一次
+     * @param cityName
+     * @return get every 3 hour  weather
+     */
+    public static ArrayList<HourWeather> getHourWeather(String cityName){
+        ArrayList<HourWeather> hourWeathers = new ArrayList<HourWeather>();
+
+        try {
+            URL hukd = new URL("http://v.juhe.cn/weather/forecast3h.php?cityname="+cityName+"&key=d6ac5a3b6054da94df74c0157d65fff8");
+            URLConnection tc = hukd.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(tc.getInputStream(), "UTF-8"));
+            String line = in.readLine();
+
+            JSONObject obj = new JSONObject(line);
+
+            if (obj.getInt("resultcode")==200){
+                JSONArray arr = obj.getJSONArray("result");
+
+                for (int i =0;i<arr.length();i++){
+                    HourWeather tmpHourWeather = new HourWeather();
+                    JSONObject tmpObj = (JSONObject)arr.get(i);
+                    tmpHourWeather.setWeather(tmpObj.getString("weather"));
+                    tmpHourWeather.setDate(tmpObj.getString("date"));
+                    tmpHourWeather.setEfdate(tmpObj.getString("efdate"));
+                    tmpHourWeather.setEndHour(tmpObj.getString("eh"));
+                    tmpHourWeather.setSfdate(tmpObj.getString("sfdate"));
+                    tmpHourWeather.setStartHour(tmpObj.getString("sh"));
+                    tmpHourWeather.setTemp1(tmpObj.getString("temp1"));
+                    tmpHourWeather.setTemp2(tmpObj.getString("temp2"));
+                    hourWeathers.add(tmpHourWeather);
+                }
+            }
+            else{
+                hourWeathers=null;
+                System.err.println("bad json");
+            }
+
+        }
+        catch (Exception e){
+            hourWeathers=null;
+            System.err.println("getDayWeather "+e);
+        }
+
+        return  hourWeathers;
+    }
+
     public void log(String str) {
         Log.d("Weatherlog", str);
     }
 
+    /*
+    public static String standardURLEncoder(String data, String key) {
+        byte[] byteHMAC = null;
+        String urlEncoder = "";
+        try {
+            Mac mac = Mac.getInstance("HmacSHA1");
+            SecretKeySpec spec = new SecretKeySpec(key.getBytes(), "HmacSHA1");
+            mac.init(spec);
+            byteHMAC = mac.doFinal(data.getBytes());
+            if (byteHMAC != null) {
+                String oauth = encode(byteHMAC);
+                if (oauth != null) {
+                    urlEncoder = URLEncoder.encode(oauth, "utf8");
+                }
+            }
+        } catch (InvalidKeyException e1) {
+            e1.printStackTrace();
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+        return urlEncoder;
+    }
 
-
+    public static String encode(byte[] from) {
+        StringBuffer to = new StringBuffer((int) (from.length * 1.34) + 3);
+        int num = 0;
+        char currentByte = 0;
+        for (int i = 0; i < from.length; i++) {
+            num = num % 8;
+            while (num < 8) {
+                switch (num) {
+                    case 0:
+                        currentByte = (char) (from[i] & lead6byte);
+                        currentByte = (char) (currentByte >>> 2);
+                        break;
+                    case 2:
+                        currentByte = (char) (from[i] & last6byte);
+                        break;
+                    case 4:
+                        currentByte = (char) (from[i] & last4byte);
+                        currentByte = (char) (currentByte << 2);
+                        if ((i + 1) < from.length) {
+                            currentByte |= (from[i + 1] & lead2byte) >>> 6;
+                        }
+                        break;
+                    case 6:
+                        currentByte = (char) (from[i] & last2byte);
+                        currentByte = (char) (currentByte << 4);
+                        if ((i + 1) < from.length) {
+                            currentByte |= (from[i + 1] & lead4byte) >>> 4;
+                        }
+                        break;
+                }
+                to.append(encodeTable[currentByte]);
+                num += 6;
+            }
+        }
+        if (to.length() % 4 != 0) {
+            for (int i = 4 - to.length() % 4; i > 0; i--) {
+                to.append("=");
+            }
+        }
+        return to.toString();
+    }
+    */
 
 }
