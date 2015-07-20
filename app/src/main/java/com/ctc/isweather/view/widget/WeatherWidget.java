@@ -2,10 +2,16 @@ package com.ctc.isweather.view.widget;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.ctc.isweather.R;
+import com.ctc.isweather.control.LocationCtrl;
+import com.ctc.isweather.http.WeatherHttp;
+import com.ctc.isweather.mode.bean.Weather;
 
 /**
  * Implementation of App Widget functionality.
@@ -15,12 +21,12 @@ public class WeatherWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
+        Log.d("widget","onUpdate");
         final int N = appWidgetIds.length;
         for (int i = 0; i < N; i++) {
             updateAppWidget(context, appWidgetManager, appWidgetIds[i]);
         }
     }
-
 
     @Override
     public void onEnabled(Context context) {
@@ -40,8 +46,26 @@ public class WeatherWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
         //views.setTextViewText(R.id.appwidget_text, widgetText);
 
+        Weather weather = WeatherHttp.getWeather(LocationCtrl.getCityName());
+        views.setTextViewText(R.id.pm_text,weather.getPm25());
+        views.setTextViewText(R.id.weather_text,weather.getTodayWeather().getWeather());
+
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        String strAction = intent.getAction();
+        //Log.d("widget","onReceive action is "+strAction);
+        if (AppWidgetManager.ACTION_APPWIDGET_UPDATE.equals(strAction)) {
+            /* Do update */
+            Log.d("widget","if");
+            AppWidgetManager gm = AppWidgetManager.getInstance(context);
+            int[] ids = gm.getAppWidgetIds(new ComponentName(context, WeatherWidget.class));
+            onUpdate(context,AppWidgetManager.getInstance(context),ids);
+        }
     }
 }
 

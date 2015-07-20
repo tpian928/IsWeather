@@ -1,5 +1,6 @@
 package com.ctc.isweather.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import com.ctc.isweather.R;
 import com.ctc.isweather.adapter.FragmentAdapter;
 import com.ctc.isweather.control.DBTools;
 import com.ctc.isweather.control.LocationCtrl;
+import com.ctc.isweather.control.service.UpdateWidgetService;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,8 @@ public class IndexActivity extends FragmentActivity{
 
         init(); // call the thread
         DBTools.importDB(this);
+        //测试
+        startService(new Intent(this, UpdateWidgetService.class));
     }
 
     public void init(){
