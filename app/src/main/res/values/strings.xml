@@ -9,4 +9,6 @@
     <string name="title_activity_future_weather">FutureWeatherActivity</string>
     <string name="title_activity_today_weather">TodayWeatherActivity</string>
     <string name="title_activity_share">ShareActivity</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
