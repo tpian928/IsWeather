@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ctc.isweather.R;
-import com.ctc.isweather.control.service.UpdateWidgetService;
 import com.ctc.isweather.http.WeatherHttp;
 import com.ctc.isweather.mode.bean.Weather;
 
