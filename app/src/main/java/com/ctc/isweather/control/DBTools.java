@@ -220,7 +220,7 @@ public class DBTools {
         int id = -1;
         System.out.println("count:"+cityCursor.getCount());
         while(cityCursor.moveToNext()){
-            id =  cityCursor.getInt(0);
+                id =  cityCursor.getInt(0);
         }
         Log.i("chris","city id: "+ id);
         return id;

@@ -25,26 +25,28 @@ public class FutureWeatherActivity extends Activity {
     private double[] min;
     private double[] max;
     private LineChart chart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_future_weather);
 
         Bundle bundle = getIntent().getExtras();
-        cityname = bundle.getString("cityname","北京");
-        Toast.makeText(this.getApplicationContext(),"cityname : " + cityname,Toast.LENGTH_SHORT).show();
+        cityname = bundle.getString("cityname", "北京");
+        //Toast.makeText(this.getApplicationContext(), "cityname : " + cityname, Toast.LENGTH_SHORT).show();
         init();
     }
 
     public void init() {
         chart = (LineChart) findViewById(R.id.chart);
         handler = new FutureHandler();
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 super.run();
-                ArrayList<FutureWeather> list = WeatherHttp.getFutureWeather(DBTools.getIdFromCity(cityname));
-                //Log.i("chris",cityname + " : list size: " + list.size());
+                int cityid = DBTools.getIdFromCity(cityname);
+                ArrayList<FutureWeather> list = WeatherHttp.getFutureWeather(cityid);
+                Log.i("chris", cityname + " : list size: " + list.size() + "; id : " + cityid);
                 Message msg = new Message();
                 msg.obj = list;
                 handler.sendMessage(msg);
@@ -53,30 +55,30 @@ public class FutureWeatherActivity extends Activity {
     }
 
 
-    class FutureHandler extends Handler{
+    class FutureHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             ArrayList<FutureWeather> list = (ArrayList<FutureWeather>) msg.obj;
             //Log.i("chris","handler");
-            if(list.size() > 0){
+            if (list.size() > 0) {
                 min = new double[list.size()];
                 max = new double[list.size()];
-                for(int i = 0;  i < list.size();i++){
+                for (int i = 0; i < list.size(); i++) {
                     max[i] = Double.valueOf(list.get(i).getMaxTemp());
                     min[i] = Double.valueOf(list.get(i).getMinTemp());
                     Log.i("chris", "最低温度 : " + min[i]);
                 }
-                LineDataSet min_LDS = DrawCharts.getLineDataSet(min, Color.BLUE,Color.YELLOW,Color.YELLOW,"最低温度");
-                LineDataSet max_LDS = DrawCharts.getLineDataSet(max, Color.RED,Color.GREEN,Color.GREEN,"最高温度");
+                LineDataSet min_LDS = DrawCharts.getLineDataSet(min, Color.BLUE, Color.YELLOW, Color.YELLOW, "最低温度");
+                LineDataSet max_LDS = DrawCharts.getLineDataSet(max, Color.RED, Color.GREEN, Color.GREEN, "最高温度");
                 ArrayList<LineDataSet> ldlist = new ArrayList<LineDataSet>();
                 ldlist.add(min_LDS);
                 ldlist.add(max_LDS);
-                LineData ld = DrawCharts.getLineData(6,ldlist);
+                LineData ld = DrawCharts.getLineData(6, ldlist);
                 DrawCharts.showChart(chart, ld, "温度变化曲线", Color.WHITE, Color.WHITE, Color.WHITE);
-               // Log.i("chris","draw");
-            }else{
-                Toast.makeText(getApplicationContext(),"No elements",Toast.LENGTH_SHORT).show();
+                // Log.i("chris","draw");
+            } else {
+                Toast.makeText(getApplicationContext(), "No elements", Toast.LENGTH_SHORT).show();
             }
         }
     }

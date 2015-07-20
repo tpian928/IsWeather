@@ -12,12 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ctc.isweather.R;
+import com.ctc.isweather.control.BasicTools;
 import com.ctc.isweather.control.DBTools;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -167,8 +165,11 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int position = (Integer) v.getTag();
+        String cityname = (String)city_data.get(position).get("city_weather");
+        Log.i("chris", "position : " + position + "; name : " + cityname);
+
+        DBTools.deleteInConcity(cityname);
         city_data.remove(position);
-        DBTools.deleteInConcity((String)city_data.get(position).get("city_weather"));
         notifyDataSetChanged();
     }
 
@@ -196,13 +197,10 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
         ArrayList<String> citylist = DBTools.QueryInConcity();
-        for (String city : citylist) {
-            Log.i("chris", city);
-        }
+        Log.i("chris", "The list of city: " + citylist.size());
 
-
-        String date = getDate();
-        date = date + " " + getWeekDay(date);
+        String date = BasicTools.getDate();
+        date = date + " " + BasicTools.getWeekDay(date);
 
         if (citylist.size() > 0) {
             for (int i = 0; i < citylist.size(); i++) {
@@ -217,28 +215,5 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener {
         return list;
     }
 
-    /**
-     * Get the current date
-     * @return Date
-     */
-    public static String getDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        return formatter.format(curDate);
-    }
 
-    /**
-     * get the day of the week
-     * @param date Date
-     * @return week day
-     */
-    public String getWeekDay(String date) {
-        String[] dates = date.split("/");
-        Calendar calendar = Calendar.getInstance();//获得一个日历
-        calendar.set(Integer.valueOf(dates[0]), Integer.valueOf(dates[1]) - 1, Integer.valueOf(dates[2]));//设置当前时间,月份是从0月开始计算
-        int number = calendar.get(Calendar.DAY_OF_WEEK);//星期表示1-7，是从星期日开始，
-        String[] str = {"", "Sun", "Mon", "Thus", "Wens", "Thur", "Fri", "Sat"};
-        //System.out.println(str[number]);
-        return str[number];
-    }
 }

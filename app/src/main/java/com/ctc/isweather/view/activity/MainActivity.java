@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import com.ctc.isweather.mode.bean.Weather;
 
 import java.util.Calendar;
 
-public class MainActivity extends Fragment{
+public class MainActivity extends Fragment {
 
     static MainActivity newInstance(String cityname){
         MainActivity city = new MainActivity();
@@ -36,7 +35,7 @@ public class MainActivity extends Fragment{
         View view = inflater.inflate(R.layout.activity_main, container, false);
         init(view);
         initListener(getArguments());
-        Log.i("chris", "Get the information.");
+        // Log.i("chris", "Get the information.");
         getWeatherInfos();
         return view;
     }
@@ -70,7 +69,7 @@ public class MainActivity extends Fragment{
     public void initListener(Bundle bundle){
         cityname = bundle.getString("name");
         city_tv.setText(cityname);
-        Log.i("chris", "city_tv: " + cityname);
+        // Log.i("chris", "city_tv: " + cityname);
 
         // turn to ToDayWeather_Activity.
         city_today_ImageView.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +119,7 @@ public class MainActivity extends Fragment{
             public void run() {
                 super.run();
                 Weather weather = WeatherHttp.getWeather(cityname);
-                Log.i("chris",weather.getPm25());
+                //Log.i("chris",weather.getPm25());
                 Message msg = new Message();
                 msg.obj = weather;
                 handler.sendMessage(msg);

@@ -84,7 +84,7 @@ public class IndexActivity extends FragmentActivity{
             //Thread branch = Thread.currentThread();
            // Log.i("chris","Thread id : " + branch.getId());
             String message = String.valueOf(msg.obj);
-            Log.i("chris", "Thread data :" + message);
+           // Log.i("chris", "Thread data :" + message);
             initViewPage(message);
         }
     }

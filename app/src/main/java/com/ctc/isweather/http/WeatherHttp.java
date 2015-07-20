@@ -172,7 +172,7 @@ public class WeatherHttp {
             URLConnection tc = hukd.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(tc.getInputStream(), "UTF-8"));
             String line = in.readLine();
-
+            Log.d("f","line is "+line);
             JSONObject obj2 = new JSONObject(line);
             JSONObject infoObj = obj2.getJSONObject("weatherinfo");
 
@@ -187,36 +187,36 @@ public class WeatherHttp {
             String temp2 = infoObj.getString("temp2");
             String weather2 = infoObj.getString("weather2");
             String wind2 = infoObj.getString("wind2");
-            String tempmin2 = temp1.split("-")[0];
-            String tempmax2 = temp1.split("-")[1];
+            String tempmin2 = temp2.split("-")[0];
+            String tempmax2 = temp2.split("-")[1];
             FutureWeather f2 = new FutureWeather(tempmin2,tempmax2,weather2,wind2);
 
             String temp3 = infoObj.getString("temp3");
             String weather3 = infoObj.getString("weather3");
             String wind3 = infoObj.getString("wind3");
-            String tempmin3 = temp1.split("-")[0];
-            String tempmax3 = temp1.split("-")[1];
+            String tempmin3 = temp3.split("-")[0];
+            String tempmax3 = temp3.split("-")[1];
             FutureWeather f3 = new FutureWeather(tempmin3,tempmax3,weather3,wind3);
 
             String temp4 = infoObj.getString("temp4");
             String weather4 = infoObj.getString("weather4");
             String wind4 = infoObj.getString("wind1");
-            String tempmin4 = temp1.split("-")[0];
-            String tempmax4 = temp1.split("-")[1];
+            String tempmin4 = temp4.split("-")[0];
+            String tempmax4 = temp4.split("-")[1];
             FutureWeather f4 = new FutureWeather(tempmin4,tempmax4,weather4,wind4);
 
             String temp5 = infoObj.getString("temp1");
             String weather5 = infoObj.getString("weather1");
             String wind5 = infoObj.getString("wind4");
-            String tempmin5 = temp1.split("-")[0];
-            String tempmax5 = temp1.split("-")[1];
+            String tempmin5 = temp5.split("-")[0];
+            String tempmax5 = temp5.split("-")[1];
             FutureWeather f5 = new FutureWeather(tempmin5,tempmax5,weather5,wind5);
 
             String temp6 = infoObj.getString("temp5");
             String weather6 = infoObj.getString("weather5");
             String wind6 = infoObj.getString("wind5");
-            String tempmin6 = temp1.split("-")[0];
-            String tempmax6 = temp1.split("-")[1];
+            String tempmin6 = temp6.split("-")[0];
+            String tempmax6 = temp6.split("-")[1];
             FutureWeather f6 = new FutureWeather(tempmin6,tempmax6,weather6,wind6);
 
             futureWeathers.add(f1);
