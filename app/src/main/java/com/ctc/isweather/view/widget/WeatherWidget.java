@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.ctc.isweather.R;
+import com.ctc.isweather.control.Icon;
 import com.ctc.isweather.control.LocationCtrl;
 import com.ctc.isweather.http.WeatherHttp;
 import com.ctc.isweather.mode.bean.Weather;
@@ -38,20 +39,35 @@ public class WeatherWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+    static void updateAppWidget(final Context context, final AppWidgetManager appWidgetManager,
+                                final int appWidgetId) {
 
         CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
-        //views.setTextViewText(R.id.appwidget_text, widgetText);
 
-        Weather weather = WeatherHttp.getWeather(LocationCtrl.getCityName());
-        views.setTextViewText(R.id.pm_text,weather.getPm25());
-        views.setTextViewText(R.id.weather_text,weather.getTodayWeather().getWeather());
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    //Your code goes here
+                    RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
+                    Weather weather = WeatherHttp.getWeather(LocationCtrl.getCityName());
+                    views.setTextViewText(R.id.pm_text, "PM2.5 "+weather.getPm25());
+                    views.setTextViewText(R.id.temp_text,weather.getMaintemp()+"℃");
+                    views.setTextViewText(R.id.weather_text,weather.getTodayWeather().getWeather());
+                    Log.d("widget", "weather is " + weather.getTodayWeather().getWeather());
+                    views.setImageViewResource(R.id.pic_img, Icon.getWeatherIcon(weather.getTodayWeather().getWeather()));
+                    // Instruct the widget manager to update the widget
+                    appWidgetManager.updateAppWidget(appWidgetId, views);
 
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+
     }
 
     @Override
