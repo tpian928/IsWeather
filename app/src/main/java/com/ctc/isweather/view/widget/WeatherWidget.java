@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -54,9 +55,10 @@ public class WeatherWidget extends AppWidgetProvider {
                     Weather weather = WeatherHttp.getWeather(LocationCtrl.getCityName());
                     views.setTextViewText(R.id.pm_text, "PM2.5 "+weather.getPm25());
                     views.setTextViewText(R.id.temp_text,weather.getMaintemp()+"℃");
-                    views.setTextViewText(R.id.weather_text,weather.getTodayWeather().getWeather());
+                    views.setTextViewText(R.id.weather_text, weather.getTodayWeather().getWeather());
                     Log.d("widget", "weather is " + weather.getTodayWeather().getWeather());
                     views.setImageViewResource(R.id.pic_img, Icon.getWeatherIcon(weather.getTodayWeather().getWeather()));
+                    //views.setInt(R.id.widget_all,"setBackgroundColor", Color.BLACK);
                     // Instruct the widget manager to update the widget
                     appWidgetManager.updateAppWidget(appWidgetId, views);
 
