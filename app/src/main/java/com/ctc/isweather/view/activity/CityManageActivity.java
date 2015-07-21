@@ -1,6 +1,7 @@
 package com.ctc.isweather.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -14,6 +15,7 @@ public class CityManageActivity extends Activity {
     private ListView listView_city;
     private MyAdapter myAdapter;
     private ImageView backBtn;
+    private ImageView addBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,17 @@ public class CityManageActivity extends Activity {
             public void onClick(View v) {
                 // when this class finishes, the main home page cannot flash.
                 CityManageActivity.this.finish();
+            }
+        });
+
+        // add
+        addBtn = (ImageView)findViewById(R.id.add_ImageView);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //jump to the add page
+                Intent intent = new Intent(CityManageActivity.this,CityAddActivity.class);
+                startActivity(intent);
             }
         });
     }
