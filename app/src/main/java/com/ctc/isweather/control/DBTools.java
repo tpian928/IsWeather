@@ -221,6 +221,9 @@ public class DBTools {
         System.out.println("count:"+cityCursor.getCount());
         while(cityCursor.moveToNext()){
                 id =  cityCursor.getInt(0);
+                if(id == 0){
+                    id = 101010100;
+                }
         }
         Log.i("chris","city id: "+ id);
         return id;

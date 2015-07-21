@@ -25,8 +25,8 @@ public class DrawCharts {
         }
 
         LineDataSet lds = new LineDataSet(yvals, label);
-        lds.setLineWidth(6f);
-        lds.setCircleSize(8f);
+        lds.setLineWidth(2f);
+        lds.setCircleSize(2f);
         lds.setColor(lineColor);
         lds.setCircleColor(circleColor);
         lds.setHighLightColor(hlcolor);
@@ -70,7 +70,7 @@ public class DrawCharts {
         // set data
         lineChart.setData(lineData);
 
-        lineChart.animateX(3000);
+        lineChart.animateX(1500);
     }
 
 }

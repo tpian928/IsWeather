@@ -23,13 +23,14 @@ import java.util.ArrayList;
 public class IndexActivity extends FragmentActivity{
     private ViewPager vpager;
     private MyHandler myHandler;
+    private String localCity;
     MyHandler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
 
-        init(); // call the thread
+       // init(); // call the thread
         DBTools.importDB(this);
         //测试
         startService(new Intent(this, UpdateWidgetService.class));
@@ -57,6 +58,7 @@ public class IndexActivity extends FragmentActivity{
 
     public void initViewPage(String citylbs){
         Log.i("chris","LBS city: " + citylbs);
+        localCity = citylbs;
         // init the viewpager
         vpager = (ViewPager) findViewById(R.id.viewpager);
         ArrayList<String> concity = DBTools.QueryInConcity(DBTools.openDatabase(getPackageName()));
@@ -84,20 +86,25 @@ public class IndexActivity extends FragmentActivity{
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            // get the data from the branch thread.
-            //Thread branch = Thread.currentThread();
-           // Log.i("chris","Thread id : " + branch.getId());
             String message = String.valueOf(msg.obj);
-           // Log.i("chris", "Thread data :" + message);
             initViewPage(message);
         }
     }
 
     // flash
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        vpager.removeAllViews();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         // Toast.makeText(this.getApplicationContext(),"need to delete the city",Toast.LENGTH_SHORT).show();
+        // vpager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), null));
+        init();
     }
 }
