@@ -32,7 +32,7 @@ public class IndexActivity extends FragmentActivity{
 
        // init(); // call the thread
         DBTools.importDB(this);
-        //测试
+        //启动服务
         startService(new Intent(this, UpdateWidgetService.class));
     }
 

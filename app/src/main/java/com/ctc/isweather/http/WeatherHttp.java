@@ -2,6 +2,9 @@ package com.ctc.isweather.http;
 
 import android.util.Log;
 
+import com.ctc.isweather.R;
+import com.ctc.isweather.control.LocationCtrl;
+import com.ctc.isweather.mode.bean.BadWeather;
 import com.ctc.isweather.mode.bean.DayWeather;
 import com.ctc.isweather.mode.bean.FutureWeather;
 import com.ctc.isweather.mode.bean.HourWeather;
@@ -15,7 +18,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by TPIAN on 15/7/16.
@@ -284,70 +289,74 @@ public class WeatherHttp {
         Log.d("Weatherlog", str);
     }
 
-    /*
-    public static String standardURLEncoder(String data, String key) {
-        byte[] byteHMAC = null;
-        String urlEncoder = "";
-        try {
-            Mac mac = Mac.getInstance("HmacSHA1");
-            SecretKeySpec spec = new SecretKeySpec(key.getBytes(), "HmacSHA1");
-            mac.init(spec);
-            byteHMAC = mac.doFinal(data.getBytes());
-            if (byteHMAC != null) {
-                String oauth = encode(byteHMAC);
-                if (oauth != null) {
-                    urlEncoder = URLEncoder.encode(oauth, "utf8");
+    /**
+     * 判断用户当前所在城市在未来3个小时有没有恶劣天气
+     * @return 如果存在恶劣天气则返回恶劣天气，不存在就返回空
+     */
+    public static BadWeather getBadWeather(){
+        BadWeather badWeather = new BadWeather();
+
+        String nowhour = new SimpleDateFormat("HH").format(Calendar.getInstance().getTime());
+        int warnHour = Integer.parseInt(nowhour)+3;
+        Log.d("badweather",nowhour);
+        ArrayList<HourWeather> hourWeathers = new ArrayList<HourWeather>();
+        if (LocationCtrl.getCityName()!=null){
+            hourWeathers = WeatherHttp.getHourWeather(LocationCtrl.getCityName());
+            if (hourWeathers.size()>5){
+                if (warnHour>=5&&warnHour<8){
+                    badWeather = getBadWeatherFromHour(hourWeathers.get(0));
+                }
+                else if (warnHour>=8&&warnHour<11){
+                    badWeather = getBadWeatherFromHour(hourWeathers.get(1));
+                }
+                else if (warnHour>=11&&warnHour<14){
+                    badWeather = getBadWeatherFromHour(hourWeathers.get(2));
+                }
+                else if (warnHour>=14&&warnHour<17){
+                    badWeather = getBadWeatherFromHour(hourWeathers.get(3));
+                }
+                else if (warnHour>=17&&warnHour<20){
+                    badWeather = getBadWeatherFromHour(hourWeathers.get(4));
+                }
+                else if (warnHour>=20&&warnHour<23){
+                    badWeather = getBadWeatherFromHour(hourWeathers.get(5));
                 }
             }
-        } catch (InvalidKeyException e1) {
-            e1.printStackTrace();
-        } catch (Exception e2) {
-            e2.printStackTrace();
+            else {
+                Log.d("badweather","getHourWeather Exception!");
+            }
         }
-        return urlEncoder;
+
+        return  badWeather;
     }
 
-    public static String encode(byte[] from) {
-        StringBuffer to = new StringBuffer((int) (from.length * 1.34) + 3);
-        int num = 0;
-        char currentByte = 0;
-        for (int i = 0; i < from.length; i++) {
-            num = num % 8;
-            while (num < 8) {
-                switch (num) {
-                    case 0:
-                        currentByte = (char) (from[i] & lead6byte);
-                        currentByte = (char) (currentByte >>> 2);
-                        break;
-                    case 2:
-                        currentByte = (char) (from[i] & last6byte);
-                        break;
-                    case 4:
-                        currentByte = (char) (from[i] & last4byte);
-                        currentByte = (char) (currentByte << 2);
-                        if ((i + 1) < from.length) {
-                            currentByte |= (from[i + 1] & lead2byte) >>> 6;
-                        }
-                        break;
-                    case 6:
-                        currentByte = (char) (from[i] & last2byte);
-                        currentByte = (char) (currentByte << 4);
-                        if ((i + 1) < from.length) {
-                            currentByte |= (from[i + 1] & lead4byte) >>> 4;
-                        }
-                        break;
-                }
-                to.append(encodeTable[currentByte]);
-                num += 6;
-            }
+    //
+    public static BadWeather getBadWeatherFromHour(HourWeather hourWeather){
+        BadWeather badWeather = new BadWeather();
+        String weatherDesc = hourWeather.getWeather();
+
+        if (weatherDesc.equals("雾霾")||weatherDesc.equals("雾")||weatherDesc.equals("霾")||weatherDesc.equals("haze")){
+            badWeather.setInfo("雾霾");
         }
-        if (to.length() % 4 != 0) {
-            for (int i = 4 - to.length() % 4; i > 0; i--) {
-                to.append("=");
-            }
+        else if (weatherDesc.indexOf("雪")>0){
+            badWeather.setInfo("雪");
         }
-        return to.toString();
+        else if (weatherDesc.equals("大雨")){
+            badWeather.setInfo("大雨");
+        }
+        else if (weatherDesc.indexOf("雨")>0){
+            badWeather.setInfo("雨");
+        }
+        else if (weatherDesc.equals("暴雨")||weatherDesc.equals("雷阵雨")){
+            badWeather.setInfo("暴雨");
+        }
+        else if (Integer.parseInt(hourWeather.getTemp2().replaceAll("[^0-9?!\\.]", ""))>35){
+            badWeather.setInfo("高温");
+        }
+        else {
+            badWeather=null;
+        }
+        return badWeather;
     }
-    */
 
 }
