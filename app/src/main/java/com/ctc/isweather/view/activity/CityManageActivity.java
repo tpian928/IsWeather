@@ -37,6 +37,7 @@ public class CityManageActivity extends Activity {
             public void onClick(View v) {
                 // when this class finishes, the main home page cannot flash.
                 CityManageActivity.this.finish();
+                startActivity(new Intent(CityManageActivity.this,IndexActivity.class));
             }
         });
 
@@ -46,6 +47,7 @@ public class CityManageActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //jump to the add page
+                CityManageActivity.this.finish();
                 Intent intent = new Intent(CityManageActivity.this,CityAddActivity.class);
                 startActivity(intent);
             }

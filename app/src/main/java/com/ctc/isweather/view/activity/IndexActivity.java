@@ -98,6 +98,7 @@ public class IndexActivity extends FragmentActivity{
     protected void onPause() {
         super.onPause();
         vpager.removeAllViews();
+        //finish();
     }
 
     @Override

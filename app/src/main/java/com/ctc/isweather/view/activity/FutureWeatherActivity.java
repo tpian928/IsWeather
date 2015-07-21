@@ -1,11 +1,14 @@
 package com.ctc.isweather.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ctc.isweather.R;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 public class FutureWeatherActivity extends Activity {
     private FutureHandler handler;
     private String cityname;
+    private ImageView back;
     private double[] min;
     private double[] max;
     private LineChart chart;
@@ -39,6 +43,14 @@ public class FutureWeatherActivity extends Activity {
 
     public void init() {
         chart = (LineChart) findViewById(R.id.chart);
+        back = (ImageView) findViewById(R.id.back_ImageView);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FutureWeatherActivity.this,IndexActivity.class));
+            }
+        });
+
         handler = new FutureHandler();
         new Thread() {
             @Override
@@ -67,7 +79,7 @@ public class FutureWeatherActivity extends Activity {
                 for (int i = 0; i < list.size(); i++) {
                     max[i] = Double.valueOf(list.get(i).getMaxTemp());
                     min[i] = Double.valueOf(list.get(i).getMinTemp());
-                    Log.i("chris", "最低温度 : " + min[i]);
+                   // Log.i("chris", "最低温度 : " + min[i]);
                 }
                 LineDataSet min_LDS = DrawCharts.getLineDataSet(min, Color.BLUE, Color.YELLOW, Color.YELLOW, "最低温度");
                 LineDataSet max_LDS = DrawCharts.getLineDataSet(max, Color.RED, Color.GREEN, Color.GREEN, "最高温度");

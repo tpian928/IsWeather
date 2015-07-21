@@ -130,6 +130,18 @@ public class DBTools {
         }
     }
 
+    public static boolean insertInConcity(String name) {
+        SQLiteDatabase db = openDatabase();
+        if (!existInConCity(db, name)) {
+            String insert = "insert into concity values(" + getIdFromCity(db, name) + ")";
+            db.execSQL(insert);
+            Log.i("chris", "The city is inserted!");
+            return true;
+        } else {
+            Log.i("chris", "The city has been concerned!");
+            return false;
+        }
+    }
     /**
      * delete the concerned city into Table conCity
      *
@@ -190,6 +202,19 @@ public class DBTools {
         while(cursor.moveToNext()) {
             cities.add(cursor.getString(0));
             Log.i("chris","query: " + cursor.getString(0));
+        }
+
+        return cities;
+    }
+
+    public static ArrayList<String> QueryInCity() {
+        SQLiteDatabase db = openDatabase();
+        String sql = "select name from city";
+        Cursor cursor = db.rawQuery(sql, null);
+        ArrayList<String> cities = new ArrayList<String>();
+        while(cursor.moveToNext()) {
+            cities.add(cursor.getString(0));
+            // Log.i("chris","query: " + cursor.getString(0));
         }
 
         return cities;

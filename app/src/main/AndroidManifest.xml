@@ -35,6 +35,9 @@
             android:name=".view.activity.ShareActivity"
             android:label="@string/title_activity_share" />
 
+        <activity
+            android:name=".view.activity.AddSureActivity"
+            android:label="AddSureActivity" />
         <!-- for widget -->
         <receiver android:name=".view.widget.WeatherWidget" >
             <intent-filter>
