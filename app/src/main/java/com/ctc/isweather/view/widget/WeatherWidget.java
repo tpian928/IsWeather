@@ -1,5 +1,6 @@
 package com.ctc.isweather.view.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -14,6 +15,8 @@ import com.ctc.isweather.control.Icon;
 import com.ctc.isweather.control.LocationCtrl;
 import com.ctc.isweather.http.WeatherHttp;
 import com.ctc.isweather.mode.bean.Weather;
+import com.ctc.isweather.view.activity.IndexActivity;
+import com.ctc.isweather.view.activity.MainActivity;
 
 /**
  * Implementation of App Widget functionality.
@@ -28,6 +31,13 @@ public class WeatherWidget extends AppWidgetProvider {
         for (int i = 0; i < N; i++) {
             updateAppWidget(context, appWidgetManager, appWidgetIds[i]);
         }
+
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
+        Intent configIntent = new Intent(context, IndexActivity.class);
+        PendingIntent configPendingIntent = PendingIntent.getActivity(context, 0, configIntent, 0);
+        remoteViews.setOnClickPendingIntent(R.id.widget_all, configPendingIntent);
+        appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
+        Log.d("widgetClick","clicked");
     }
 
     @Override
