@@ -63,15 +63,16 @@ public class WeatherWidget extends AppWidgetProvider {
                     //Your code goes here
                     RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
                     Weather weather = WeatherHttp.getWeather(LocationCtrl.getCityName());
-                    views.setTextViewText(R.id.pm_text, "PM2.5 "+weather.getPm25());
-                    views.setTextViewText(R.id.temp_text,weather.getMaintemp()+"℃");
-                    views.setTextViewText(R.id.weather_text, weather.getTodayWeather().getWeather());
-                    Log.d("widget", "weather is " + weather.getTodayWeather().getWeather());
-                    views.setImageViewResource(R.id.pic_img, Icon.getWeatherIcon(weather.getTodayWeather().getWeather()));
-                    //views.setInt(R.id.widget_all,"setBackgroundColor", Color.BLACK);
-                    // Instruct the widget manager to update the widget
-                    appWidgetManager.updateAppWidget(appWidgetId, views);
-
+                    if (weather!=null){
+                        views.setTextViewText(R.id.pm_text, "PM2.5 "+weather.getPm25());
+                        views.setTextViewText(R.id.temp_text,weather.getMaintemp()+"℃");
+                        views.setTextViewText(R.id.weather_text, weather.getTodayWeather().getWeather());
+                        Log.d("widget", "weather is " + weather.getTodayWeather().getWeather());
+                        views.setImageViewResource(R.id.pic_img, Icon.getWeatherIcon(weather.getTodayWeather().getWeather()));
+                        //views.setInt(R.id.widget_all,"setBackgroundColor", Color.BLACK);
+                        // Instruct the widget manager to update the widget
+                        appWidgetManager.updateAppWidget(appWidgetId, views);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
