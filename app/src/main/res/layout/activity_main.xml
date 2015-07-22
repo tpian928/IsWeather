@@ -46,7 +46,7 @@
         <LinearLayout
             android:id="@+id/show_LinearLayout"
             android:layout_width="match_parent"
-            android:layout_height="164dp"
+            android:layout_height="184dp"
             android:background="#3f51b5"
             android:orientation="horizontal">
 
@@ -104,214 +104,202 @@
         </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/future_weather_linearlayout"
+        android:id="@+id/future_weather_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <LinearLayout
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/bg_card"
-                android:id="@+id/tomorro_LinearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="84dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="#1f2c78"
-                    android:padding="10dp"
-                    android:src="@drawable/sprinkle" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#5677fc">
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/after_LinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="84dp"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/bg_card">
+                android:layout_weight="2">
 
-                <ImageView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="#1f2c78"
-                    android:padding="10dp"
-                    android:src="@drawable/thunder_rain" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#5677fc">
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/index_LinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-        android:background="#1d2636"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:layout_weight="1">
 
                     <ImageView
-                        android:layout_width="match_parent"
+                        android:id="@+id/tomorrow_img"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/sunny_day"
+                        android:layout_centerInParent="true"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:src="@drawable/dress_index"
-                        android:padding="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
+                        android:orientation="vertical"
+                        android:layout_toLeftOf="@id/tomorrow_img"
                         android:paddingRight="10dp"
-                        android:paddingBottom="10dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:gravity="center_vertical">
 
                         <TextView
-                            android:id="@+id/dressIndex_tv"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Dressing"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="10dp" />
+                            android:layout_weight="1"
+                            android:text="mo"
+                            android:gravity="center_horizontal|bottom"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="7.23"
+                            android:gravity="top"
+                            android:textSize="20dp" />
 
                     </LinearLayout>
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_toRightOf="@id/tomorrow_img"
+                        android:paddingLeft="5dp"
+                        android:gravity="center_vertical">
 
-                <LinearLayout
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Sunny"
+                            android:gravity="center_horizontal|bottom"
+                            android:textSize="24dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="19℃"
+                            android:textSize="20dp"
+                            android:gravity="bottom" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:src="@drawable/cold_index"
-                        android:padding="10dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/coldIndex_tv"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="cold"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="10dp" />
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:layout_weight="1">
+                </RelativeLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="3">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:src="@drawable/car_index"
-                        android:padding="10dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/carwash_tv"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="carwash"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="10dp" />
-                    </LinearLayout>
+                    android:layout_weight="3">
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:src="@drawable/sports_index"
-                        android:padding="10dp" />
+                    android:orientation="horizontal"
+                    android:layout_weight="2">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:orientation="vertical"
                         android:layout_weight="1">
 
-                        <TextView
-                            android:id="@+id/sportIndex_tv"
+                        <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="sport"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="10dp" />
+                            android:src="@drawable/rain_index"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="23" />
+
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/rain_index"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="23" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/rain_index"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="23" />
+
+                    </LinearLayout>
+
+
 
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>
