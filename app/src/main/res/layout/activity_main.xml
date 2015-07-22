@@ -172,9 +172,8 @@
     <LinearLayout
             android:id="@+id/index_LinearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:background="#1d2636"
+            android:layout_height="128dp"
+        android:background="#1d2636"
             android:orientation="vertical">
 
             <LinearLayout
@@ -192,7 +191,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:src="@drawable/dress_index" />
+                        android:src="@drawable/dress_index"
+                        android:padding="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -203,7 +207,9 @@
                             android:id="@+id/dressIndex_tv"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Dressing" />
+                            android:text="Dressing"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp" />
 
                     </LinearLayout>
 
@@ -219,7 +225,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:src="@drawable/cold_index" />
+                        android:src="@drawable/cold_index"
+                        android:padding="10dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -230,7 +237,9 @@
                             android:id="@+id/coldIndex_tv"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="cold" />
+                            android:text="cold"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -252,7 +261,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:src="@drawable/car_index" />
+                        android:src="@drawable/car_index"
+                        android:padding="10dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -263,7 +273,9 @@
                             android:id="@+id/carwash_tv"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="carwash" />
+                            android:text="carwash"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -278,7 +290,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:src="@drawable/sports_index" />
+                        android:src="@drawable/sports_index"
+                        android:padding="10dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -289,7 +302,9 @@
                             android:id="@+id/sportIndex_tv"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="sport" />
+                            android:text="sport"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp" />
                     </LinearLayout>
 
                 </LinearLayout>
