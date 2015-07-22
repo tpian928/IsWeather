@@ -55,7 +55,7 @@ public class SPTools {
         editor.putString("sportsTipt", weather.getSportsIndex().getTipt());
         editor.putString("sportsDes", weather.getSportsIndex().getDes());
 
-        //  future three days' weather
+        //  day_img three days' weather
         editor.putString("todayTempRage", weather.getTodayWeather().getTempRage());
         editor.putString("todayWeather", weather.getTodayWeather().getWeather());
         editor.putString("todayWind", weather.getTodayWeather().getWind());
@@ -127,7 +127,7 @@ public class SPTools {
                 sp.getString("coldDes", "des")
         );
 
-        // construction of the weather of future three days
+        // construction of the weather of day_img three days
         DayWeather today = new DayWeather(
                 sp.getString("todayDate", "todayDate"),
                 sp.getString("todayTemp", "todayTemp"),

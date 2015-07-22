@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="184dp"
                 android:orientation="horizontal"
-                android:background="@drawable/future">
+                android:background="@drawable/day_img">
 
                 <ImageView
                     android:id="@+id/city_today_imageView"
@@ -662,7 +662,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:background="#98d5cd">
+                    android:background="#72bbb1">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -687,7 +687,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:text="穿衣"
-                                android:gravity="center" />
+                                android:gravity="center|center_horizontal" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -713,7 +713,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:background="#74c5bf">
+                    android:background="#62b4ae">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -764,7 +764,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:background="#53b7af">
+                    android:background="#44a49c">
 
 
                     <LinearLayout
@@ -815,7 +815,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:background="#38aca3">
+                    android:background="#2ba097">
 
 
                     <LinearLayout
