@@ -103,18 +103,18 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="3px"
-            android:background="@android:color/white" />
-
-        <LinearLayout
+    <LinearLayout
             android:id="@+id/future_weather_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/bg_card"
                 android:id="@+id/tomorro_LinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="84dp"
@@ -138,16 +138,16 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="3px"
-                android:background="@android:color/white" />
-
             <LinearLayout
                 android:id="@+id/after_LinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="84dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/bg_card">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -169,12 +169,7 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="3px"
-            android:background="@android:color/white" />
-
-        <LinearLayout
+    <LinearLayout
             android:id="@+id/index_LinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
