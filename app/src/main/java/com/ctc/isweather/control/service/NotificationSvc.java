@@ -57,7 +57,6 @@ public class NotificationSvc extends Service {
             public void run() {
                 //从网络获取天气信息
                 //未来2天内有恶劣情况，启动推动
-
                 /*intent.putExtra("tickerText","");
                 intent.putExtra("contentText","");//提醒用户做好预防措施
                 intent.putExtra("contentTitle","");//雷电，大风，暴雨，干旱，寒潮*/
