@@ -62,7 +62,7 @@ public class MainActivity extends Fragment{
         city_today_ImageView = (ImageView) view.findViewById(R.id.city_today_imageView);
         city_manage_ImageView = (ImageView) view.findViewById(R.id.city_manage_ImageView);
 
-        tomorrow = (LinearLayout) view.findViewById(R.id.tomorro_LinearLayout);
+        tomorrow = (LinearLayout) view.findViewById(R.id.tomorrow_LinearLayout);
         after = (LinearLayout) view.findViewById(R.id.after_LinearLayout);
     }
 
