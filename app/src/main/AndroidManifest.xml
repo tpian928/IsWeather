@@ -36,8 +36,10 @@
             android:label="@string/title_activity_share" />
 
         <activity
-            android:name=".view.activity.AddSureActivity"
-            android:label="AddSureActivity" />
+            android:name=".view.activity.ShowIndexDialog"
+            android:label="指数详情"
+            android:theme="@android:style/Theme.Dialog"/>
+
         <!-- for widget -->
         <receiver android:name=".view.widget.WeatherWidget" >
             <intent-filter>

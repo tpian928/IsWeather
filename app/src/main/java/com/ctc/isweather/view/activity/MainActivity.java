@@ -14,11 +14,12 @@ import android.widget.TextView;
 
 import com.ctc.isweather.R;
 import com.ctc.isweather.http.WeatherHttp;
+import com.ctc.isweather.mode.bean.WIndex;
 import com.ctc.isweather.mode.bean.Weather;
 
 import java.util.Calendar;
 
-public class MainActivity extends Fragment {
+public class MainActivity extends Fragment{
 
     static MainActivity newInstance(String cityname){
         MainActivity city = new MainActivity();
@@ -106,6 +107,63 @@ public class MainActivity extends Fragment {
                 startActivity(intent);
             }
         });
+
+        dressindex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ShowIndexDialog.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("indexname",dress.getTitle());
+                bundle.putString("zs",dress.getZs());
+                bundle.putString("tipt", dress.getTipt());
+                bundle.putString("desc", dress.getDes());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        sportindex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ShowIndexDialog.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("title",sport.getTitle());;
+                bundle.putString("zs",sport.getZs());
+                bundle.putString("tipt",sport.getTipt());
+                bundle.putString("desc",sport.getDes());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        carwashindex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ShowIndexDialog.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("indexname", carwash.getTitle());
+                bundle.putString("zs", carwash.getZs());
+                bundle.putString("tipt", carwash.getTipt());
+                bundle.putString("desc", carwash.getDes());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        coldindex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ShowIndexDialog.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("indexname",cold.getTitle());
+                bundle.putString("zs",cold.getZs());
+                bundle.putString("tipt",cold.getTipt());
+                bundle.putString("desc",cold.getDes());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
     }
 
     WeatherHandler handler;
@@ -138,6 +196,8 @@ public class MainActivity extends Fragment {
         return str[number];
     }
 
+
+    private WIndex dress,sport,carwash,cold;
     /**
      * Handle Today's weather
      */
@@ -146,8 +206,6 @@ public class MainActivity extends Fragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Weather weather = (Weather)msg.obj;
-            // The city id is null
-           // Log.i("chris", "send pm25: " + weather.getPm25());
 
             // set the information below
             pm25.setText("PM2.5  :  " + weather.getPm25());
@@ -155,10 +213,10 @@ public class MainActivity extends Fragment {
 
 
             // set the indexes
-            dressindex.setText(weather.getDressingIndex().getDes());
-            coldindex.setText(weather.getColdIndex().getDes());
-            carwashindex.setText(weather.getCarwashIndex().getDes());
-            sportindex.setText(weather.getSportsIndex().getDes());
+            dress = weather.getDressingIndex();
+            sport = weather.getSportsIndex();
+            carwash =weather.getCarwashIndex();
+            cold = weather.getColdIndex();
         }
     }
 }
