@@ -18,7 +18,7 @@
                 android:id="@+id/nav_LinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="#1f3193"
+                android:background="#097e83"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -55,8 +55,8 @@
                 android:id="@+id/show_LinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="184dp"
-                android:background="#3f51b5"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/future">
 
                 <ImageView
                     android:id="@+id/city_today_imageView"
@@ -115,7 +115,8 @@
                 android:id="@+id/future_weather_linearlayout"
                 android:layout_width="match_parent"
                 android:layout_height="340dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="#17989d">
 
                 <LinearLayout
                     android:id="@+id/tomorrow_LinearLayout"
@@ -640,8 +641,6 @@
 
                             </LinearLayout>
 
-
-
                         </LinearLayout>
 
                     </LinearLayout>
@@ -650,147 +649,215 @@
 
             </LinearLayout>
 
+            <!-- index  -->
             <LinearLayout
                 android:id="@+id/index_LinearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
+                android:layout_height="90dp"
                 android:background="#1d2636"
-                android:orientation="vertical">
-
+                android:orientation="horizontal">
+                <!-- dress index-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:orientation="horizontal">
-
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="#98d5cd">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="40dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:src="@drawable/dress_index"
-                            android:padding="10dp"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingRight="10dp"
-                            android:paddingBottom="10dp" />
-
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:id="@+id/dressIndex_tv"
+                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="Dressing"
-                                android:gravity="center_vertical"
-                                android:paddingLeft="10dp" />
+                                android:src="@drawable/dress_index"
+                                android:padding="4dp"/>
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="穿衣"
+                                android:gravity="center" />
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <ImageView
+                        android:layout_height="50dp">
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:src="@drawable/cold_index"
-                            android:padding="10dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/coldIndex_tv"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="cold"
-                                android:gravity="center_vertical"
-                                android:paddingLeft="10dp" />
-                        </LinearLayout>
+                            android:gravity="center"
+                            android:text="炎热"
+                            android:id="@+id/dressIndex_tv"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
+
+                <!-- cold index-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="#74c5bf">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="40dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:src="@drawable/car_index"
-                            android:padding="10dp" />
-
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/carwash_tv"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent">
+                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="carwash"
-                                android:gravity="center_vertical"
-                                android:paddingLeft="10dp" />
+                                android:src="@drawable/cold_index"
+                                android:padding="4dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="感冒"/>
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="50dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="易发"
+                            android:id="@+id/coldIndex_tv"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <!-- car index-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="#53b7af">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:src="@drawable/sports_index"
-                            android:padding="10dp" />
-
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/sportIndex_tv"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent">
+                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="sport"
-                                android:gravity="center_vertical"
-                                android:paddingLeft="10dp" />
+                                android:src="@drawable/car_index"
+                                android:padding="4dp"/>
+
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="洗车"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="适合"
+                            android:id="@+id/carwash_tv"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <!-- sports index-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="#38aca3">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/sports_index"
+                                android:padding="4dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="运动"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="不适合"
+                            android:id="@+id/sportIndex_tv"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
 
             </LinearLayout>
 
