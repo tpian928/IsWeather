@@ -258,7 +258,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/rain_index"
+                                    android:src="@drawable/fl"
                                     android:layout_weight="1"/>
 
                                 <TextView
@@ -441,7 +441,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/rain_index"
+                                    android:src="@drawable/fl"
                                     android:layout_weight="1"/>
 
                                 <TextView
@@ -624,7 +624,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/rain_index"
+                                    android:src="@drawable/fl"
                                     android:layout_weight="1"/>
 
                                 <TextView
@@ -693,7 +693,7 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/rain_index"
+                                android:src="@drawable/cyzs"
                                 android:padding="4dp"/>
 
                         </LinearLayout>
@@ -797,7 +797,7 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/rain_index"
+                                android:src="@drawable/xczs"
                                 android:padding="4dp"/>
 
                         </LinearLayout>
@@ -848,7 +848,7 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/rain_index"
+                                android:src="@drawable/ydzs"
                                 android:padding="4dp"/>
                         </LinearLayout>
 
