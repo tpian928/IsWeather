@@ -587,7 +587,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/zgw"
+                                    android:src="@drawable/hightemp"
                                     android:layout_weight="1"/>
 
                                 <TextView
@@ -629,7 +629,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/zdw"
+                                    android:src="@drawable/lowtemp"
                                     android:layout_weight="1"/>
 
                                 <TextView
