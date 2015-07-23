@@ -5,9 +5,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pull_refresh_scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        ptr:ptrAnimationStyle="flip"
+        ptr:ptrMode="both" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -883,6 +887,6 @@
         </LinearLayout>
 
 
-    </ScrollView>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 </LinearLayout>
