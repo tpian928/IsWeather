@@ -13,11 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ctc.isweather.R;
+import com.ctc.isweather.control.charts.FinalLineChart;
 import com.ctc.isweather.http.WeatherHttp;
 import com.ctc.isweather.mode.bean.WIndex;
 import com.ctc.isweather.mode.bean.Weather;
-
-import java.util.Calendar;
 
 public class MainActivity extends Fragment{
 
@@ -45,6 +44,7 @@ public class MainActivity extends Fragment{
     private TextView city_tv;
     private ImageView city_today_ImageView;
     private ImageView city_manage_ImageView;
+    private ImageView city_share_ImageView;
     private TextView date,weekday, pm25,temp,dressindex,coldindex,carwashindex,sportindex;
     private LinearLayout tomorrow,after;
 
@@ -61,13 +61,17 @@ public class MainActivity extends Fragment{
 
         city_today_ImageView = (ImageView) view.findViewById(R.id.city_today_imageView);
         city_manage_ImageView = (ImageView) view.findViewById(R.id.city_manage_ImageView);
+        city_share_ImageView = (ImageView) view.findViewById(R.id.share_ImageView);
 
         tomorrow = (LinearLayout) view.findViewById(R.id.tomorro_LinearLayout);
         after = (LinearLayout) view.findViewById(R.id.after_LinearLayout);
+
+
     }
 
 
     public void initListener(Bundle bundle){
+        IndexActivity.refresh = false;
         cityname = bundle.getString("name");
         city_tv.setText(cityname);
         // Log.i("chris", "city_tv: " + cityname);
@@ -84,15 +88,25 @@ public class MainActivity extends Fragment{
             }
         });
 
+
         // turn to CityManage_Activity.
         city_manage_ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),CityManageActivity.class);
+                IndexActivity.refresh = true;
+               Intent intent = new Intent(getActivity(),CityManageActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("cityname",cityname);
                 intent.putExtras(bundle);
                 startActivity(intent);
+
+            }
+        });
+
+        city_share_ImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), FinalLineChart.class));
             }
         });
 
@@ -186,16 +200,6 @@ public class MainActivity extends Fragment{
 
     }
 
-    public String getWeekDay(String date){
-        String[] dates = date.split("/");
-        Calendar calendar = Calendar.getInstance();//获得一个日历
-        calendar.set(Integer.valueOf(dates[0]), Integer.valueOf(dates[1])-1, Integer.valueOf(dates[2]));//设置当前时间,月份是从0月开始计算
-        int number = calendar.get(Calendar.DAY_OF_WEEK);//星期表示1-7，是从星期日开始，
-        String [] str = {"","Sun","Mon","Thus","Wens","Thur","Fri","Sat"};
-        //System.out.println(str[number]);
-        return str[number];
-    }
-
 
     private WIndex dress,sport,carwash,cold;
     /**
@@ -217,6 +221,7 @@ public class MainActivity extends Fragment{
             sport = weather.getSportsIndex();
             carwash =weather.getCarwashIndex();
             cold = weather.getColdIndex();
+            //BasicTools.getWholeWeekdays(BasicTools.getDate());
         }
     }
 }

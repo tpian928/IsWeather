@@ -30,6 +30,7 @@ public class CityAddActivity extends Activity implements SearchView.OnQueryTextL
     private String[] names;
     private ArrayAdapter<String> adapter;
     private int selected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +41,11 @@ public class CityAddActivity extends Activity implements SearchView.OnQueryTextL
         initview();
     }
 
-    public void initview()
-    {
+    public void initview() {
         // get the array from the database.
         ArrayList<String> citys = DBTools.QueryInCity();
         names = new String[citys.size()];
-        for(int i = 0; i < citys.size(); i++){
+        for (int i = 0; i < citys.size(); i++) {
             names[i] = citys.get(i);
         }
 
@@ -54,17 +54,17 @@ public class CityAddActivity extends Activity implements SearchView.OnQueryTextL
             @Override
             public void onClick(View v) {
                 CityAddActivity.this.finish();
-                startActivity(new Intent(CityAddActivity.this,CityManageActivity.class));
+                startActivity(new Intent(CityAddActivity.this, CityManageActivity.class));
             }
         });
 
 
-        search =(SearchView)findViewById(R.id.search);
+        search = (SearchView) findViewById(R.id.search);
         search.setOnQueryTextListener(this);
         search.setOnClickListener(this);
 
-        lv=(ListView)findViewById(R.id.lv);
-        adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,names);
+        lv = (ListView) findViewById(R.id.lv);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
         lv.setAdapter(adapter);
         lv.setTextFilterEnabled(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -79,12 +79,17 @@ public class CityAddActivity extends Activity implements SearchView.OnQueryTextL
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // add the city to the concity
-                                DBTools.insertInConcity(names[selected]);
-                                Log.i("chris", "The city is inserted!");
-                                Toast.makeText(CityAddActivity.this.getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
+                                // check whether the concity has been concerned
+                                if (DBTools.existInConCity(names[selected])) {
+                                    Toast.makeText(CityAddActivity.this.getApplicationContext(), "城市已被关注", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    DBTools.insertInConcity(names[selected]);
+                                    Log.i("chris", "The city is inserted!");
+                                    Toast.makeText(CityAddActivity.this.getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         })
-                        .setNegativeButton("取消",null)
+                        .setNegativeButton("取消", null)
                         .show();
 
             }
@@ -93,27 +98,22 @@ public class CityAddActivity extends Activity implements SearchView.OnQueryTextL
 
     @Override
     public boolean onQueryTextChange(String arg0) {
-        if(arg0.length()!=0){
+        if (arg0.length() != 0) {
             lv.setFilterText(arg0);
-        }else{
+        } else {
             lv.clearTextFilter();
         }
         return false;
     }
+
     @Override
     public boolean onQueryTextSubmit(String arg0) {
-        /*******************************************************************************************
-         * click enter button
-         * add city to database
-         */
-        Log.i("chris","点击按钮: " + arg0);
         return false;
     }
 
     @Override
     public void onClick(View v) {
-        Log.i("chris","Click the search view");
-       /* InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(v,InputMethodManager.SHOW_FORCED);*/
+        Log.i("chris", "Click the search view");
     }
+
 }

@@ -9,8 +9,11 @@ import java.util.Date;
  */
 public class BasicTools {
 
+    public static String[] weekdays = {"Mon", "Thus", "Wens", "Thur", "Fri", "Sat", "Sun"};
+
     /**
      * Get the current date
+     *
      * @return Date
      */
     public static String getDate() {
@@ -21,6 +24,7 @@ public class BasicTools {
 
     /**
      * get the day of the week
+     *
      * @param date Date
      * @return week day
      */
@@ -32,5 +36,30 @@ public class BasicTools {
         String[] str = {"", "Sun", "Mon", "Thus", "Wens", "Thur", "Fri", "Sat"};
         //System.out.println(str[number]);
         return str[number];
+    }
+
+    /**
+     * Get the week day of the current date
+     *
+     * @param date
+     * @return
+     */
+    public static String[] getWholeWeekdays(String date) {
+        String weekday = getWeekDay(date);
+        int index = -1;
+        for (int i = 0; i < weekdays.length; i++) {
+            if (weekday.compareTo(weekdays[i]) == 0) {
+                index = i;
+                break;
+            }
+        }
+        // get the index of the weekday
+        String[] days = new String[6];
+        days[0] = weekday;
+        for (int i = 1; i < 6; i++) {
+            days[i] = weekdays[(index+i) % weekdays.length];
+        }
+
+        return days;
     }
 }

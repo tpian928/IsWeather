@@ -110,6 +110,23 @@ public class DBTools {
         return false;
     }
 
+
+    public static boolean existInConCity(String name) {
+        // get the list of city
+        SQLiteDatabase db = openDatabase();
+        ArrayList<String> list = QueryInConcity(db);
+        if (list.size() == 0) {
+            return false;
+        }
+
+        for (String city : list) {
+            if (city.compareTo(name) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * insert the concerned city into Table conCity
      *

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ctc.isweather" >
+    package="com.ctc.isweather">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -9,10 +9,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.NoActionBar" >
+        android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
             android:name=".view.activity.IndexActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,10 +38,36 @@
         <activity
             android:name=".view.activity.ShowIndexDialog"
             android:label="指数详情"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:theme="@android:style/Theme.Dialog" />
 
+
+        <activity
+            android:name=".control.charts.ShowLineChart_1"
+            android:label="ShowLineChart" />
+
+        <activity
+            android:name=".control.charts.ShowLineChart_2"
+            android:label="ShowLineChart" />
+
+        <activity
+            android:name=".control.charts.FinalLineChart"
+            android:label="ShowLineChart" />
+        <activity
+            android:name=".control.charts.ShowLineChart_4"
+            android:label="ShowLineChart" />
+        <activity
+            android:name=".control.charts.ShowLineChart_5"
+            android:label="ShowLineChart" />
+
+        <activity
+            android:name=".control.charts.PerformanceLineChart"
+            android:label="ShowLineChart" />
+
+        <activity
+            android:name=".control.charts.RealtimeLineChartActivity"
+            android:label="ShowLineChart" />
         <!-- for widget -->
-        <receiver android:name=".view.widget.WeatherWidget" >
+        <receiver android:name=".view.widget.WeatherWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -54,8 +80,7 @@
         <service
             android:name=".control.service.UpdateWidgetService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true"></service>
     </application>
 
 </manifest>

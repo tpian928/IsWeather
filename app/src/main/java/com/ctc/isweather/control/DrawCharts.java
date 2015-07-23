@@ -73,4 +73,5 @@ public class DrawCharts {
         lineChart.animateX(1500);
     }
 
+
 }

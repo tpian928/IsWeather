@@ -20,7 +20,10 @@ import java.util.ArrayList;
 /**
  * Created by chris on 2015/7/17.
  */
+
 public class IndexActivity extends FragmentActivity{
+    public static boolean refresh = false;
+
     private ViewPager vpager;
     private MyHandler myHandler;
     private String localCity;
@@ -91,21 +94,10 @@ public class IndexActivity extends FragmentActivity{
         }
     }
 
-    // flash
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        // vpager.removeAllViews();
-        // finish();
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        // Toast.makeText(this.getApplicationContext(),"need to delete the city",Toast.LENGTH_SHORT).show();
-        // vpager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), null));
-        init();
+        if(refresh)
+             init();
     }
 }
