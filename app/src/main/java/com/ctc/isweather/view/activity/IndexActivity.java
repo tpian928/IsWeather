@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class IndexActivity extends FragmentActivity{
     public static boolean refresh = false;
+    public static boolean start = true;
 
     private ViewPager vpager;
     private MyHandler myHandler;
@@ -97,7 +98,6 @@ public class IndexActivity extends FragmentActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        if(refresh)
-             init();
+        init();
     }
 }

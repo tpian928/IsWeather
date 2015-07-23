@@ -77,18 +77,9 @@ public class FutureWeatherActivity extends Activity {
                 for (int i = 0; i < list.size(); i++) {
                     max[i] = list.get(i).getMaxTemp();
                     min[i] = list.get(i).getMinTemp();
-                    Log.i("chris", "最低温度 : " + min[i]);
                 }
-                /*LineDataSet min_LDS = DrawCharts.getLineDataSet(min, Color.BLUE, Color.YELLOW, Color.YELLOW, "最低温度");
-                LineDataSet max_LDS = DrawCharts.getLineDataSet(max, Color.RED, Color.GREEN, Color.GREEN, "最高温度");
-                ArrayList<LineDataSet> ldlist = new ArrayList<LineDataSet>();
-                ldlist.add(min_LDS);
-                ldlist.add(max_LDS);
-                LineData ld = DrawCharts.getLineData(6, ldlist);
-                DrawCharts.showChart(chart, ld, "温度变化曲线", Color.WHITE, Color.WHITE, Color.WHITE);*/
-                // Log.i("chris","draw");
 
-                FinalLineChart.setChart(chart, BasicTools.getWholeWeekdays(BasicTools.getDate()), min, max);
+                FinalLineChart.setChart(chart, BasicTools.getWholeWeekdays(BasicTools.getDate()), min, max,6);
                 //FinalLineChart.setChart(chart, BasicTools.getWholeWeekdays(BasicTools.getDate()), min);
             } else {
                 Toast.makeText(getApplicationContext(), "No elements", Toast.LENGTH_SHORT).show();

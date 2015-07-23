@@ -138,6 +138,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="44dp">
                         <ImageView
+                            android:id="@+id/fl_imageview"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="4dp"
@@ -150,6 +151,7 @@
                         android:layout_height="20dp">
 
                         <TextView
+                            android:id="@+id/fl_textview"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -176,10 +178,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="44dp">
                         <ImageView
+                            android:id="@+id/sd_imageview"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="4dp"
-                            android:src="@drawable/rain_index"/>
+                            android:src="@drawable/sd"/>
 
                     </LinearLayout>
 
@@ -188,6 +191,7 @@
                         android:layout_height="20dp">
 
                         <TextView
+                            android:id="@+id/sd_textview"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -214,6 +218,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="44dp">
                         <ImageView
+                            android:id="@+id/pm_imageview"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="4dp"
@@ -226,6 +231,7 @@
                         android:layout_height="20dp">
 
                         <TextView
+                            android:id="@+id/pm_textview"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"

@@ -107,7 +107,7 @@ public class FinalLineChart extends Activity {
     }
 
     // Two types
-    public static void setChart(LineChart mChart,String[] xs,String[] ys,String[] y2s){
+    public static void setChart(LineChart mChart,String[] xs,String[] ys,String[] y2s,int count){
         // no description text
         mChart.setDescription("");
 
@@ -136,7 +136,7 @@ public class FinalLineChart extends Activity {
         mChart.getAxisRight().setEnabled(false);
 
         // add data
-        setData(mChart, 6, xs, ys,y2s);
+        setData(mChart, count, xs, ys,y2s);
 
         mChart.getLegend().setEnabled(true);
         mChart.getLegend().setTextColor(Color.WHITE);

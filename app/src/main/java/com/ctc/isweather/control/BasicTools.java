@@ -1,5 +1,6 @@
 package com.ctc.isweather.control;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -62,4 +63,31 @@ public class BasicTools {
 
         return days;
     }
+
+    public static String[] getDates(String todayDate){
+        String[] threeDays = new String[3];
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        Date nowDate = null;
+        try {
+            nowDate = df.parse(todayDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        threeDays[0] = todayDate;
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date tomorrow = new Date(nowDate.getTime() + 1 * 24 * 60 * 60 * 1000);
+        threeDays[1] = simpleDateFormat.format(tomorrow);
+
+        Date after = new Date(nowDate.getTime() + 2 * 24 * 60 * 60 * 1000);
+        threeDays[2] = simpleDateFormat.format(after);
+        return threeDays;
+    }
+
+    public static String getSimpleDate(String date){
+        String[] dates = date.split("/");
+        return dates[1] + " -" + dates[2];
+    }
+
 }
