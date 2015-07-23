@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.ScrollView;
 
 import com.ctc.isweather.R;
 import com.ctc.isweather.adapter.FragmentAdapter;
@@ -17,7 +16,6 @@ import com.ctc.isweather.control.LocationCtrl;
 import com.ctc.isweather.control.service.UpdateWidgetService;
 
 import java.util.ArrayList;
-
 
 /**
  * Created by chris on 2015/7/17.
@@ -31,12 +29,6 @@ public class IndexActivity extends FragmentActivity{
     private MyHandler myHandler;
     private String localCity;
     MyHandler handler;
-
-//    //for pull to refresh
-//    PullToRefreshScrollView mPullRefreshScrollView;
-//    ScrollView mScrollView;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
