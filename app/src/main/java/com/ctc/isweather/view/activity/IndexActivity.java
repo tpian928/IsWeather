@@ -98,6 +98,7 @@ public class IndexActivity extends FragmentActivity{
     @Override
     protected void onResume() {
         super.onResume();
+        //finish();
         init();
     }
 }

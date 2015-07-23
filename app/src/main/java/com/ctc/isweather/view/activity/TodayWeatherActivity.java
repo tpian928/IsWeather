@@ -1,8 +1,10 @@
 package com.ctc.isweather.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import com.ctc.isweather.mode.bean.HourWeather;
 import java.util.ArrayList;
 
 public class TodayWeatherActivity extends Activity {
+    private ImageView back;
     public String cityname;
     private TextView sd,fl,pm;
     private ImageView sd_imageview,fl_imageview,pm_imageview;
@@ -35,6 +38,15 @@ public class TodayWeatherActivity extends Activity {
         sd_imageview = (ImageView) findViewById(R.id.sd_imageview);
         fl_imageview = (ImageView) findViewById(R.id.fl_imageview);
         pm_imageview = (ImageView) findViewById(R.id.pm_imageview);
+        back = (ImageView) findViewById(R.id.back_ImageView);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TodayWeatherActivity.this.finish();
+                startActivity(new Intent(TodayWeatherActivity.this, IndexActivity.class));
+            }
+        });
 
         sd.setText(bundle.getString("wd"));
         fl.setText(bundle.getString("fl"));

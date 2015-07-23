@@ -104,6 +104,8 @@ public class MainActivity extends Fragment{
         min_today = (TextView) view.findViewById(R.id.min_today);
         min_tomorrow = (TextView) view.findViewById(R.id.min_tomorrow);
         min_after = (TextView) view.findViewById(R.id.min_after);
+
+
     }
 
 
@@ -308,6 +310,7 @@ public class MainActivity extends Fragment{
             afterafter_img.setImageResource(Icon.getWeatherIcon(weather.getTomorrowWeather().getWeather()));
             after_img.setImageResource(Icon.getWeatherIcon(weather.getAferWeather().getWeather()));
             //BasicTools.getWholeWeekdays(BasicTools.getDate());
+            city_today_ImageView.setImageResource(Icon.getWeatherIcon(weather.getTodayWeather().getWeather()));
         }
     }
 }
