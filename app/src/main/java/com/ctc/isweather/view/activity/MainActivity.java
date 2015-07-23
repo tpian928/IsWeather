@@ -1,6 +1,7 @@
 package com.ctc.isweather.view.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.ctc.isweather.R;
@@ -20,6 +22,8 @@ import com.ctc.isweather.control.charts.FinalLineChart;
 import com.ctc.isweather.http.WeatherHttp;
 import com.ctc.isweather.mode.bean.WIndex;
 import com.ctc.isweather.mode.bean.Weather;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 public class MainActivity extends Fragment{
 
@@ -29,18 +33,6 @@ public class MainActivity extends Fragment{
         bundle.putString("name", cityname);
         city.setArguments(bundle);
         return city;
-    }
-
-    // Get the data from the bundle
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.activity_main, container, false);
-        init(view);
-        initListener(getArguments());
-        // Log.i("chris", "Get the information.");
-        getWeatherInfos();
-        return view;
     }
 
     private String cityname;
@@ -57,6 +49,60 @@ public class MainActivity extends Fragment{
     private ImageView tomorrow_img,afterafter_img,after_img;
     private TextView max_today,max_tomorrow,max_after;
     private TextView min_today,min_tomorrow,min_after;
+
+    //for pull
+    PullToRefreshScrollView mPullRefreshScrollView;
+    ScrollView mScrollView;
+
+    // Get the data from the bundle
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_main, container, false);
+        init(view);
+        initListener(getArguments());
+        // Log.i("chris", "Get the information.");
+        getWeatherInfos();
+
+        //for pull
+
+        mPullRefreshScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                new GetDataTask().execute();
+            }
+        });
+
+        mScrollView = mPullRefreshScrollView.getRefreshableView();
+
+        return view;
+    }
+
+    private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(Void... params) {
+            // Simulates a background job.
+            try {
+                Log.d("mypull", "refreshRunning");
+
+                //Thread.sleep(4000);
+            } catch (Exception e) {
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+            // Do some stuff here
+
+            // Call onRefreshComplete when the list has been refreshed.
+            mPullRefreshScrollView.onRefreshComplete();
+
+            super.onPostExecute(result);
+        }
+    }
 
     public void init(View view){
         city_tv = (TextView) view.findViewById(R.id.title_TextView);
@@ -105,7 +151,8 @@ public class MainActivity extends Fragment{
         min_tomorrow = (TextView) view.findViewById(R.id.min_tomorrow);
         min_after = (TextView) view.findViewById(R.id.min_after);
 
-
+        //for pull
+        mPullRefreshScrollView = (PullToRefreshScrollView)view.findViewById(R.id.pull_refresh_scrollview);
     }
 
 

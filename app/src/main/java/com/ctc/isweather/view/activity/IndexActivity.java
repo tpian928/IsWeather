@@ -28,7 +28,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
  * Created by chris on 2015/7/17.
  */
 
-public final class IndexActivity extends FragmentActivity{
+public class IndexActivity extends FragmentActivity{
     public static boolean refresh = false;
     public static boolean start = true;
 
@@ -51,49 +51,6 @@ public final class IndexActivity extends FragmentActivity{
         //启动服务
         startService(new Intent(this, UpdateWidgetService.class));
 
-        //for pull
-        mPullRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.pull_refresh_scrollview);
-
-        if (mPullRefreshScrollView==null){
-            Log.d("mypull","mPullRefreshScrollView is null"+mPullRefreshScrollView);
-        }
-
-
-
-//        mPullRefreshScrollView.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
-//            @Override
-//            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-//                new GetDataTask().execute();
-//            }
-//        });
-//
-//        mScrollView = mPullRefreshScrollView.getRefreshableView();
-
-    }
-
-    //for pull
-    private class GetDataTask extends AsyncTask<Void, Void, String[]> {
-
-        @Override
-        protected String[] doInBackground(Void... params) {
-            // Simulates a background job.
-            try {
-                Log.d("mypull","test");
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String[] result) {
-            // Do some stuff here
-
-            // Call onRefreshComplete when the list has been refreshed.
-            mPullRefreshScrollView.onRefreshComplete();
-
-            super.onPostExecute(result);
-        }
     }
 
     public void init(){
