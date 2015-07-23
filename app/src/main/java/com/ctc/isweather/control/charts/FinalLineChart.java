@@ -21,6 +21,8 @@ public class FinalLineChart extends Activity {
 
     private String[] xs,ys;
 
+    public FinalLineChart(){}
+
     public FinalLineChart(String[] x,String[] y){
         xs = x;
         ys = y;
