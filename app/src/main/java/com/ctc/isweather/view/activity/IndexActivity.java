@@ -1,7 +1,6 @@
 package com.ctc.isweather.view.activity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,18 +9,17 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.ctc.isweather.R;
 import com.ctc.isweather.adapter.FragmentAdapter;
 import com.ctc.isweather.control.DBTools;
 import com.ctc.isweather.control.LocationCtrl;
+import com.ctc.isweather.control.service.ConnectRequest;
 import com.ctc.isweather.control.service.UpdateWidgetService;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import java.util.ArrayList;
-
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 
 /**
@@ -29,8 +27,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
  */
 
 public class IndexActivity extends FragmentActivity{
-    public static boolean refresh = false;
-    public static boolean start = true;
+    public static boolean isConnected = false;
 
     private ViewPager vpager;
     private MyHandler myHandler;
@@ -48,8 +45,15 @@ public class IndexActivity extends FragmentActivity{
 
        // init(); // call the thread
         DBTools.importDB(this);
-        //启动服务
-        startService(new Intent(this, UpdateWidgetService.class));
+        isConnected = ConnectRequest.isNetworkAvailable(this);
+        if (isConnected) {
+            init();
+            startService(new Intent(this, UpdateWidgetService.class));
+        }else{
+            Toast.makeText(getApplicationContext(),"无法连接网络",Toast.LENGTH_SHORT).show();
+            // Read the information from the sharepreference
+        }
+
 
     }
 

@@ -29,16 +29,7 @@
             android:padding="5dip"
             android:id="@+id/title_TextView" />
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:src="@drawable/add"
-            android:id="@+id/add_ImageView" />
-
-    </LinearLayout>
+         </LinearLayout>
 
     <SearchView
         android:id="@+id/search"

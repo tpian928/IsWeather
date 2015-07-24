@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.ctc.isweather.R;
 import com.ctc.isweather.control.BasicTools;
 import com.ctc.isweather.control.Icon;
-import com.ctc.isweather.control.charts.FinalLineChart;
 import com.ctc.isweather.http.WeatherHttp;
 import com.ctc.isweather.mode.bean.WIndex;
 import com.ctc.isweather.mode.bean.Weather;
@@ -49,6 +48,7 @@ public class MainActivity extends Fragment{
     private ImageView tomorrow_img,afterafter_img,after_img;
     private TextView max_today,max_tomorrow,max_after;
     private TextView min_today,min_tomorrow,min_after;
+    private TextView temp_today,temp_tomorrow,temp_after;
 
     //for pull
     PullToRefreshScrollView mPullRefreshScrollView;
@@ -73,7 +73,6 @@ public class MainActivity extends Fragment{
                 new GetDataTask().execute();
             }
         });
-
         mScrollView = mPullRefreshScrollView.getRefreshableView();
 
         return view;
@@ -116,6 +115,8 @@ public class MainActivity extends Fragment{
     }
 
     public void init(View view){
+
+
         city_tv = (TextView) view.findViewById(R.id.title_TextView);
         date  = (TextView) view.findViewById(R.id.date_TextView);
         weekday  = (TextView) view.findViewById(R.id.weekday_TextView);
@@ -164,11 +165,14 @@ public class MainActivity extends Fragment{
 
         //for pull
         mPullRefreshScrollView = (PullToRefreshScrollView)view.findViewById(R.id.pull_refresh_scrollview);
+
+        temp_today = (TextView) view.findViewById(R.id.temp_today);
+        temp_tomorrow = (TextView) view.findViewById(R.id.temp_tomorrow);
+        temp_after = (TextView) view.findViewById(R.id.temp_after);
     }
 
 
     public void initListener(Bundle bundle){
-        IndexActivity.refresh = false;
         cityname = bundle.getString("name");
         city_tv.setText(cityname);
         // Log.i("chris", "city_tv: " + cityname);
@@ -193,8 +197,7 @@ public class MainActivity extends Fragment{
         city_manage_ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IndexActivity.refresh = true;
-               Intent intent = new Intent(getActivity(),CityManageActivity.class);
+                Intent intent = new Intent(getActivity(),CityManageActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("cityname",cityname);
                 intent.putExtras(bundle);
@@ -206,7 +209,7 @@ public class MainActivity extends Fragment{
         city_share_ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 startActivity(new Intent(getActivity(), ShareActivity.class));
+                startActivity(new Intent(getActivity(), ShareActivity.class));
             }
         });
 
@@ -303,6 +306,7 @@ public class MainActivity extends Fragment{
 
     private String wd,fl,pm;
     private WIndex dress,sport,carwash,cold;
+
     /**
      * Handle Today's weather
      */
@@ -318,8 +322,8 @@ public class MainActivity extends Fragment{
             pm = weather.getPm25();
 
             // set the information below
-            pm25.setText("PM2.5  :  " + weather.getPm25());
-            temp.setText(weather.getMaintemp());
+            pm25.setText("PM2.5  :  " + weather.getPm25() + " μm");
+            temp.setText(weather.getMaintemp()+ "℃");
 
 
             // set the indexes
@@ -338,7 +342,7 @@ public class MainActivity extends Fragment{
             // get date
             String date = BasicTools.getDate();
             String[] threeDays = BasicTools.getDates(date);
-            Log.i("chris",threeDays[0] +" : " + threeDays[1] + " : " + threeDays[2]);
+            Log.i("chris", threeDays[0] + " : " + threeDays[1] + " : " + threeDays[2]);
             date_today.setText(BasicTools.getSimpleDate(threeDays[0]));
             date_tomorrow.setText(BasicTools.getSimpleDate(threeDays[1]));
             date_after.setText(BasicTools.getSimpleDate(threeDays[2]));
@@ -351,20 +355,25 @@ public class MainActivity extends Fragment{
             desc_tomorrow.setText(weather.getTomorrowWeather().getWeather());
             desc_after.setText(weather.getAferWeather().getWeather());
 
-            Log.i("chris","温度范围: " + weather.getTodayWeather().getTempRage());
+            //Log.i("chris", "温度范围: " + weather.getTodayWeather().getTempRage());
 
             min_today.setText(weather.getTodayWeather().getTempRage().split("~")[1]);
             max_today.setText(weather.getTodayWeather().getTempRage().split("~")[0] +"℃");
             min_tomorrow.setText(weather.getTomorrowWeather().getTempRage().split("~")[1]);
-            max_tomorrow.setText(weather.getTomorrowWeather().getTempRage().split("~")[0] +"℃");
+            max_tomorrow.setText(weather.getTomorrowWeather().getTempRage().split("~")[0] + "℃");
             min_after.setText(weather.getAferWeather().getTempRage().split("~")[1]);
-            max_after.setText(weather.getAferWeather().getTempRage().split("~")[0] +"℃");
+            max_after.setText(weather.getAferWeather().getTempRage().split("~")[0] + "℃");
+            temp_today.setText(weather.getMaintemp() + "℃");
+            temp_tomorrow.setText(weather.getTomorrowWeather().getTempRage().split("~")[1]);
+            temp_after.setText(weather.getAferWeather().getTempRage().split("~")[1]);
 
             wind_today.setText(weather.getTodayWeather().getWind());
             wind_tomorrow.setText(weather.getTomorrowWeather().getWind());
             wind_after.setText(weather.getAferWeather().getWind());
 
+            // Something wrong!
             tomorrow_img.setImageResource(Icon.getWeatherIcon(weather.getTodayWeather().getWeather()));
+            Log.i("getWeather", weather.getTodayWeather().getWeather());
             afterafter_img.setImageResource(Icon.getWeatherIcon(weather.getTomorrowWeather().getWeather()));
             after_img.setImageResource(Icon.getWeatherIcon(weather.getAferWeather().getWeather()));
             //BasicTools.getWholeWeekdays(BasicTools.getDate());

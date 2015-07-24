@@ -198,6 +198,7 @@
                                     android:textSize="12dp" />
 
                                 <TextView
+                                    android:id="@+id/temp_today"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -383,6 +384,7 @@
                                     android:gravity="bottom" />
 
                                 <TextView
+                                    android:id="@+id/temp_tomorrow"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -569,6 +571,7 @@
                                     android:layout_gravity="bottom" />
 
                                 <TextView
+                                    android:id="@+id/temp_after"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
