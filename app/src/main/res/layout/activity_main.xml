@@ -1,10 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:gravity="center_vertical">
+    tools:context=".MainActivity">
 
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
@@ -116,7 +115,6 @@
 
             </LinearLayout>
 
-            <!--future-->
             <LinearLayout
                 android:id="@+id/future_weather_linearlayout"
                 android:layout_width="match_parent"
@@ -158,20 +156,22 @@
                                 android:gravity="center_vertical">
 
                                 <TextView
-                                    android:id="@+id/weekday_tomorrow"
+                                    android:id="@+id/weekday_today"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="mo"
-                                    android:gravity="center_vertical|center_horizontal" />
+                                    android:gravity="center_horizontal|bottom"
+                                    android:textSize="18dp" />
 
                                 <TextView
-                                    android:id="@+id/date_tomorrow"
+                                    android:id="@+id/date_today"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="7.23"
-                                    android:gravity="top" />
+                                    android:gravity="top"
+                                    android:textSize="20dp" />
 
                             </LinearLayout>
 
@@ -184,18 +184,20 @@
                                 android:gravity="center_vertical">
 
                                 <TextView
-                                    android:id="@+id/desc_tomorrow"
+                                    android:id="@+id/desc_today"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="Sunny"
-                                    android:gravity="center_horizontal|bottom" />
+                                    android:gravity="center_horizontal|bottom"
+                                    android:textSize="24dp" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="19℃"
+                                    android:textSize="20dp"
                                     android:gravity="bottom" />
 
                             </LinearLayout>
@@ -242,7 +244,7 @@
                                     android:layout_weight="1"/>
 
                                 <TextView
-                                    android:id="@+id/max_tomorrow"
+                                    android:id="@+id/max_today"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -264,7 +266,7 @@
                                     android:layout_weight="1"/>
 
                                 <TextView
-                                    android:id="@+id/wind_tomorrow"
+                                    android:id="@+id/wind_today"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -286,7 +288,7 @@
                                     android:layout_weight="1"/>
 
                                 <TextView
-                                    android:id="@+id/min_tomorrow"
+                                    android:id="@+id/min_today"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -342,7 +344,8 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="mo"
-                                    android:gravity="center_vertical|center_horizontal" />
+                                    android:gravity="center_horizontal|bottom"
+                                    android:textSize="18dp" />
 
                                 <TextView
                                     android:id="@+id/date_tomorrow"
@@ -350,7 +353,8 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="7.23"
-                                    android:gravity="top" />
+                                    android:gravity="top"
+                                    android:textSize="20dp" />
 
                             </LinearLayout>
 
@@ -368,13 +372,15 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="Sunny"
-                                    android:gravity="center_horizontal|bottom" />
+                                    android:gravity="center_horizontal|bottom"
+                                    android:textSize="24dp" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="19℃"
+                                    android:textSize="20dp"
                                     android:gravity="bottom" />
 
                             </LinearLayout>
@@ -521,7 +527,8 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="mo"
-                                    android:gravity="center_horizontal|bottom" />
+                                    android:gravity="center_horizontal|bottom"
+                                    android:textSize="18dp" />
 
                                 <TextView
                                     android:id="@+id/date_after"
@@ -529,7 +536,8 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="7.23"
-                                    android:gravity="top" />
+                                    android:gravity="top"
+                                    android:textSize="20dp" />
 
                             </LinearLayout>
 
@@ -547,13 +555,15 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="Sunny"
-                                    android:gravity="center_horizontal|bottom" />
+                                    android:gravity="center_horizontal|bottom"
+                                    android:textSize="24dp" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="19℃"
+                                    android:textSize="20dp"
                                     android:gravity="bottom" />
 
                             </LinearLayout>
