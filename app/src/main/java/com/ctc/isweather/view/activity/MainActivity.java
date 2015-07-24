@@ -62,6 +62,7 @@ public class MainActivity extends Fragment{
         init(view);
         initListener(getArguments());
         // Log.i("chris", "Get the information.");
+        handler = new WeatherHandler();
         getWeatherInfos();
 
         //for pull
@@ -85,7 +86,17 @@ public class MainActivity extends Fragment{
             // Simulates a background job.
             try {
                 Log.d("mypull", "refreshRunning");
-
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        Weather weather = WeatherHttp.getWeather(cityname);
+                        //Log.i("chris",weather.getPm25());
+                        Message msg = new Message();
+                        msg.obj = weather;
+                        handler.sendMessage(msg);
+                    }
+                }.start();
                 //Thread.sleep(4000);
             } catch (Exception e) {
 
@@ -195,7 +206,7 @@ public class MainActivity extends Fragment{
         city_share_ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), FinalLineChart.class));
+                 startActivity(new Intent(getActivity(), FinalLineChart.class));
             }
         });
 
@@ -274,7 +285,7 @@ public class MainActivity extends Fragment{
      * Two threads will be executed here.
      */
     public void getWeatherInfos(){
-        handler = new WeatherHandler();
+
         new Thread(){
             @Override
             public void run() {
