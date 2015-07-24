@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile files('libs/mpandroidchartlibrary-2-1-0.jar')
     compile 'com.loopeer.android.thirdparty.pulltorefresh:Android-PullToRefresh:2.1.1'
+    compile 'org.henjue.library:sharesdk:1.0.1'
 }
