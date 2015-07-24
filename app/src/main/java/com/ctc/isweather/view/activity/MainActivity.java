@@ -206,7 +206,7 @@ public class MainActivity extends Fragment{
         city_share_ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), FinalLineChart.class));
+                 startActivity(new Intent(getActivity(), FinalLineChart.class));
             }
         });
 
