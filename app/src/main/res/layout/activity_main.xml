@@ -161,8 +161,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="mo"
-                                    android:gravity="center_horizontal|bottom"
-                                    android:textSize="18dp" />
+                                    android:gravity="center_horizontal|bottom" />
 
                                 <TextView
                                     android:id="@+id/date_today"
@@ -170,8 +169,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="7.23"
-                                    android:gravity="top"
-                                    android:textSize="20dp" />
+                                    android:gravity="top" />
 
                             </LinearLayout>
 
@@ -189,15 +187,13 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="Sunny"
-                                    android:gravity="center_horizontal|bottom"
-                                    android:textSize="24dp" />
+                                    android:gravity="center_horizontal|bottom" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="19℃"
-                                    android:textSize="20dp"
                                     android:gravity="bottom" />
 
                             </LinearLayout>
@@ -344,8 +340,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="mo"
-                                    android:gravity="center_horizontal|bottom"
-                                    android:textSize="18dp" />
+                                    android:gravity="center_horizontal|bottom" />
 
                                 <TextView
                                     android:id="@+id/date_tomorrow"
@@ -353,8 +348,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="7.23"
-                                    android:gravity="top"
-                                    android:textSize="20dp" />
+                                    android:gravity="top" />
 
                             </LinearLayout>
 
@@ -372,15 +366,13 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="Sunny"
-                                    android:gravity="center_horizontal|bottom"
-                                    android:textSize="24dp" />
+                                    android:gravity="center_horizontal|bottom" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="19℃"
-                                    android:textSize="20dp"
                                     android:gravity="bottom" />
 
                             </LinearLayout>
@@ -527,8 +519,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="mo"
-                                    android:gravity="center_horizontal|bottom"
-                                    android:textSize="18dp" />
+                                    android:gravity="center_horizontal|bottom" />
 
                                 <TextView
                                     android:id="@+id/date_after"
@@ -536,8 +527,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="7.23"
-                                    android:gravity="top"
-                                    android:textSize="20dp" />
+                                    android:gravity="top" />
 
                             </LinearLayout>
 
@@ -555,15 +545,13 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="Sunny"
-                                    android:gravity="center_horizontal|bottom"
-                                    android:textSize="24dp" />
+                                    android:gravity="center_horizontal|bottom" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:text="19℃"
-                                    android:textSize="20dp"
                                     android:gravity="bottom" />
 
                             </LinearLayout>
