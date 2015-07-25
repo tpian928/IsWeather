@@ -5,6 +5,7 @@ import android.util.Log;
 import com.ctc.isweather.R;
 import com.ctc.isweather.control.DBTools;
 import com.ctc.isweather.control.LocationCtrl;
+import com.ctc.isweather.control.MyURL;
 import com.ctc.isweather.mode.bean.BadWeather;
 import com.ctc.isweather.mode.bean.DayWeather;
 import com.ctc.isweather.mode.bean.FutureWeather;
@@ -22,6 +23,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,21 +38,8 @@ public class WeatherHttp {
 
         try {
 
-            String url = "http://op.juhe.cn/onebox/weather/query?cityname=";//url为请求的api接口地址
-            String key= "a83486af15a6b592dabd467809cf6033";//申请的对应key
-            String urlAll = new StringBuffer(url).append(cityName).append("&key=").append(key).toString();
-            String charset ="UTF-8";
-            String jsonResult = get(urlAll, charset);//得到JSON字符串
-            JSONObject obj2 = new JSONObject(jsonResult);//转化为JSON类
-            String code = obj2.getString("error_code");//得到错误码
-//            //错误码判断
-//            if(code.equals("0")){
-//                //根据需要取得数据
-//                JSONObject jsonObject =  (JSONObject)object.getJSONArray("result").get(0);
-//                System.out.println(jsonObject.getJSONObject("citynow").get("AQI"));
-//            }else{
-//                System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
-//            }
+            String newcityName = URLEncoder.encode(cityName,"utf-8");
+            JSONObject obj2 = MyURL.readJsonFromUrl("http://op.juhe.cn/onebox/weather/query?cityname=" + newcityName + "&key=a83486af15a6b592dabd467809cf6033");
 
             Log.d("newweather","obj2 is "+obj2.toString());
             if (obj2.getInt("error_code")==0){
