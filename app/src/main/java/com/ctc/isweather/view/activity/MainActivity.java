@@ -1,29 +1,37 @@
 package com.ctc.isweather.view.activity;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ctc.isweather.R;
 import com.ctc.isweather.control.BasicTools;
 import com.ctc.isweather.control.Icon;
+import com.ctc.isweather.control.Screenshot;
 import com.ctc.isweather.http.WeatherHttp;
 import com.ctc.isweather.mode.bean.WIndex;
 import com.ctc.isweather.mode.bean.Weather;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 
 public class MainActivity extends Fragment{
@@ -52,6 +60,7 @@ public class MainActivity extends Fragment{
     private TextView min_today,min_tomorrow,min_after;
     private TextView temp_today,temp_tomorrow,temp_after;
 
+
     //for pull
     PullToRefreshScrollView mPullRefreshScrollView;
     ScrollView mScrollView;
@@ -76,6 +85,8 @@ public class MainActivity extends Fragment{
             }
         });
         mScrollView = mPullRefreshScrollView.getRefreshableView();
+
+
 
         return view;
     }
@@ -216,7 +227,25 @@ public class MainActivity extends Fragment{
         city_share_ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ShareActivity.class));
+                //startActivity(new Intent(getActivity(), ShareActivity.class));
+                try
+                {
+//                    //File myFile = new File(String.valueOf(Screenshot.getBitmapFromView((View) city_today_ImageView, 100, 100)));
+//                    String url = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), Screenshot.getBitmapFromView((View)city_today_ImageView, 100, 100), "title", null);
+//
+//                    MimeTypeMap mime = MimeTypeMap.getSingleton();
+//                    String ext = "zzzz";
+//                    String type = mime.getMimeTypeFromExtension(ext);
+//                    Intent sharingIntent = new Intent("android.intent.action.SEND");
+//                    sharingIntent.setType(type);
+//                    sharingIntent.putExtra("android.intent.extra.STREAM",url);
+//                    startActivity(Intent.createChooser(sharingIntent, "Share using"));
+                    Screenshot.savePic(Screenshot.takeScreenShot(getActivity()),"myss");
+                }
+                catch (Exception e)
+                {
+                    //Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
