@@ -3,9 +3,11 @@ package com.ctc.isweather.view.activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -31,7 +33,10 @@ import com.ctc.isweather.mode.bean.Weather;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class MainActivity extends Fragment{
@@ -227,25 +232,19 @@ public class MainActivity extends Fragment{
         city_share_ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(getActivity(), ShareActivity.class));
-                try
-                {
-//                    //File myFile = new File(String.valueOf(Screenshot.getBitmapFromView((View) city_today_ImageView, 100, 100)));
-//                    String url = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), Screenshot.getBitmapFromView((View)city_today_ImageView, 100, 100), "title", null);
-//
-//                    MimeTypeMap mime = MimeTypeMap.getSingleton();
-//                    String ext = "zzzz";
-//                    String type = mime.getMimeTypeFromExtension(ext);
-//                    Intent sharingIntent = new Intent("android.intent.action.SEND");
-//                    sharingIntent.setType(type);
-//                    sharingIntent.putExtra("android.intent.extra.STREAM",url);
-//                    startActivity(Intent.createChooser(sharingIntent, "Share using"));
-                    Screenshot.savePic(Screenshot.takeScreenShot(getActivity()),"myss");
-                }
-                catch (Exception e)
-                {
-                    //Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+            try
+            {
+                String strFileName = "sdcard/" + String.valueOf(System.currentTimeMillis()) + ".png";
+                Screenshot.savePic(Screenshot.takeScreenShot(getActivity()), strFileName);
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("image/jpeg");
+                share.putExtra(Intent.EXTRA_STREAM, Uri.parse(strFileName));
+                startActivity(Intent.createChooser(share, "Weather By IsWeatherApp"));
+            }
+            catch (Exception e)
+            {
+                //Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
             }
         });
 
