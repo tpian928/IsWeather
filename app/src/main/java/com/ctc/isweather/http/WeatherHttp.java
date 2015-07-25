@@ -16,8 +16,10 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,10 +29,11 @@ import java.util.Calendar;
  */
 public class WeatherHttp {
 
-    public static Weather getWeather(String cityName){
+    public static Weather getWeather(String cityName) throws UnsupportedEncodingException {
         Weather mWeather = new Weather();
 
         mWeather.setCityname(cityName);
+        String newcityName = URLEncoder.encode(cityName,"utf-8");
 
         //联网获取json
 
@@ -39,7 +42,7 @@ public class WeatherHttp {
         try {
             String url = "http://api.map.baidu.com/telematics/v3/weather";
             Log.d("Weather", "url " + url);
-            result = HttpRequest.sendGet(url, "location=" + cityName + "&output=json&ak=256333037387158f732a3601de80cfb3");
+            result = HttpRequest.sendGet(url, "location=" + newcityName + "&output=json&ak=256333037387158f732a3601de80cfb3");
 
             JSONObject obj = new JSONObject(result);
 

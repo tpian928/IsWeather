@@ -24,6 +24,8 @@ import com.ctc.isweather.mode.bean.Weather;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
+import java.io.UnsupportedEncodingException;
+
 public class MainActivity extends Fragment{
 
     static MainActivity newInstance(String cityname){
@@ -89,7 +91,12 @@ public class MainActivity extends Fragment{
                     @Override
                     public void run() {
                         super.run();
-                        Weather weather = WeatherHttp.getWeather(cityname);
+                        Weather weather = null;
+                        try {
+                            weather = WeatherHttp.getWeather(cityname);
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
                         //Log.i("chris",weather.getPm25());
                         Message msg = new Message();
                         msg.obj = weather;
@@ -293,7 +300,12 @@ public class MainActivity extends Fragment{
             @Override
             public void run() {
                 super.run();
-                Weather weather = WeatherHttp.getWeather(cityname);
+                Weather weather = null;
+                try {
+                    weather = WeatherHttp.getWeather(cityname);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 //Log.i("chris",weather.getPm25());
                 Message msg = new Message();
                 msg.obj = weather;
