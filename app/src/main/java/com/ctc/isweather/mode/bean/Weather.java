@@ -35,7 +35,19 @@ public class Weather {
     /**
      * 今天明天，后天的具体天气
      */
-    private DayWeather todayWeather, tomorrowWeather, aferWeather;
+    private DayWeather todayWeather;
+    private DayWeather tomorrowWeather;
+    private DayWeather aferWeather;
+
+    public DayWeather getAfterafterWeather() {
+        return afterafterWeather;
+    }
+
+    public void setAfterafterWeather(DayWeather afterafterWeather) {
+        this.afterafterWeather = afterafterWeather;
+    }
+
+    private DayWeather afterafterWeather;
 
     /**
      * 得到一周温度的数组

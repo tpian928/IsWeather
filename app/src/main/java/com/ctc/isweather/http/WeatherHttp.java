@@ -3,6 +3,7 @@ package com.ctc.isweather.http;
 import android.util.Log;
 
 import com.ctc.isweather.R;
+import com.ctc.isweather.control.DBTools;
 import com.ctc.isweather.control.LocationCtrl;
 import com.ctc.isweather.mode.bean.BadWeather;
 import com.ctc.isweather.mode.bean.DayWeather;
@@ -15,7 +16,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
@@ -27,6 +31,107 @@ import java.util.Calendar;
  */
 public class WeatherHttp {
 
+    public static Weather getWeather(String cityName){
+        Weather mWeather = new Weather();
+
+        try {
+
+            String url = "http://op.juhe.cn/onebox/weather/query?cityname=";//url为请求的api接口地址
+            String key= "a83486af15a6b592dabd467809cf6033";//申请的对应key
+            String urlAll = new StringBuffer(url).append(cityName).append("&key=").append(key).toString();
+            String charset ="UTF-8";
+            String jsonResult = get(urlAll, charset);//得到JSON字符串
+            JSONObject obj2 = new JSONObject(jsonResult);//转化为JSON类
+            String code = obj2.getString("error_code");//得到错误码
+//            //错误码判断
+//            if(code.equals("0")){
+//                //根据需要取得数据
+//                JSONObject jsonObject =  (JSONObject)object.getJSONArray("result").get(0);
+//                System.out.println(jsonObject.getJSONObject("citynow").get("AQI"));
+//            }else{
+//                System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
+//            }
+
+            Log.d("newweather","obj2 is "+obj2.toString());
+            if (obj2.getInt("error_code")==0){
+                JSONObject result = obj2.getJSONObject("result");
+                JSONObject data = result.getJSONObject("data");
+                JSONObject realtime = data.getJSONObject("realtime");
+                mWeather.setCityid(realtime.getString("city_code"));
+                mWeather.setCityname(realtime.getString("city_name"));
+                JSONObject weather = realtime.getJSONObject("weather");
+                mWeather.setMaintemp(weather.getString("temperature"));
+
+                JSONObject life = data.getJSONObject("life");
+                JSONObject info = life.getJSONObject("info");
+                JSONArray chuanyi = info.getJSONArray("chuanyi");
+                JSONArray ganmao = info.getJSONArray("ganmao");
+                JSONArray xiche = info.getJSONArray("xiche");
+                JSONArray yundong = info.getJSONArray("yundong");
+
+                WIndex index1 = new WIndex();
+                index1.setDes(chuanyi.get(1).toString());
+                index1.setZs(chuanyi.get(0).toString());
+                index1.setTipt("穿衣指数");
+                index1.setTitle("穿衣");
+                WIndex index2 = new WIndex();
+                index2.setDes(xiche.get(1).toString());
+                index2.setZs(xiche.get(0).toString());
+                index2.setTipt("洗车指数");
+                index2.setTitle("洗车");
+                WIndex index4 = new WIndex();
+                index4.setDes(ganmao.get(1).toString());
+                index4.setZs(ganmao.get(0).toString());
+                index4.setTipt("感冒指数");
+                index4.setTitle("感冒");
+                WIndex index5 = new WIndex();
+                index5.setDes(yundong.get(1).toString());
+                index5.setZs(yundong.get(0).toString());
+                index5.setTipt("运动指数");
+                index5.setTitle("运动");
+
+                mWeather.setCarwashIndex(index2);
+                mWeather.setDressingIndex(index1);
+                mWeather.setSportsIndex(index5);
+                mWeather.setColdIndex(index4);
+
+                ArrayList<DayWeather> dayWeathers = new ArrayList<DayWeather>();
+                JSONArray weatherArr = data.getJSONArray("weather");
+                for (int i =0;i<4;i++){
+                    DayWeather day = new DayWeather();
+                    JSONObject obj = weatherArr.getJSONObject(i);
+                    day.setDate(obj.getString("date"));
+                    day.setWeather(obj.getJSONObject("info").getJSONArray("day").get(1).toString());
+                    day.setTemp(obj.getJSONObject("info").getJSONArray("day").get(2).toString());
+                    day.setWind(obj.getJSONObject("info").getJSONArray("day").get(4).toString());
+                    day.setTempRage(obj.getJSONObject("info").getJSONArray("day").get(1).toString()+" ~ "+obj.getJSONObject("info").getJSONArray("night").get(2).toString());
+                    dayWeathers.add(day);
+                }
+
+                mWeather.setTodayWeather(dayWeathers.get(0));
+                mWeather.setTomorrowWeather(dayWeathers.get(1));
+                mWeather.setAferWeather(dayWeathers.get(2));
+                mWeather.setAfterafterWeather(dayWeathers.get(3));
+
+            }
+
+            else {
+                Log.d("newweather"," error_code is "+obj2.getInt("error_code"));
+                mWeather=null;
+            }
+
+        } catch (Exception e) {
+            mWeather=null;
+            System.err.println(e);
+        }
+
+
+        return mWeather;
+    }
+
+
+    //百度fucker
+    /*
     public static Weather getWeather(String cityName){
         Weather mWeather = new Weather();
 
@@ -146,6 +251,7 @@ public class WeatherHttp {
 
         return mWeather;
     }
+    */
 
     /**
      * getFutureWeather get futureWeather(class) with cityid
@@ -238,6 +344,7 @@ public class WeatherHttp {
             String line = in.readLine();
 
             JSONObject obj = new JSONObject(line);
+            Log.d("httpweather", obj.toString());
 
             if (obj.getInt("resultcode")==200){
                 JSONArray arr = obj.getJSONArray("result");
@@ -297,7 +404,7 @@ public class WeatherHttp {
                 else if (warnHour>=11&&warnHour<14){
                     badWeather = getBadWeatherFromHour(hourWeathers.get(2));
                 }
-                else if (warnHour>=14&&warnHour<17){
+                else if (warnHour>= 14&&warnHour<17){
                     badWeather = getBadWeatherFromHour(hourWeathers.get(3));
                 }
                 else if (warnHour>=17&&warnHour<20){
@@ -342,6 +449,42 @@ public class WeatherHttp {
             badWeather=null;
         }
         return badWeather;
+    }
+
+    /**
+     *
+     * @param urlAll:请求接口
+     * @param charset:字符编码
+     * @return 返回json结果
+     */
+    public static String get(String urlAll,String charset){
+        BufferedReader reader = null;
+        String result = null;
+        StringBuffer sbf = new StringBuffer();
+        String userAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";//模拟浏览器
+        try {
+            URL url = new URL(urlAll);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setReadTimeout(30000);
+            connection.setConnectTimeout(30000);
+            connection.setRequestProperty("User-agent",userAgent);
+            connection.connect();
+            InputStream is = connection.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(
+                    is, charset));
+            String strRead = null;
+            while ((strRead = reader.readLine()) != null) {
+                sbf.append(strRead);
+                sbf.append("\r\n");
+            }
+            reader.close();
+            result = sbf.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }

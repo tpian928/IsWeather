@@ -17,6 +17,7 @@ import com.ctc.isweather.control.DBTools;
 import com.ctc.isweather.control.LocationCtrl;
 import com.ctc.isweather.control.service.ConnectRequest;
 import com.ctc.isweather.control.service.UpdateWidgetService;
+import com.ctc.isweather.http.WeatherHttp;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import java.util.ArrayList;
@@ -65,10 +66,11 @@ public class IndexActivity extends FragmentActivity{
             public void run() {
                 try {
                     //Your code goes here
-                    String  lbs = LocationCtrl.getCityName();
-                    Message msg = new Message();
-                    msg.obj = lbs;
-                    handler.sendMessage(msg);
+//                    String  lbs = LocationCtrl.getCityName();
+//                    Message msg = new Message();
+//                    msg.obj = lbs;
+//                    handler.sendMessage(msg);
+                    WeatherHttp.getWeather("北京");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
