@@ -167,7 +167,7 @@ public class FinalLineChart extends Activity {
         set1.setLineWidth(2f);
         set1.setCircleSize(5f);
         set1.setHighLightColor(Color.rgb(244, 117, 117));
-        set1.setColor(Color.rgb(104, 241, 175));
+        set1.setColor(Color.RED);
         set1.setFillColor(ColorTemplate.getHoloBlue());
 
         LineDataSet set2 = new LineDataSet(y2, "最高温度");
@@ -178,7 +178,7 @@ public class FinalLineChart extends Activity {
         set2.setLineWidth(2f);
         set2.setCircleSize(5f);
         set2.setHighLightColor(Color.rgb(244, 117, 117));
-        set2.setColor(Color.rgb(104, 141, 175));
+        set2.setColor(Color.rgb(255,87,34));
         set2.setFillColor(ColorTemplate.getHoloBlue());
 
 

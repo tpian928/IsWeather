@@ -28,7 +28,7 @@ public class ConnectRequest {
             if (networkInfos != null && networkInfos.length > 0){
                 for(int i = 0; i < networkInfos.length;i++){
                     if (networkInfos[i].getState() == NetworkInfo.State.CONNECTED){
-                        Toast.makeText(activity,"free!",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(activity,"free!",Toast.LENGTH_SHORT).show();
                         return true;
                     }
                 }
