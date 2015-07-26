@@ -80,11 +80,11 @@ public class TodayWeatherActivity extends Activity {
             String[] max = new String[list.size()];
             for (int i = 0; i < 8; i++) {
                 min[i] = list.get(i).getTemp1();
-                max[i] = list.get(i).getTemp2();
+                //max[i] = list.get(i).getTemp2();
             }
             String[] times = {"5:00","8:00","11:00","14:00","17:00","20:00","23:00","2:00"};
             Log.i("chris","size: " +list.size());
-            FinalLineChart.setChart(mChart, times, min, max, 8);
+            FinalLineChart.setChart(mChart, times, min);
         }
     }
 }

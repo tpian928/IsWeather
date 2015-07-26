@@ -70,7 +70,7 @@ public class FinalLineChart extends Activity {
         mChart.getAxisRight().setEnabled(false);
 
         // add data
-        setData(mChart,6,xs,ys);
+        setData(mChart,8,xs,ys);
 
         mChart.getLegend().setEnabled(true);
 
