@@ -23,6 +23,7 @@ import com.ctc.isweather.control.Icon;
 import com.ctc.isweather.control.SPTools;
 import com.ctc.isweather.control.Screenshot;
 import com.ctc.isweather.control.service.ConnectRequest;
+import com.ctc.isweather.control.service.NotificationSvc;
 import com.ctc.isweather.http.WeatherHttp;
 import com.ctc.isweather.mode.bean.WIndex;
 import com.ctc.isweather.mode.bean.Weather;
@@ -194,6 +195,7 @@ public class MainActivity extends Fragment {
         temp_today = (TextView) view.findViewById(R.id.temp_today);
         temp_tomorrow = (TextView) view.findViewById(R.id.temp_tomorrow);
         temp_after = (TextView) view.findViewById(R.id.temp_after);
+
     }
 
 

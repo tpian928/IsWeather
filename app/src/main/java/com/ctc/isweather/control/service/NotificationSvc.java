@@ -6,10 +6,14 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
+
 import com.ctc.isweather.R;
 import com.ctc.isweather.http.WeatherHttp;
 import com.ctc.isweather.mode.bean.BadWeather;
 import com.ctc.isweather.view.activity.MainActivity;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,11 +23,12 @@ import java.util.TimerTask;
  * Created by saty on 2015/7/14.
  */
 public class NotificationSvc extends Service {
-    private long interval = 60*60*1000;//每小时定时获取
+   // private long interval = 60*60*1000;//每小时定时获取
+   private long interval = 3*1000;
     private static Timer timer = null;
 
     //推送通知
-    public void PushNotification(Intent intent)
+    public void PushNotification(BadWeather badWeather)
     {
         NotificationManager nm = (NotificationManager)NotificationSvc.this.getSystemService(NOTIFICATION_SERVICE);
         Notification.Builder builder = new Notification.Builder(NotificationSvc.this);
@@ -32,10 +37,12 @@ public class NotificationSvc extends Service {
 
         //设置通知
         builder.setContentIntent(contentIntent);
-        builder.setSmallIcon(R.mipmap.ic_launcher);//通知栏图标
-        builder.setTicker(intent.getStringExtra("tickerText")); //测试通知栏标题
+        builder.setSmallIcon(R.drawable.notification);//通知栏图标
+        builder.setContentText(badWeather.getInfo()); //下拉通知内容
+        builder.setContentTitle("恶劣天气");//下拉通知栏标题
+       /* builder.setTicker(intent.getStringExtra("tickerText")); //测试通知栏标题
         builder.setContentText(intent.getStringExtra("contentText")); //下拉通知内容
-        builder.setContentTitle(intent.getStringExtra("contentTitle"));//下拉通知栏标题
+        builder.setContentTitle(intent.getStringExtra("contentTitle"));//下拉通知栏标题*/
         builder.setAutoCancel(true);
         builder.setDefaults(Notification.DEFAULT_ALL);
 
@@ -52,18 +59,44 @@ public class NotificationSvc extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if(null == timer){
-            timer = new Timer();//你好
+            timer = new Timer();
         }
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 //从网络获取天气信息
-                BadWeather badWeather = WeatherHttp.getBadWeather();
-                //未来2天内有恶劣情况，启动推动
-                /*intent.putExtra("tickerText","");
-                intent.putExtra("contentText","");//提醒用户做好预防措施
-                intent.putExtra("contentTitle","");//雷电，大风，暴雨，干旱，寒潮*/
-                //PushNotification(intent);
+                Thread thread = new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        try {
+                            //Your code goes here
+                            try {
+                                BadWeather badWeather = WeatherHttp.getBadWeather();
+                                Log.d("saty",""+1);
+                                if(badWeather!=null) {
+                                    //Log.d("mytest","not null");
+                                    PushNotification(badWeather);
+                                }
+                                /*else
+                                {
+                                    Log.d("mytest","null");
+                                }*/
+
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                            //未来2天内有恶劣情况，启动推动
+                            /*intent.putExtra("tickerText","");
+                            intent.putExtra("contentText","");//提醒用户做好预防措施
+                            intent.putExtra("contentTitle","");//雷电，大风，暴雨，干旱，寒潮*/
+                            //PushNotification(badWeather);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                thread.start();
             }
         }, 0,interval);
 

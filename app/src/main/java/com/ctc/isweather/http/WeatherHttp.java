@@ -292,7 +292,7 @@ public class WeatherHttp {
 
         String nowhour = new SimpleDateFormat("HH").format(Calendar.getInstance().getTime());
         int warnHour = Integer.parseInt(nowhour)+3;
-        Log.d("badweather",nowhour);
+        Log.d("badweather","nowhour is:"+nowhour);
         ArrayList<HourWeather> hourWeathers = new ArrayList<HourWeather>();
         if (LocationCtrl.getCityName()!=null){
             hourWeathers = WeatherHttp.getHourWeather(LocationCtrl.getCityName());

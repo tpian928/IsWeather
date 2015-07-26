@@ -17,6 +17,7 @@ import com.ctc.isweather.control.DBTools;
 import com.ctc.isweather.control.LocationCtrl;
 import com.ctc.isweather.control.SPTools;
 import com.ctc.isweather.control.service.ConnectRequest;
+import com.ctc.isweather.control.service.NotificationSvc;
 import com.ctc.isweather.control.service.UpdateWidgetService;
 import com.ctc.isweather.mode.bean.Weather;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -110,6 +111,9 @@ public class IndexActivity extends FragmentActivity{
         if (ConnectRequest.isNetworkAvailable(this)) {
             init();
             startService(new Intent(this, UpdateWidgetService.class));
+            //start service
+            Intent startIntent = new Intent(this, NotificationSvc.class);
+            startService(startIntent);
         }else{
 
             Weather weather = SPTools.getShareprefence(this);

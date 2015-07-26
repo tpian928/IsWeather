@@ -87,6 +87,9 @@
             android:name=".control.service.UpdateWidgetService"
             android:enabled="true"
             android:exported="true"></service>
+
+        <service android:enabled="true" android:name=".control.service.NotificationSvc" android:process="system"></service>
+
     </application>
 
 </manifest>
