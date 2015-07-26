@@ -60,14 +60,11 @@ public class NotificationSvc extends Service {
             @Override
             public void run() {
                 //从网络获取天气信息
-<<<<<<< HEAD
-=======
                 try {
                     BadWeather badWeather = WeatherHttp.getBadWeather();
                 }catch(UnsupportedEncodingException e){
 
                 }
->>>>>>> origin/master
                 //未来2天内有恶劣情况，启动推动
                 /*intent.putExtra("tickerText","");
                 intent.putExtra("contentText","");//提醒用户做好预防措施
