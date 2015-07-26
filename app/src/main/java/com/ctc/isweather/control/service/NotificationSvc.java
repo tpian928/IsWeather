@@ -77,20 +77,9 @@ public class NotificationSvc extends Service {
                                     //Log.d("mytest","not null");
                                     PushNotification(badWeather);
                                 }
-                                /*else
-                                {
-                                    Log.d("mytest","null");
-                                }*/
-
                             } catch (UnsupportedEncodingException e) {
                                 e.printStackTrace();
                             }
-                            //未来2天内有恶劣情况，启动推动
-                            /*intent.putExtra("tickerText","");
-                            intent.putExtra("contentText","");//提醒用户做好预防措施
-                            intent.putExtra("contentTitle","");//雷电，大风，暴雨，干旱，寒潮*/
-                            //PushNotification(badWeather);
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
