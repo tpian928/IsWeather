@@ -283,7 +283,7 @@ public class WeatherHttp {
      * 判断用户当前所在城市在未来3个小时有没有恶劣天气
      * @return 如果存在恶劣天气则返回恶劣天气，不存在就返回空
      */
-    public static BadWeather getBadWeather(){
+    public static BadWeather getBadWeather() throws UnsupportedEncodingException {
         BadWeather badWeather = new BadWeather();
 
         String nowhour = new SimpleDateFormat("HH").format(Calendar.getInstance().getTime());
