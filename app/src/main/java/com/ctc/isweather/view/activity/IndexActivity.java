@@ -15,8 +15,10 @@ import com.ctc.isweather.R;
 import com.ctc.isweather.adapter.FragmentAdapter;
 import com.ctc.isweather.control.DBTools;
 import com.ctc.isweather.control.LocationCtrl;
+import com.ctc.isweather.control.SPTools;
 import com.ctc.isweather.control.service.ConnectRequest;
 import com.ctc.isweather.control.service.UpdateWidgetService;
+import com.ctc.isweather.mode.bean.Weather;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import java.util.ArrayList;
@@ -27,7 +29,6 @@ import java.util.ArrayList;
  */
 
 public class IndexActivity extends FragmentActivity{
-    public static boolean isConnected = false;
 
     private ViewPager vpager;
     private MyHandler myHandler;
@@ -45,16 +46,6 @@ public class IndexActivity extends FragmentActivity{
 
        // init(); // call the thread
         DBTools.importDB(this);
-        isConnected = ConnectRequest.isNetworkAvailable(this);
-        if (isConnected) {
-            init();
-            startService(new Intent(this, UpdateWidgetService.class));
-        }else{
-            Toast.makeText(getApplicationContext(),"无法连接网络",Toast.LENGTH_SHORT).show();
-            // Read the information from the sharepreference
-        }
-
-
     }
 
     public void init(){
@@ -116,6 +107,18 @@ public class IndexActivity extends FragmentActivity{
     protected void onResume() {
         super.onResume();
         //finish();
-        init();
+        if (ConnectRequest.isNetworkAvailable(this)) {
+            init();
+            startService(new Intent(this, UpdateWidgetService.class));
+        }else{
+
+            Weather weather = SPTools.getShareprefence(this);
+            vpager = (ViewPager) findViewById(R.id.viewpager);
+            ArrayList<Fragment> flist = new ArrayList<Fragment>();
+            flist.add(MainActivity.newInstance(weather.getCityname()));
+            vpager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), flist));
+            vpager.setCurrentItem(0);
+            Toast.makeText(getApplicationContext(),"网络连接失败",Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -22,6 +22,8 @@ public class Weather {
     private String sd;//湿度
     private String maintemp; //主要温度
     private String mess;
+    private String fl,wd;
+    private String date;
 
     public Weather(){
 
@@ -181,5 +183,29 @@ public class Weather {
 
     private void log(String str) {
         Log.d("Weatherlog", str);
+    }
+
+    public void setFl(String fl){
+        this.fl = fl;
+    }
+
+    public String getFl(){
+        return fl;
+    }
+
+    public void setWd(String wd){
+        this.wd = wd;
+    }
+
+    public String getWd(){
+        return wd;
+    }
+
+    public void setDate(String date){
+        this.date = date;
+    }
+
+    public String getDate(){
+        return date;
     }
 }

@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import com.ctc.isweather.mode.bean.DayWeather;
 import com.ctc.isweather.mode.bean.WIndex;
 import com.ctc.isweather.mode.bean.Weather;
-import com.ctc.isweather.mode.bean.Wsimple;
 
 /**
  * Created by chris on 2015/7/17.
@@ -22,12 +21,16 @@ public class SPTools {
     public static void setSharePreferences(Weather weather, Activity activity) {
         SharedPreferences sp = activity.getSharedPreferences("weatherInfo", 0);
         SharedPreferences.Editor editor = sp.edit();
+        editor.clear().commit();
+
         // Today's weather
         editor.putString("cityname", weather.getCityname());
         editor.putString("cityid", weather.getCityid());
-        editor.putString("pm2.5", weather.getPm25());
-        editor.putString("sd", weather.getSd());
-        editor.putString("maintemp", weather.getMaintemp());
+        editor.putString("pm", weather.getPm25());
+        editor.putString("fl", weather.getTodayWeather().getWind());
+        editor.putString("wd", weather.getTodayWeather().getTempRage());
+        editor.putString("date", weather.getDate());
+        editor.putString("maintemp",weather.getMaintemp());
 
         // Today's index
         editor.putString("dressingTitle", weather.getDressingIndex().getTitle());
@@ -76,21 +79,19 @@ public class SPTools {
         editor.commit();
     }
 
-    /**
-     * Unfinished!!!!!
-     * @param activity
-     * @return
-     */
-    public static void getShareprefence(Activity activity) {
+    public static Weather getShareprefence(Activity activity) {
         SharedPreferences sp = activity.getSharedPreferences("weatherInfo", 0);
 
-        // construction of Wsimple
-        String cityname = sp.getString("cityname", "cityname");
-        String cityid = sp.getString("cityid", "cityid");
-        String pm25 = sp.getString("pm2.5", "pm2.5");
-        String sd = sp.getString("sd", "sd");
-        String maintemp = sp.getString("maintemp", "maintemp");
-        Wsimple wsimple = new Wsimple(cityname,cityid,pm25,sd,maintemp);
+        //
+        Weather weather = new Weather();
+        weather.setWd(sp.getString("wd","25"));
+        weather.setFl(sp.getString("fl", "微风"));
+        weather.setPm25(sp.getString("pm", "20"));
+        weather.setDate(sp.getString("date",BasicTools.getDate()));
+        weather.setCityid(sp.getString("cityid", "1010100"));
+        weather.setMaintemp(sp.getString("maintemp","19 ℃"));
+        weather.setCityname(sp.getString("cityname","北京"));
+
 
         // Construction of indexes.
         WIndex dressingIndex = new WIndex(
@@ -152,8 +153,16 @@ public class SPTools {
                 sp.getString("afterTempRage", "afterTempRage")
         );
 
-         //construction of the weather
-        //  return new Weather(wsimple,dressingIndex,cardwashIndex,travelIndex,coldIndex,sportIndex,today,tomorrow,after);
+        //construction of the weather
+        weather.setCarwashIndex(cardwashIndex);
+        weather.setColdIndex(coldIndex);
+        weather.setDressingIndex(dressingIndex);
+        weather.setSportsIndex(sportIndex);
+        weather.setTravelIndex(travelIndex);
+        weather.setTodayWeather(today);
+        weather.setTomorrowWeather(tomorrow);
+        weather.setAferWeather(after);
+        return weather;
     }
 
 
