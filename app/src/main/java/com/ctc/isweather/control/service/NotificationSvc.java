@@ -7,6 +7,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import com.ctc.isweather.R;
+import com.ctc.isweather.http.WeatherHttp;
+import com.ctc.isweather.mode.bean.BadWeather;
 import com.ctc.isweather.view.activity.MainActivity;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -38,7 +40,7 @@ public class NotificationSvc extends Service {
         builder.setDefaults(Notification.DEFAULT_ALL);
 
         //启动通知
-        Notification notification = builder.build();//叫姐姐
+        Notification notification = builder.build();
         nm.notify((int)System.currentTimeMillis(),notification);
     }
 
@@ -56,6 +58,7 @@ public class NotificationSvc extends Service {
             @Override
             public void run() {
                 //从网络获取天气信息
+                BadWeather badWeather = WeatherHttp.getBadWeather();
                 //未来2天内有恶劣情况，启动推动
                 /*intent.putExtra("tickerText","");
                 intent.putExtra("contentText","");//提醒用户做好预防措施
