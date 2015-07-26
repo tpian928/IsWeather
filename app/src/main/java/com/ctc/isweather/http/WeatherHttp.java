@@ -231,10 +231,14 @@ public class WeatherHttp {
      * @param cityName
      * @return get every 3 hour  weather
      */
-    public static ArrayList<HourWeather> getHourWeather(String cityName) throws UnsupportedEncodingException {
+    public static ArrayList<HourWeather> getHourWeather(String cityName) {
         ArrayList<HourWeather> hourWeathers = new ArrayList<HourWeather>();
 
-        cityName = URLEncoder.encode(cityName,"utf-8");
+        try {
+            cityName = URLEncoder.encode(cityName,"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         try {
             URL hukd = new URL("http://v.juhe.cn/weather/forecast3h.php?cityname="+cityName+"&key=d6ac5a3b6054da94df74c0157d65fff8");
