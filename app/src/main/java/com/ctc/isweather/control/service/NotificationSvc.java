@@ -23,8 +23,7 @@ import java.util.TimerTask;
  * Created by saty on 2015/7/14.
  */
 public class NotificationSvc extends Service {
-   // private long interval = 60*60*1000;//每小时定时获取
-   private long interval = 3*1000;
+    private long interval = 60*60*1000;//每小时定时获取
     private static Timer timer = null;
 
     //推送通知
